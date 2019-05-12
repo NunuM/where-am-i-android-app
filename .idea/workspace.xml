@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dda77342-61c8-4e77-9c1a-0c0321030dc6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../rest_server/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rest_server/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rest_server/server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/exceptions/EntityAlreadyExists.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/fileContent/fileContent.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskJars.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcsWorkingDirs/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_common_1_1_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_extensions_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_3_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_solver_1_1_3_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_design_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_recyclerview_v7_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_27_1_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_transition_27_1_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_volley_volley_1_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_2_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_inject_javax_inject_1_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_sf_kxml_kxml2_2_3_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_integration_1_3_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/me/nunum/whereami/ExampleInstrumentedTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/activities/AppCompatPreferenceActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/activities/MainActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/activities/SettingsActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/LocalizationRecyclerViewAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/PositionRecyclerViewAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/TrainingRecyclerViewAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/LocalizationFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewLocalizationFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewPositionFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewTrainingRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionDetailsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/TrainingStatusFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/AsyncHttp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/Cache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/Emitter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/EndlessRecyclerOnScrollListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/Marshaller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnCircuitTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnListSizeChange.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnSaved.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnSync.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/Receiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/SortedListCallbackImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/StreamFlow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/domain/AggregateRoot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/domain/DomainEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/domain/Identifiable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/persistence/activerecord/ActiveRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/persistence/activerecord/DeleteableActiveRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/persistence/activerecord/Finder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/persistence/repositories/DeleteableRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/persistence/repositories/PaginateRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/persistence/repositories/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/Localization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/LocalizationStats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/Position.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/PositionStats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/Post.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/TrainingProgress.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/WifiDataSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/marshaller/PersistenceWifiMarshaller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/FingerprintRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/NewAlgorithmRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/NewLocalizationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/NewPositionRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/NewTrainingRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/PostRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/SpamRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/persistence/LocalizationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/HttpService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/PersistenceSinker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/Services.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/StreamFlowService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/WifiService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/application/ApplicationPreferences.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/database/DatabaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/database/DatabaseServiceErrorHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/database/DatabaseStats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/database/SqlCursorFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/httpimpl/AsyncHttpImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/repository/HttpRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/utils/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/utils/PermissionRequestCodes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_home_black_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_notifications_black_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_localization_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_localization_list.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_new_localization.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_new_position.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_new_training_request.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_position_details.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_position_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_position_list.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_training_list_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_training_status.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/app_settings_options_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/fli_localization_options_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/fpi_position_options_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/ftli_training_options_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/navigation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_general.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_headers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_http_resources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_offline_phase.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/pref_online_phase.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/me/nunum/whereami/ExampleUnitTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/where.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whereami.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android_app/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../android_app/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/controller/AlgorithmController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/controller/AlgorithmController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/controller/FingerprintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/controller/FingerprintController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/controller/TrainingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/controller/TrainingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/AlgorithmResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/AlgorithmResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/FingerprintResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/FingerprintResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/LocalizationResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/LocalizationResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/TrainResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/facade/TrainResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/framework/dto/DTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/framework/dto/DTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/framework/persistence/repositories/impl/jpa/JpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/framework/persistence/repositories/impl/jpa/JpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Algorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Localization.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Localization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Position.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/TrainingStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/TrainingStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/dto/TrainingDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/dto/TrainingDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/TrainingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/TrainingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/jpa/FingerprintRepositoryJpa.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/jpa/FingerprintRepositoryJpa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/jpa/LocalizationRepositoryJpa.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/jpa/LocalizationRepositoryJpa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/jpa/TrainingRepositoryJpa.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/persistance/jpa/TrainingRepositoryJpa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/request/FingerprintRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/request/FingerprintRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/request/NewLocalizationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/java/me/nunum/whereami/model/request/NewLocalizationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rest_server/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../rest_server/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="where" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/TrainingRecyclerViewAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="81" column="29" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2554#3384#0" expanded="true" />
+                <element signature="e#2921#3311#0" expanded="true" />
+                <element signature="e#3310#3311#0" expanded="true" />
+                <element signature="e#3383#3384#0" expanded="true" />
+                <element signature="e#3524#3525#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_new_training_request.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewTrainingRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/ftli_training_options_menu.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="53" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="53" />
+              <folding>
+                <element signature="e#227#265#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/TrainingStatusFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="105" column="75" selection-start-line="105" selection-start-column="75" selection-end-line="105" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/app_settings_options_menu.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/LocalizationRecyclerViewAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="78" column="52" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="52" />
+              <folding>
+                <element signature="e#2505#5437#0" expanded="true" />
+                <element signature="e#5436#5437#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/Localization.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="109">
+              <caret line="96" column="19" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
+              <folding>
+                <element signature="e#1822#1823#0" expanded="true" />
+                <element signature="e#1852#1853#0" expanded="true" />
+                <element signature="e#1969#1970#0" expanded="true" />
+                <element signature="e#1997#1998#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/PositionRecyclerViewAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="90" column="51" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="51" />
+              <folding>
+                <element signature="e#5865#5866#0" expanded="true" />
+                <element signature="e#5902#5903#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="layoutResourceFile" />
+        <option value="resourceFile" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>startSampling</find>
+      <find>openNewPositionFragment</find>
+      <find>Position</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/utils/AppConfig.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnListSizeChange.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewPositionViewModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_new_position.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewPositionFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnSync.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/PersistenceSinker.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnSample.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionDetailsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/StreamFlowService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/PositionRecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewLocalizationFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_new_localization.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_position_list.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/TrainingRecyclerViewAdpter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/HttpService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/LocalizationFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/LocalizationRecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/TrainingProgress.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_training_status.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_training_list_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/ftli_training_options_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/TrainingRecyclerViewAdpter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/fli_localization_options_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/TrainingStatusFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/TrainingRecyclerViewAdapter.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-20" />
+    <option name="y" value="49" />
+    <option name="width" value="1266" />
+    <option name="height" value="720" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="where" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="where" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="where" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="whereami" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="where" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="whereami" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="fragments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="where" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
+    <property name="device.picker.selection" value="6BY7N19123004257" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="not.eligible.for.single.variant.sync" value="true" />
+    <property name="sync.plugin.last.upgrade.timestamp" value="1557696245381" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dda77342-61c8-4e77-9c1a-0c0321030dc6" name="Default Changelist" comment="" />
+      <created>1557596186840</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1557596186840</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="60" y="-1" width="1306" height="769" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" visible="true" weight="0.26904762" />
+      <window_info id="Structure" side_tool="true" />
+      <window_info id="Build Variants" side_tool="true" />
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="Resources Explorer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Run" weight="0.34991974" />
+      <window_info anchor="bottom" id="Logcat" weight="0.75120384" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="Android Profiler" />
+      <window_info anchor="bottom" id="Debug" weight="0.37720707" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32905295" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Build" weight="0.32744783" />
+      <window_info anchor="right" id="Device File Explorer" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Gradle" weight="0.32936507" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Preview" weight="0.35396826" />
+    </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/StreamFlowService.java</url>
+          <line>118</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionDetailsFragment.java</url>
+          <line>95</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionDetailsFragment.java</url>
+          <line>93</line>
+          <properties />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/StreamFlowService.java</url>
+          <line>95</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/HttpService.java</url>
+          <line>355</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/PositionRecyclerViewAdapter.java</url>
+          <line>93</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/TrainingStatusFragment.java</url>
+          <line>110</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/TrainingStatusFragment.java</url>
+          <line>119</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/TrainingRecyclerViewAdapter.java</url>
+          <line>57</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="app">
+        <watch expression="p.getStats().getStrongestSignal()" language="JAVA" />
+        <watch expression="((ClientError) throwable).networkTimeMs" language="JAVA" custom="com.android.volley.ClientError" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>((ClientError) throwable).networkTimeMs</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>com.android.volley.ClientError</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>p.getStats().getStrongestSignal()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnSync.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/PersistenceSinker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+          <folding>
+            <element signature="e#2991#2992#0" expanded="true" />
+            <element signature="e#3023#3024#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/OnSample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/StreamFlowService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_position_details.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/recyclerview-v7/27.1.1/ad225a74247e675db0b05ea4f8b17202acbb7f9d/recyclerview-v7-27.1.1-sources.jar!/android/support/v7/util/SortedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="572" column="19" selection-start-line="572" selection-start-column="19" selection-end-line="572" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/request/NewLocalizationRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding>
+            <element signature="e#270#271#0" expanded="true" />
+            <element signature="e#315#316#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_new_position.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="10" selection-start-line="10" selection-end-line="12" selection-end-column="41" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_new_localization.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#749#796#0" expanded="true" />
+            <element signature="e#1102#1149#0" expanded="true" />
+            <element signature="e#1433#1470#0" expanded="true" />
+            <element signature="e#1857#1905#0" expanded="true" />
+            <element signature="e#2134#2175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/application/ApplicationPreferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="299" selection-start-line="299" selection-end-line="299" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/utils/AppConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/HttpService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="64" column="5" lean-forward="true" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/framework/SortedListCallbackImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-942">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+          <folding>
+            <element signature="e#367#368#0" expanded="true" />
+            <element signature="e#405#406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_position_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="92" column="28" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionDetailsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="185" selection-start-line="185" selection-end-line="185" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-core-ui/27.1.1/266c369a3227be5afec33e11c964472269ff2a7c/support-core-ui-27.1.1-sources.jar!/android/support/v4/widget/SwipeRefreshLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="1166" column="21" selection-start-line="1166" selection-start-column="21" selection-end-line="1166" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="269" column="34" selection-start-line="269" selection-start-column="34" selection-end-line="269" selection-end-column="34" />
+          <folding>
+            <element signature="e#4761#4762#0" expanded="true" />
+            <element signature="e#4801#4802#0" expanded="true" />
+            <element signature="e#7245#7246#0" expanded="true" />
+            <element signature="e#7299#7300#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/27.1.1/94732bda44fba11302c58e459b7c1f47e7521bf9/support-fragment-27.1.1-sources.jar!/android/support/v4/app/Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="2345" selection-start-line="2345" selection-end-line="2345" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/27.1.1/94732bda44fba11302c58e459b7c1f47e7521bf9/support-fragment-27.1.1-sources.jar!/android/support/v4/app/FragmentManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="1429" selection-start-line="1429" selection-end-line="1429" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.volley/volley/1.1.0/65ed7df4af0e83a626f383ff49c3403342659aa9/volley-1.1.0-sources.jar!/com/android/volley/toolbox/StringRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/httpimpl/AsyncHttpImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="347" lean-forward="true" selection-start-line="347" selection-end-line="347" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.volley/volley/1.1.0/65ed7df4af0e83a626f383ff49c3403342659aa9/volley-1.1.0-sources.jar!/com/android/volley/ExecutorDelivery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/PositionFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1093">
+          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/service/WifiService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/Post.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/PositionStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/Position.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/LocalizationStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+          <folding>
+            <element signature="e#414#415#0" expanded="true" />
+            <element signature="e#444#445#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/WifiDataSample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-840">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_position_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-27/android.jar!/java/text/SimpleDateFormat.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding>
+            <element signature="e#354#355#0" expanded="true" />
+            <element signature="e#405#406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_localization_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="41" column="41" selection-start-line="32" selection-start-column="4" selection-end-line="41" selection-end-column="41" />
+          <folding>
+            <element signature="e#1053#1073#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/TrainingProgress.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="48" column="28" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+            <element signature="e#859#860#0" expanded="true" />
+            <element signature="e#895#896#0" expanded="true" />
+            <element signature="e#940#941#0" expanded="true" />
+            <element signature="e#1339#1340#0" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_localization_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewLocalizationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="75" column="26" selection-start-line="75" selection-start-column="26" selection-end-line="75" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewPositionFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="688">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/LocalizationFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="153" column="47" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="47" />
+          <folding>
+            <element signature="e#5624#5846#0" expanded="true" />
+            <element signature="e#5845#5846#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_training_status.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="21" column="57" lean-forward="true" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_training_list_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="35" column="51" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="51" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/app_settings_options_menu.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/fli_localization_options_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" selection-start-column="11" selection-end-column="11" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/fpi_position_options_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="10" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/TrainingStatusFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="105" column="75" selection-start-line="105" selection-start-column="75" selection-end-line="105" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/LocalizationRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="78" column="52" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="52" />
+          <folding>
+            <element signature="e#2505#5437#0" expanded="true" />
+            <element signature="e#5436#5437#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/model/Localization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="96" column="19" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
+          <folding>
+            <element signature="e#1822#1823#0" expanded="true" />
+            <element signature="e#1852#1853#0" expanded="true" />
+            <element signature="e#1969#1970#0" expanded="true" />
+            <element signature="e#1997#1998#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/PositionRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="90" column="51" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="51" />
+          <folding>
+            <element signature="e#5865#5866#0" expanded="true" />
+            <element signature="e#5902#5903#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/ftli_training_options_menu.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="53" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="53" />
+          <folding>
+            <element signature="e#227#265#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/adapters/TrainingRecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="81" column="29" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2554#3384#0" expanded="true" />
+            <element signature="e#2921#3311#0" expanded="true" />
+            <element signature="e#3310#3311#0" expanded="true" />
+            <element signature="e#3383#3384#0" expanded="true" />
+            <element signature="e#3524#3525#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_new_training_request.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/me/nunum/whereami/fragments/NewTrainingRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

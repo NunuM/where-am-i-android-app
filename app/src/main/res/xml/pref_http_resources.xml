@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="localization"
+        android:key="http_localization_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/pref_http_localization_description"
+        android:title="@string/pref_http_localization_title" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="pagination_state"
+        android:summary="@string/pref_http_localization_paging_description"
+        android:title="@string/pref_http_localization_paging_title" />
+
+    <EditTextPreference
+        android:defaultValue="localization/:id/position"
+        android:key="http_position_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/pref_http_position_description"
+        android:title="@string/pref_http_position_title" />
+
+    <EditTextPreference
+        android:defaultValue="fingerprint"
+        android:key="http_fingerprint_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/pref_http_fingerprint_resource_summary"
+        android:title="@string/pref_http_fingerprint_resource" />
+
+    <EditTextPreference
+        android:defaultValue="prediction"
+        android:key="http_prediction_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_http_query_resource"
+        android:summary="@string/pref_http_query_resource_summary"/>
+
+    <EditTextPreference
+        android:defaultValue="post"
+        android:key="http_posts_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_http_post_resource"
+        android:summary="@string/pref_http_post_resource_summary"/>
+
+    <EditTextPreference
+        android:defaultValue="localization/:id/train"
+        android:key="http_train_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_http_train_resource"
+        android:summary="@string/pref_http_train_resource_summary"/>
+
+    <EditTextPreference
+        android:defaultValue="localization/spam"
+        android:key="http_spam_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_http_spam_resource"
+        android:summary="@string/pref_http_spam_resource_summary"/>
+
+</PreferenceScreen>

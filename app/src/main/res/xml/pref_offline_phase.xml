@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/pre_offline_delay_list_entries"
+        android:entryValues="@array/pre_offline_delay_list_entries"
+        android:key="sinker_delay"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_offline_delay"
+        android:summary="@string/pref_offline_delay_description"/>
+
+    <ListPreference
+        android:defaultValue="30"
+        android:entries="@array/pre_offline_interval_list_entries"
+        android:entryValues="@array/pre_offline_interval_list_entries"
+        android:key="sinker_period"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_offline_interval"
+        android:summary="@string/pref_offline_interval_description"/>
+
+</PreferenceScreen>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header
+        android:fragment="me.nunum.whereami.activities.SettingsActivity$GeneralPreferenceFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/pref_general_header" />
+
+    <header
+        android:fragment="me.nunum.whereami.activities.SettingsActivity$OffLinePreferenceFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/pref_offline_header" />
+
+    <header
+        android:fragment="me.nunum.whereami.activities.SettingsActivity$OnLinePreferenceFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/pref_online_header" />
+
+    <header
+        android:fragment="me.nunum.whereami.activities.SettingsActivity$HttpAPIPreferenceFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/pref_http_api_header" />
+
+</preference-headers>

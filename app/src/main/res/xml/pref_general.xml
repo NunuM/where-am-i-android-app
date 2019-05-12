@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="HTTP"
+        android:entries="@array/pref_protocol_list_titles"
+        android:entryValues="@array/pref_protocol_list_titles"
+        android:key="http_online_protocol"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:summary="@string/pref_online_use_protocol_description"
+        android:title="@string/pref_online_use_protocol" />
+
+    <ListPreference
+        android:defaultValue="HTTP"
+        android:entries="@array/pref_protocol_list_titles"
+        android:entryValues="@array/pref_protocol_list_titles"
+        android:key="http_offline_protocol"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:summary="@string/pref_offline_use_protocol_description"
+        android:title="@string/pref_offline_use_protocol" />
+
+    <EditTextPreference
+        android:defaultValue="@string/pref_hostname_default"
+        android:key="http_remote_host"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/pref_hostname_summary"
+        android:title="@string/pref_hostname_label" />
+
+    <EditTextPreference
+        android:defaultValue="8080"
+        android:inputType="number"
+        android:key="tcp_remote_host_online_port"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/pref_http_online_port_summary"
+        android:title="@string/pref_http_online_port" />
+
+    <EditTextPreference
+        android:defaultValue="9090"
+        android:inputType="number"
+        android:key="tcp_remote_host_offline_port"
+        android:selectAllOnFocus="true"
+        android:summary="@string/pref_http_offline_port_summary"
+        android:title="@string/pref_http_offline_port" />
+
+
+    <EditTextPreference
+        android:defaultValue=" "
+        android:inputType="text"
+        android:key="application_instance_id"
+        android:selectAllOnFocus="true"
+        android:summary="@string/pref_instance_id_summary"
+        android:title="@string/pref_instance_id" />
+
+
+</PreferenceScreen>
