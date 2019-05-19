@@ -70,8 +70,8 @@ public class StreamFlowService implements
 
         this.streamState = STREAM_STATE.RUNNING;
 
-        final int period = preferences.getIntegerKey(KEYS.PRODUCER_PERIOD);
-        final int delay = preferences.getIntegerKey(KEYS.PRODUCER_DELAY);
+        final int period = preferences.getIntegerKey(KEYS.SINKER_PERIOD);
+        final int delay = preferences.getIntegerKey(KEYS.SINKER_DELAY);
 
         final String protocol = preferences.getStringKey(KEYS.ONLINE_PROTOCOL);
 
@@ -105,9 +105,13 @@ public class StreamFlowService implements
                             @Override
                             public void failed(Long batch, Throwable throwable) {
                                 Log.e(TAG, "failed batch number " + batch, throwable);
+
+
+
+
+
                             }
                         });
-
 
                         worker = executorService
                                 .scheduleAtFixedRate(new WifiService(context, position, localization, StreamFlowService.this), delay, period, TimeUnit.SECONDS);

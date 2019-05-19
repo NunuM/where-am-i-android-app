@@ -22,6 +22,7 @@ import me.nunum.whereami.framework.OnCircuitTest;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.OnSync;
 import me.nunum.whereami.framework.Receiver;
+import me.nunum.whereami.model.Algorithm;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.Post;
@@ -73,6 +74,11 @@ public final class HttpService {
         return service;
     }
 
+    /**
+     * @param localizationRequest
+     * @param onResponse
+     * @return boolean
+     */
     public boolean newLocalization(NewLocalizationRequest localizationRequest, OnResponse<Localization> onResponse) {
 
         final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
@@ -142,7 +148,11 @@ public final class HttpService {
 
         final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
 
-        final String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_SPAM_RESOURCE);
+        String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_LOCALIZATION_SPAM_RESOURCE);
+
+        if (resource.contains(":id")) {
+            resource = resource.replace(":id", String.valueOf(request.getId()));
+        }
 
         final AsyncHttp<SpamRequest, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
 
@@ -151,6 +161,27 @@ public final class HttpService {
         return true;
     }
 
+
+    public boolean newPositionSpam(long localization, SpamRequest request, OnResponse<Void> onResponse) {
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_POSITION_SPAM_RESOURCE);
+
+        if (resource.contains(":id")) {
+            resource = resource.replace(":id", String.valueOf(localization));
+        }
+
+        if (resource.contains(":it")) {
+            resource = resource.replace(":it", String.valueOf(request.getId()));
+        }
+
+        final AsyncHttp<SpamRequest, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
+
+        asyncHttp.post(this.makeURL(host, resource), this.headers, request, onResponse);
+
+        return true;
+    }
 
     public boolean newTrain(long id, NewTrainingRequest request, OnResponse<TrainingProgress> onResponse) {
 
@@ -165,6 +196,25 @@ public final class HttpService {
         final AsyncHttp<NewTrainingRequest, TrainingProgress> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, TrainingProgress.class);
 
         asyncHttp.post(this.makeURL(host, resource), this.headers, request, onResponse);
+
+        return true;
+    }
+
+    public boolean deleteTraining(long id, TrainingProgress request, OnResponse<Void> onResponse) {
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_TRAINING_RESOURCE);
+
+        if (resource.contains(":id")) {
+            resource = resource.replace(":id", String.valueOf(id));
+        }
+
+        resource += "/" + request.getId();
+
+        final AsyncHttp<Void, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
+
+        asyncHttp.delete(this.makeURL(host, resource), this.headers, onResponse);
 
         return true;
     }
@@ -248,6 +298,22 @@ public final class HttpService {
         }.getType();
 
         final AsyncHttpImpl<Void, List<Position>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
+
+        asyncHttp.get(this.makeURL(host, resource), type, this.headers, onResponse);
+
+        return true;
+    }
+
+    public boolean allAlgorithms(OnResponse<List<Algorithm>> onResponse) {
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_ALGORITHM_RESOURCE);
+
+        final Type type = new TypeToken<List<Algorithm>>() {
+        }.getType();
+
+        final AsyncHttpImpl<Void, List<Algorithm>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
         asyncHttp.get(this.makeURL(host, resource), type, this.headers, onResponse);
 

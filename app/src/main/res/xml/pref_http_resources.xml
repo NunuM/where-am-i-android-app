@@ -36,31 +36,39 @@
         android:key="http_prediction_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="@string/pref_http_query_resource"
-        android:summary="@string/pref_http_query_resource_summary"/>
+        android:summary="@string/pref_http_query_resource_summary"
+        android:title="@string/pref_http_query_resource" />
 
     <EditTextPreference
         android:defaultValue="post"
         android:key="http_posts_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="@string/pref_http_post_resource"
-        android:summary="@string/pref_http_post_resource_summary"/>
+        android:summary="@string/pref_http_post_resource_summary"
+        android:title="@string/pref_http_post_resource" />
 
     <EditTextPreference
         android:defaultValue="localization/:id/train"
         android:key="http_train_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="@string/pref_http_train_resource"
-        android:summary="@string/pref_http_train_resource_summary"/>
+        android:summary="@string/pref_http_train_resource_summary"
+        android:title="@string/pref_http_train_resource" />
 
     <EditTextPreference
-        android:defaultValue="localization/spam"
-        android:key="http_spam_resource"
+        android:defaultValue="localization/:id/spam"
+        android:key="http_localization_spam_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="@string/pref_http_spam_resource"
-        android:summary="@string/pref_http_spam_resource_summary"/>
+        android:summary="@string/pref_http_localization_spam_resource_summary"
+        android:title="@string/pref_http_localization_spam_resource" />
+
+    <EditTextPreference
+        android:defaultValue="localization/:id/position/:it/spam"
+        android:key="http_position_spam_resource"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/pref_http_position_spam_resource_summary"
+        android:title="@string/pref_http_position_spam_resource" />
 
 </PreferenceScreen>

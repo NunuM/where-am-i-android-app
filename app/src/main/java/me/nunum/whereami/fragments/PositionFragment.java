@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -49,7 +50,6 @@ public class PositionFragment extends Fragment {
     public PositionFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static PositionFragment newInstance(int columnCount) {
         PositionFragment fragment = new PositionFragment();
@@ -135,7 +135,7 @@ public class PositionFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-                            Log.e(TAG, "onFailure: ", throwable);
+                            Toast.makeText(mListener.context(), R.string.fpi_position_list_request_failure, Toast.LENGTH_LONG).show();
 
                             if (swipeRefreshLayout.isRefreshing()) {
                                 swipeRefreshLayout.setRefreshing(false);

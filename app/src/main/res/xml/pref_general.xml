@@ -48,7 +48,6 @@
 
 
     <EditTextPreference
-        android:defaultValue=" "
         android:inputType="text"
         android:key="application_instance_id"
         android:selectAllOnFocus="true"

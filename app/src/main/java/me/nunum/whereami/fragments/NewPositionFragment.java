@@ -35,7 +35,6 @@ public class NewPositionFragment extends Fragment {
      *
      * @return A new instance of fragment NewPositionFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static NewPositionFragment newInstance() {
         NewPositionFragment fragment = new NewPositionFragment();
         Bundle args = new Bundle();

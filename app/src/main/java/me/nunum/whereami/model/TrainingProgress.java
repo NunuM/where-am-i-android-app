@@ -1,12 +1,10 @@
 package me.nunum.whereami.model;
 
-import android.os.Build;
 import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 public class TrainingProgress implements Comparable<TrainingProgress> {
 
@@ -75,26 +73,5 @@ public class TrainingProgress implements Comparable<TrainingProgress> {
     @Override
     public int compareTo(@NonNull TrainingProgress trainingProgress) {
         return this.getAlgorithmName().toLowerCase().compareTo(trainingProgress.getAlgorithmName().toLowerCase());
-    }
-
-    static class Algorithm {
-        private String name;
-        private Long id;
-
-        public Algorithm() {
-        }
-
-        public Algorithm(String name, Long id) {
-            this.name = name;
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Long getId() {
-            return id;
-        }
     }
 }

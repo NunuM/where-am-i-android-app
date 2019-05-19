@@ -9,10 +9,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -33,14 +33,6 @@ import me.nunum.whereami.service.Services;
  * create an instance of this fragment.
  */
 public class TrainingStatusFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private int mColumnCount;
 
@@ -56,7 +48,6 @@ public class TrainingStatusFragment extends Fragment {
      *
      * @return A new instance of fragment TrainingStatusFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static TrainingStatusFragment newInstance(int mColumnCount) {
         TrainingStatusFragment fragment = new TrainingStatusFragment();
         Bundle args = new Bundle();
@@ -69,8 +60,6 @@ public class TrainingStatusFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -117,7 +106,11 @@ public class TrainingStatusFragment extends Fragment {
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    Log.e("TrainingStatusFragment", "onFailure: ", throwable);
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    Toast.makeText(mListener.context(), R.string.ftli_training_request_failure, Toast.LENGTH_SHORT).show();
                 }
             };
 
@@ -146,7 +139,7 @@ public class TrainingStatusFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mListener.openNewTrainingFragment();
             }
         });
 
@@ -181,6 +174,6 @@ public class TrainingStatusFragment extends Fragment {
 
         void setActionBarTitle(final String barTitle);
 
-
+        void openNewTrainingFragment();
     }
 }

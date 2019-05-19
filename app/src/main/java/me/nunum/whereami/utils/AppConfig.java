@@ -26,8 +26,10 @@ public class AppConfig {
     public static final String HTTP_LOCALIZATION_POSITIONS_RESOURCE = "localization/:id/position";
     public static final String HTTP_PAGE_LOCALIZATION_RESOURCE = "/page/:x";
     public static final String HTTP_TRAINING_RESOURCE = "/localization/:id/train";
-    public static final String HTTP_SPAM_RESOURCE = "localization/spam";
+    public static final String HTTP_LOCALIZATION_SPAM_RESOURCE = "localization/:id/spam";
+    public static final String HTTP_POSITION_SPAM_RESOURCE = "localization/:id/position/:it/spam";
     public static final String HTTP_SAMPLES_RESOURCE = "fingerprint";
+    public static final String HTTP_ALGORITHM_RESOURCE = "algorithm";
 
 
     public static final String HTTP_POSTS_RESOURCE = "/post";

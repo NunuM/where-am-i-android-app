@@ -3,6 +3,7 @@ package me.nunum.whereami.adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,14 +11,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import me.nunum.whereami.R;
 import me.nunum.whereami.fragments.TrainingStatusFragment;
 import me.nunum.whereami.framework.OnListSizeChange;
+import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.SortedListCallbackImpl;
 import me.nunum.whereami.model.TrainingProgress;
+import me.nunum.whereami.service.HttpService;
+import me.nunum.whereami.service.Services;
 
 public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRecyclerViewAdapter.ViewHolder> {
 
@@ -78,9 +83,23 @@ public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRe
 
                             switch (menuItem.getItemId()) {
                                 case R.id.ftli_delete_training_request:
+
+                                    HttpService service = (HttpService) mListener.getService(Services.HTTP);
+
+                                    service.deleteTraining(mListener.associatedLocalization().id(), holder.mItem, new OnResponse<Void>() {
+                                        @Override
+                                        public void onSuccess(Void o) {
+                                            mValues.remove(holder.mItem);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Throwable throwable) {
+                                            Toast.makeText(mListener.context(), R.string.ftli_delete_training_request_failure, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
                                     break;
                             }
-
                             return false;
                         }
                     });

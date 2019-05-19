@@ -18,7 +18,7 @@ public final class NewTrainingRequest {
 
     @Override
     public String toString() {
-        return "NewTrainingRequest{" +
+        return "NewTrainingRequestFragment{" +
                 "algorithmId=" + algorithmId +
                 '}';
     }

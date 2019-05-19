@@ -26,6 +26,7 @@ public class NewLocalizationFragment extends Fragment {
 
     private double lat = 0;
     private double lng = 0;
+    private String username;
 
     private OnFragmentInteractionListener mListener;
 
@@ -33,16 +34,27 @@ public class NewLocalizationFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static NewLocalizationFragment newInstance(double lat, double lng) {
+    public static NewLocalizationFragment newInstance(double lat, double lng, String username) {
         NewLocalizationFragment fragment = new NewLocalizationFragment();
         fragment.lat = lat;
         fragment.lng = lng;
+        fragment.username = username;
+        Bundle args = new Bundle();
+        args.putDouble("lat", lat);
+        args.putDouble("lng", lng);
+        args.putString("username", username);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            this.lat = getArguments().getDouble("lat");
+            this.lng = getArguments().getDouble("lng");
+            this.username = getArguments().getString("username");
+        }
     }
 
     @Override
@@ -55,6 +67,11 @@ public class NewLocalizationFragment extends Fragment {
         final EditText username = (EditText) view.findViewById(R.id.fnl_input_user);
         final Switch isPrivate = (Switch) view.findViewById(R.id.fnl_is_private);
         final Button submit = (Button) view.findViewById(R.id.fnl_submit_btn);
+
+        if (!this.username.isEmpty()) {
+            username.setText(this.username);
+            username.setEnabled(false);
+        }
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +90,7 @@ public class NewLocalizationFragment extends Fragment {
                     return;
                 }
 
-                mListener.createLocalization(localizationStr, usernameStr, isPrivateBl, lat, lng);
+                mListener.createLocalization(localizationStr.trim(), usernameStr.trim(), isPrivateBl, lat, lng);
             }
         });
 

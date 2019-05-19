@@ -27,7 +27,7 @@ public class PersistenceSinker
         implements Receiver<List<WifiDataSample>>,
         Emitter<List<WifiDataSample>>, Runnable {
 
-    private final String TAG = PersistenceSinker.class.getSimpleName();
+    private static final String TAG = PersistenceSinker.class.getSimpleName();
 
     private final Context context;
     private final DatabaseService databaseService;

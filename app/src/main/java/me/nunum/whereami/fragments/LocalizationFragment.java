@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -125,7 +126,7 @@ public class LocalizationFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-                            Log.e(TAG, "onFailure: ", throwable);
+                            Toast.makeText(getContext(), R.string.fll_localization_list_request_failure, Toast.LENGTH_SHORT).show();
 
                             if (swipeRefreshLayout.isRefreshing()) {
                                 swipeRefreshLayout.setRefreshing(false);

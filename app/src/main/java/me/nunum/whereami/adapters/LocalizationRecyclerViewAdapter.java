@@ -11,6 +11,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.ClientError;
+
 import java.util.List;
 
 import me.nunum.whereami.R;
@@ -98,6 +100,16 @@ public class LocalizationRecyclerViewAdapter
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+
+                                        if (throwable instanceof ClientError) {
+                                            ClientError error = (ClientError) throwable;
+                                            if (error.networkResponse.statusCode == 409) {
+                                                Toast.makeText(listener.context(), R.string.fli_localization_spam_request_success, Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
+                                        }
+
+
                                         Toast.makeText(listener.context(), R.string.fli_localization_spam_request_failure, Toast.LENGTH_SHORT).show();
                                     }
                                 });

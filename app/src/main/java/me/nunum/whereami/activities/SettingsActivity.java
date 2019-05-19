@@ -205,11 +205,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
             });
 
-
-            final Preference preference = findPreference(ApplicationPreferences.KEYS.INSTANCE_ID.keyName());
-
-            preference.setDefaultValue(applicationPreferences.getStringKey(ApplicationPreferences.KEYS.INSTANCE_ID));
-
         }
 
         @Override

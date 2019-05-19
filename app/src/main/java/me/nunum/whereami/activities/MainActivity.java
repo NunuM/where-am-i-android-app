@@ -25,6 +25,7 @@ import me.nunum.whereami.R;
 import me.nunum.whereami.fragments.LocalizationFragment;
 import me.nunum.whereami.fragments.NewLocalizationFragment;
 import me.nunum.whereami.fragments.NewPositionFragment;
+import me.nunum.whereami.fragments.NewTrainingRequestFragment;
 import me.nunum.whereami.fragments.PositionDetailsFragment;
 import me.nunum.whereami.fragments.PositionFragment;
 import me.nunum.whereami.fragments.TrainingStatusFragment;
@@ -32,10 +33,13 @@ import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.OnSample;
 import me.nunum.whereami.framework.StreamFlow;
+import me.nunum.whereami.model.Algorithm;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
+import me.nunum.whereami.model.TrainingProgress;
 import me.nunum.whereami.model.request.NewLocalizationRequest;
 import me.nunum.whereami.model.request.NewPositionRequest;
+import me.nunum.whereami.model.request.NewTrainingRequest;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.Services;
 import me.nunum.whereami.service.StreamFlowService;
@@ -49,7 +53,8 @@ public class MainActivity extends AppCompatActivity
         PositionDetailsFragment.OnFragmentInteractionListener,
         NewPositionFragment.OnFragmentInteractionListener,
         NewLocalizationFragment.OnFragmentInteractionListener,
-        TrainingStatusFragment.OnFragmentInteractionListener {
+        TrainingStatusFragment.OnFragmentInteractionListener,
+        NewTrainingRequestFragment.OnFragmentInteractionListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -103,6 +108,9 @@ public class MainActivity extends AppCompatActivity
         this.servicesCache = new Cache(this.getApplicationContext());
 
         positionDetailsFragment = PositionDetailsFragment.newInstance();
+
+
+        preferences.persistIfNull(ApplicationPreferences.KEYS.INSTANCE_ID);
     }
 
     @Override
@@ -143,7 +151,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void createLocalization(String localization,
-                                   String username,
+                                   final String username,
                                    boolean isPrivate,
                                    double lat,
                                    double lng) {
@@ -155,6 +163,9 @@ public class MainActivity extends AppCompatActivity
         service.newLocalization(newLocalizationRequest, new OnResponse<Localization>() {
             @Override
             public void onSuccess(Localization o) {
+
+                preferences.persistIfNull(ApplicationPreferences.KEYS.USERNAME, username);
+
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.am_container, LocalizationFragment.newInstance(1))
@@ -241,6 +252,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void openNewTrainingFragment() {
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.am_container, NewTrainingRequestFragment.newInstance())
+                .commitAllowingStateLoss();
+
+    }
+
+    @Override
     public void openNewLocalizationFragment() {
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -257,9 +278,11 @@ public class MainActivity extends AppCompatActivity
 
         Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
+        final String username = preferences.getStringKey(ApplicationPreferences.KEYS.USERNAME);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.am_container, NewLocalizationFragment.newInstance(location.getLatitude(), location.getLongitude()))
+                .replace(R.id.am_container, NewLocalizationFragment.newInstance(location.getLatitude(), location.getLongitude(), username))
                 .commitAllowingStateLoss();
 
     }
@@ -283,6 +306,28 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.am_container, NewPositionFragment.newInstance())
                 .commitAllowingStateLoss();
 
+    }
+
+    @Override
+    public void submitNewTanningRequest(Algorithm algorithm) {
+
+
+        HttpService service = (HttpService) getService(Services.HTTP);
+
+        service.newTrain(associatedLocalization().id(),
+                new NewTrainingRequest(algorithm.getId()),
+                new OnResponse<TrainingProgress>() {
+                    @Override
+                    public void onSuccess(TrainingProgress o) {
+                        openTrainingStatus(associatedLocalization());
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+
+                    }
+                });
     }
 
     @Override

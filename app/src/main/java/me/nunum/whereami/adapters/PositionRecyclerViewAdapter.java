@@ -109,7 +109,7 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
                                 break;
                             case R.id.fpi_position_options_spam:
 
-                                service.newSpam(holder.mItem.createSpamRequest(), new OnResponse<Void>() {
+                                service.newPositionSpam(mListener.associatedLocalization().getId(), holder.mItem.createSpamRequest(), new OnResponse<Void>() {
                                     @Override
                                     public void onSuccess(Void o) {
                                         Toast.makeText(mListener.context(), R.string.fli_localization_spam_request_success, Toast.LENGTH_SHORT).show();

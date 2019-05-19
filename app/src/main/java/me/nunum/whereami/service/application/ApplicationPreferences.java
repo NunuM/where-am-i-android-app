@@ -319,15 +319,30 @@ public class ApplicationPreferences {
                 return true;
             }
         },
-        HTTP_SPAM_RESOURCE {
+        HTTP_LOCALIZATION_SPAM_RESOURCE {
             @Override
             public String defaultValue() {
-                return AppConfig.HTTP_SPAM_RESOURCE;
+                return AppConfig.HTTP_LOCALIZATION_SPAM_RESOURCE;
             }
 
             @Override
             public String keyName() {
-                return "http_spam_resource";
+                return "http_localization_spam_resource";
+            }
+
+            @Override
+            public boolean isString() {
+                return true;
+            }
+        },
+        HTTP_POSITION_SPAM_RESOURCE {
+            public String defaultValue() {
+                return AppConfig.HTTP_POSITION_SPAM_RESOURCE;
+            }
+
+            @Override
+            public String keyName() {
+                return "http_position_spam_resource";
             }
 
             @Override
@@ -344,6 +359,22 @@ public class ApplicationPreferences {
             @Override
             public String keyName() {
                 return "http_samples_resource";
+            }
+
+            @Override
+            public boolean isString() {
+                return true;
+            }
+        },
+        HTTP_ALGORITHM_RESOURCE {
+            @Override
+            public String defaultValue() {
+                return AppConfig.HTTP_ALGORITHM_RESOURCE;
+            }
+
+            @Override
+            public String keyName() {
+                return "http_algorithm_resource";
             }
 
             @Override
@@ -428,6 +459,21 @@ public class ApplicationPreferences {
 
             @Override
             public boolean isBoolean() {
+                return true;
+            }
+        }, USERNAME {
+            @Override
+            public String defaultValue() {
+                return "";
+            }
+
+            @Override
+            public String keyName() {
+                return "username";
+            }
+
+            @Override
+            public boolean isString() {
                 return true;
             }
         };
@@ -528,6 +574,31 @@ public class ApplicationPreferences {
         edit.apply();
 
         return true;
+    }
+
+
+    public void persistIfNull(KEYS key) {
+
+        String string = this.preferences.getString(key.keyName(), null);
+
+        if (string == null) {
+            SharedPreferences.Editor editor = this.preferences.edit();
+            editor.putString(key.keyName(), (String) key.defaultValue());
+            editor.apply();
+        }
+
+    }
+
+    public void persistIfNull(KEYS key, String value) {
+
+        String string = this.preferences.getString(key.keyName(), null);
+
+        if (string == null) {
+            SharedPreferences.Editor editor = this.preferences.edit();
+            editor.putString(key.keyName(), value);
+            editor.apply();
+        }
+
     }
 
     public static ApplicationPreferences instance(final Context context) {

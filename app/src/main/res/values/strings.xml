@@ -2,7 +2,7 @@
     <string name="app_name">whereami</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Localization</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_prediction">Prediction</string>
 
     <string name="fli_localization_options_training">Training</string>
     <string name="fli_localization_options_spam">Spam</string>
@@ -15,10 +15,16 @@
     <string name="fli_localization_spam_request_failure">Cannot send your report</string>
     <string name="fli_localization_delete_request_failure">Cannot delete localization</string>
 
+    <string name="fntr_request_algorithm_error">Was not possible to retrieve algorithms from the server</string>
+    <string name="fntr_training_submit_btn">Train</string>
+
+    <string name="ftli_delete_training_request_failure">Was not possible to delete.</string>
+    <string name="ftli_training_request_failure">Was not possible to retrieve training status from the server</string>
     <string name="ftli_delete_training_request">Delete</string>
 
     <string name="fpi_position_options_spam">Spam</string>
     <string name="fpi_position_options_delete">Delete</string>
+    <string name="fpi_position_list_request_failure">Was not possible to retrieve positions from the server</string>
 
     <string name="fpd_position_number_of_online_samples">Online Samples</string>
     <string name="fpd_position_number_of_offline_samples">Offline Samples</string>
@@ -47,6 +53,7 @@
     <string name="app_options_menu_settings">Settings</string>
 
     <string name="fll_localization_actionbar_title">Localizations</string>
+    <string name="fll_localization_list_request_failure">Was not possible to retrieve localizations from the server</string>
 
 
     <string-array name="pref_protocol_list_titles">
@@ -97,8 +104,11 @@
     <string name="pref_http_train_resource">Train Resource</string>
     <string name="pref_http_train_resource_summary">The resource responsible for queue training request.</string>
 
-    <string name="pref_http_spam_resource">Spam Resource</string>
-    <string name="pref_http_spam_resource_summary">The resource responsible for receive spam reports.</string>
+    <string name="pref_http_localization_spam_resource">Localization Spam Resource</string>
+    <string name="pref_http_localization_spam_resource_summary">The resource responsible for receive localization spam reports.</string>
+
+    <string name="pref_http_position_spam_resource">Position Spam Resource</string>
+    <string name="pref_http_position_spam_resource_summary">The resource responsible for receive position spam reports.</string>
 
     <string name="pref_http_localization_title">Localizations Resource</string>
     <string name="pref_http_localization_description">The application will fetch available localizations.</string>
