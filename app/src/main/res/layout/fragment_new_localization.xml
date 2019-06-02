@@ -14,12 +14,6 @@
         android:layout_marginRight="15dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fnl_new_localization_informative_text" />
-
 
         <EditText
             android:id="@+id/fnl_input_localization_label"
@@ -46,7 +40,8 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/fnl_is_localization_private_input_hint" />
+            android:text="@string/fnl_is_localization_private_input_hint"
+            android:textColor="@color/grey"/>
 
         <Button
             android:id="@+id/fnl_submit_btn"

@@ -37,6 +37,7 @@ public class Localization implements Identifiable<Long>, Comparable<Localization
 
 
     public Localization() {
+        this(0L, "", "", true, new LocalizationStats());
     }
 
     public Localization(Long id, String label, String user, boolean isOwner, LocalizationStats stats) {

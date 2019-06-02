@@ -398,12 +398,16 @@ public final class HttpService {
 
         private final URL url;
         private final OnSync onSync;
-        private final AsyncHttp<List<WifiDataSample>, Position> asyncHttp;
+        private final AsyncHttp<List<WifiDataSample>, List<Position>> asyncHttp;
 
         private HttpSinker(OnSync onSync) {
 
             this.onSync = onSync;
-            asyncHttp = new AsyncHttpImpl<>(context, gson, Position.class);
+
+            final Type type = new TypeToken<List<Position>>() {
+            }.getType();
+
+            asyncHttp = new AsyncHttpImpl<>(context, gson, type);
 
             final String host = HttpService.this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
 
@@ -416,10 +420,12 @@ public final class HttpService {
         @Override
         public void receive(List<WifiDataSample> wifiDataSamples, final Long batchNumber) {
 
-            asyncHttp.post(this.url, HttpService.this.headers, wifiDataSamples, new OnResponse<Position>() {
+            asyncHttp.post(this.url, HttpService.this.headers, wifiDataSamples, new OnResponse<List<Position>>() {
                 @Override
-                public void onSuccess(Position o) {
-                    onSync.batchNumber(batchNumber, o);
+                public void onSuccess(List<Position> o) {
+                    for (int i = 0; i < o.size(); i++) {
+                        onSync.batchNumber(batchNumber, o.get(i));
+                    }
                 }
 
                 @Override

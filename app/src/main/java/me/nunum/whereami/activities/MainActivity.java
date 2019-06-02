@@ -309,13 +309,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void submitNewTanningRequest(Algorithm algorithm) {
+    public void submitNewTanningRequest(Long algorithmId, Long providerId) {
 
 
         HttpService service = (HttpService) getService(Services.HTTP);
 
         service.newTrain(associatedLocalization().id(),
-                new NewTrainingRequest(algorithm.getId()),
+                new NewTrainingRequest(algorithmId, providerId),
                 new OnResponse<TrainingProgress>() {
                     @Override
                     public void onSuccess(TrainingProgress o) {

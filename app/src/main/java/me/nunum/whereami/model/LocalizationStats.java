@@ -9,6 +9,7 @@ public class LocalizationStats {
     private Integer positions;
 
     public LocalizationStats() {
+        this(0L, 0.0f, 0);
     }
 
     public LocalizationStats(Long samples, Float accuracy, Integer positions) {

@@ -17,9 +17,9 @@ public class WifiDataSample {
     private int channelWidth;
     private int frequency;
     private String timeStamp;
-    private Long position;
-    private Long floorid;
-    private Long localization;
+    private Long positionId;
+    private Long floorId;
+    private Long localizationId;
 
     private WifiDataSample() {
 
@@ -33,9 +33,9 @@ public class WifiDataSample {
                     int channelWidth,
                     int frequency,
                     String timeStamp,
-                    long position,
-                    long floorid,
-                    long localization) {
+                    long positionId,
+                    long floorId,
+                    long localizationId) {
 
         this.bssid = bssid;
         this.ssid = ssid;
@@ -45,9 +45,9 @@ public class WifiDataSample {
         this.channelWidth = channelWidth;
         this.frequency = frequency;
         this.timeStamp = timeStamp;
-        this.position = position;
-        this.floorid = floorid;
-        this.localization = localization;
+        this.positionId = positionId;
+        this.floorId = floorId;
+        this.localizationId = localizationId;
     }
 
     public String getBssid() {
@@ -115,28 +115,28 @@ public class WifiDataSample {
     }
 
 
-    public void setPosition(Long position) {
-        this.position = position;
+    public void setPositionId(Long positionId) {
+        this.positionId = positionId;
     }
 
-    public void setFloorid(Long floorid) {
-        this.floorid = floorid;
+    public void setFloorId(Long floorId) {
+        this.floorId = floorId;
     }
 
-    public void setLocalization(Long localization) {
-        this.localization = localization;
+    public void setLocalizationId(Long localizationId) {
+        this.localizationId = localizationId;
     }
 
-    public Long getPosition() {
-        return position;
+    public Long getPositionId() {
+        return positionId;
     }
 
-    public Long getFloorid() {
-        return floorid;
+    public Long getFloorId() {
+        return floorId;
     }
 
-    public Long getLocalization() {
-        return localization;
+    public Long getLocalizationId() {
+        return localizationId;
     }
 
     public static WifiDataSample mapFromScanResult(ScanResult result, Localization localization, Position position) {
@@ -160,9 +160,9 @@ public class WifiDataSample {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         data.setTimeStamp(dateFormat.format(new Date()));
 
-        data.setPosition(position.getId());
-        data.setLocalization(localization.getId());
-        data.setFloorid(0L);
+        data.setPositionId(position.getId());
+        data.setLocalizationId(localization.getId());
+        data.setFloorId(0L);
 
         return data;
     }

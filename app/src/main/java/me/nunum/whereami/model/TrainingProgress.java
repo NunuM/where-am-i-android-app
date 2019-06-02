@@ -16,6 +16,7 @@ public class TrainingProgress implements Comparable<TrainingProgress> {
     private Algorithm algorithm;
 
     public TrainingProgress() {
+        this(0L, "", new Algorithm());
     }
 
     public TrainingProgress(Long id, String status, Algorithm algorithm) {

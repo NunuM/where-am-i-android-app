@@ -5,7 +5,7 @@ public final class NewLocalizationRequest {
 
     private String label;
 
-    private boolean isVisible;
+    private boolean isPublic;
 
     private String user;
 
@@ -18,12 +18,12 @@ public final class NewLocalizationRequest {
     }
 
     public NewLocalizationRequest(String label,
-                                  boolean isVisible,
+                                  boolean isPublic,
                                   String user,
                                   double latitude,
                                   double longitude) {
         this.label = label;
-        this.isVisible = isVisible;
+        this.isPublic = isPublic;
         this.user = user;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -37,12 +37,12 @@ public final class NewLocalizationRequest {
         this.label = label;
     }
 
-    public boolean isVisible() {
-        return isVisible;
+    public boolean isPublic() {
+        return isPublic;
     }
 
-    public void setVisible(boolean visible) {
-        isVisible = visible;
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 
     public String getUser() {

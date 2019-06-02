@@ -1,40 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:weightSum="2"
     tools:context=".fragments.NewTrainingRequestFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/fntr_list_algorithms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/text_margin"
-            android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginTop="@dimen/text_margin"
-            android:spinnerMode="dropdown" />
-
         <TextView
-            android:id="@+id/fntr_algorithm_info"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/text_margin"
-            android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginTop="@dimen/text_margin"
-            android:autoLink="web" />
+            android:text="@string/fntr_new_training_algorithm_label"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceListItem" />
 
-        <Button
-            android:id="@+id/fntr_submit_btn"
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@+id/fntr_algorithm_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/fnp_new_position_btn" />
+            android:choiceMode="singleChoice" />
 
     </LinearLayout>
 
-</FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="?android:attr/listDivider" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fntr_new_training_algorithm_implementation_label"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <ListView
+            android:id="@+id/fntr_algorithm_implementation_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="singleChoice" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fntr_submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
+</LinearLayout>

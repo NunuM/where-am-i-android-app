@@ -14,6 +14,7 @@ public class Position implements Identifiable<Long>, Comparable<Position> {
     private PositionStats stats;
 
     public Position() {
+        this(0L, "", new PositionStats());
     }
 
     public Position(Long id, String label, PositionStats stats) {

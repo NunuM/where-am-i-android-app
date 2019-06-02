@@ -8,12 +8,12 @@
     <string name="fli_localization_options_spam">Spam</string>
     <string name="fli_localization_options_delete">Delete</string>
 
-    <string name="fli_localization_training_request_success">Cannot delete localization</string>
-    <string name="fli_localization_training_request_failure">Cannot delete localization</string>
+    <string name="fli_localization_training_request_success">Cannot delete localizationId</string>
+    <string name="fli_localization_training_request_failure">Cannot delete localizationId</string>
 
     <string name="fli_localization_spam_request_success">Thank you for your report</string>
     <string name="fli_localization_spam_request_failure">Cannot send your report</string>
-    <string name="fli_localization_delete_request_failure">Cannot delete localization</string>
+    <string name="fli_localization_delete_request_failure">Cannot delete localizationId</string>
 
     <string name="fntr_request_algorithm_error">Was not possible to retrieve algorithms from the server</string>
     <string name="fntr_training_submit_btn">Train</string>
@@ -38,7 +38,7 @@
     <string name="fnp_new_position_label_input_hint">Label</string>
     <string name="fnp_new_position_label_empty_input">Label cannot be empty</string>
     <string name="fnp_new_position_label_duplicate_input">Label already exists</string>
-    <string name="fnp_new_position_label_request_failure">Not was possible to create position</string>
+    <string name="fnp_new_position_label_request_failure">Not was possible to create positionId</string>
     <string name="fnp_new_position_btn">Create</string>
 
     <string name="fnl_new_localization_informative_text">This application does not require any kind of authentication, so please fill the username to something meaning to you.</string>
@@ -46,8 +46,10 @@
     <string name="fnl_new_username_input_hint">Username</string>
     <string name="fnl_is_localization_private_input_hint">Visible to other users</string>
     <string name="fnl_new_localization_submit_btn">Create</string>
-    <string name="fnl_new_localization_request_duplicate_failure">The pair localization name and username already exists</string>
-    <string name="fnl_new_localization_request_failure">Not able to create localization</string>
+    <string name="fnl_new_localization_request_duplicate_failure">The pair localizationId name and username already exists</string>
+    <string name="fnl_new_localization_request_failure">Not able to create localizationId</string>
+    <string name="fnl_new_localization_empty_name">A localization must have a name</string>
+    <string name="fnl_new_localization_empty_username">A localization must have a username</string>
 
     <string name="app_options_menu_about">About</string>
     <string name="app_options_menu_settings">Settings</string>
@@ -55,6 +57,10 @@
     <string name="fll_localization_actionbar_title">Localizations</string>
     <string name="fll_localization_list_request_failure">Was not possible to retrieve localizations from the server</string>
 
+    <string name="fntr_new_training_algorithm_label">Algorithms</string>
+    <string name="fntr_new_training_algorithm_implementation_label">Implementation</string>
+    <string name="fntr_new_training_algorithm_invalid_request">Must choose an Algorithm and a Implementation</string>
+    <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.2f - Deployed: %3$s </string>
 
     <string-array name="pref_protocol_list_titles">
         <item>TCP</item>
@@ -105,10 +111,10 @@
     <string name="pref_http_train_resource_summary">The resource responsible for queue training request.</string>
 
     <string name="pref_http_localization_spam_resource">Localization Spam Resource</string>
-    <string name="pref_http_localization_spam_resource_summary">The resource responsible for receive localization spam reports.</string>
+    <string name="pref_http_localization_spam_resource_summary">The resource responsible for receive localizationId spam reports.</string>
 
     <string name="pref_http_position_spam_resource">Position Spam Resource</string>
-    <string name="pref_http_position_spam_resource_summary">The resource responsible for receive position spam reports.</string>
+    <string name="pref_http_position_spam_resource_summary">The resource responsible for receive positionId spam reports.</string>
 
     <string name="pref_http_localization_title">Localizations Resource</string>
     <string name="pref_http_localization_description">The application will fetch available localizations.</string>
@@ -117,7 +123,7 @@
     <string name="pref_http_localization_page_description">The application will fetch available localizations by page.Only usable if paging enabled.</string>
 
     <string name="pref_http_position_title">Position Resource</string>
-    <string name="pref_http_position_description">Within a localization, there are positions.</string>
+    <string name="pref_http_position_description">Within a localizationId, there are positions.</string>
 
     <string name="pref_http_localization_paging_title">Pagination</string>
     <string name="pref_http_localization_paging_description"><![CDATA[The applications will fetch N localizations per request. Ex=.../?page=3]]></string>
@@ -126,7 +132,7 @@
     <string name="pref_http_fingerprint_resource_summary">A fingerprint will be submitted to this resource.</string>
 
     <string name="pref_http_query_resource">Prediction Resource</string>
-    <string name="pref_http_query_resource_summary">Based on a fingerprint, the resource will respond with the user localization prediction.</string>
+    <string name="pref_http_query_resource_summary">Based on a fingerprint, the resource will respond with the user localizationId prediction.</string>
 
 
     <string name="pref_offline_header">Offline Phase</string>

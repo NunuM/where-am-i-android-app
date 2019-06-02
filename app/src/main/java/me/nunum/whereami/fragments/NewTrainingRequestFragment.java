@@ -3,6 +3,7 @@ package me.nunum.whereami.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,7 @@ import java.util.List;
 import me.nunum.whereami.R;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.model.Algorithm;
+import me.nunum.whereami.model.AlgorithmProvider;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.Services;
 
@@ -68,16 +72,32 @@ public class NewTrainingRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         View hostView = inflater.inflate(R.layout.fragment_new_training_request, container, false);
 
-        final Spinner algorithms = (Spinner) hostView.findViewById(R.id.fntr_list_algorithms);
-
-        final TextView info = (TextView) hostView.findViewById(R.id.fntr_algorithm_info);
+        final ListView algorithms = (ListView) hostView.findViewById(R.id.fntr_algorithm_list);
+        final ListView algorithmsImplementations = (ListView) hostView.findViewById(R.id.fntr_algorithm_implementation_list);
 
         final Button submit = (Button) hostView.findViewById(R.id.fntr_submit_btn);
 
+        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mListener.context(), android.R.layout.simple_list_item_single_choice);
+        final ArrayAdapter<CharSequence> adapterForImplementations = new ArrayAdapter<CharSequence>(mListener.context(), android.R.layout.simple_list_item_single_choice);
 
-        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mListener.context(), android.R.layout.simple_spinner_dropdown_item);
 
         algorithms.setAdapter(adapter);
+        algorithmsImplementations.setAdapter(adapterForImplementations);
+
+        algorithms.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Algorithm algorithm = algorithmsList.get(position);
+
+                algorithmsImplementations.clearChoices();
+                adapterForImplementations.clear();
+
+                for (AlgorithmProvider p : algorithm.getProviders()) {
+                    final String providerStr = getString(R.string.fntr_new_training_provider_name, p.getId(), p.getPredictionRate(), p.getDeployed().toString());
+                    adapterForImplementations.add(providerStr);
+                }
+            }
+        });
 
         HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
@@ -87,8 +107,8 @@ public class NewTrainingRequestFragment extends Fragment {
                 for (int i = 0; i < o.size(); i++) {
                     adapter.add(o.get(i).getName());
                 }
-
                 algorithmsList = o;
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -97,34 +117,36 @@ public class NewTrainingRequestFragment extends Fragment {
             }
         });
 
-
-        algorithms.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                if (algorithmsList == null) {
-                    return;
-                }
-
-                Algorithm algorithm = algorithmsList.get(i);
-                Log.d("TAG", "onItemClick: " + algorithm);
-
-                info.setText("Information: " + algorithm.getPaperURL());
-                Linkify.addLinks(info, Linkify.WEB_URLS);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                info.setText("");
-            }
-        });
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!(algorithmsList == null || algorithmsList.isEmpty())) {
-                    final Algorithm algorithm = algorithmsList.get(algorithms.getSelectedItemPosition());
-                    mListener.submitNewTanningRequest(algorithm);
+                    int itemPosition = algorithms.getCheckedItemPosition();
+
+                    if (AdapterView.INVALID_POSITION != itemPosition
+                            && itemPosition < algorithmsList.size()) {
+
+                        Algorithm algorithm = algorithmsList.get(itemPosition);
+
+                        int providerSize = algorithm.getProviders().size();
+
+                        int checkedItemPosition = algorithmsImplementations.getCheckedItemPosition();
+
+                        if (checkedItemPosition != AdapterView.INVALID_POSITION
+                                && checkedItemPosition < providerSize) {
+
+                            AlgorithmProvider provider = algorithm.getProviders().get(checkedItemPosition);
+
+                            Object position = algorithmsImplementations.getItemAtPosition(checkedItemPosition);
+
+                            if (position.toString().contains(provider.getId().toString())) {
+                                mListener.submitNewTanningRequest(algorithm.getId(), provider.getId());
+                                return;
+                            }
+                        }
+                    }
+
+                    Toast.makeText(mListener.context(), R.string.fntr_new_training_algorithm_invalid_request, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -154,6 +176,6 @@ public class NewTrainingRequestFragment extends Fragment {
 
         Object getService(Services service);
 
-        void submitNewTanningRequest(Algorithm algorithm);
+        void submitNewTanningRequest(Long algorithmId, Long providerId);
     }
 }

@@ -12,6 +12,7 @@ public class PositionStats {
     private String strongestSignal;
 
     public PositionStats() {
+        this(0, 0, 0, "");
     }
 
     public PositionStats(Integer routers, Integer samples, Integer networks, String strongestSignal) {

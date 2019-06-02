@@ -81,12 +81,12 @@ public class NewLocalizationFragment extends Fragment {
                 final boolean isPrivateBl = isPrivate.isChecked();
 
                 if (localizationStr.isEmpty()) {
-                    Toast.makeText(mListener.context(), R.string.fli_localization_spam_request_failure, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mListener.context(), R.string.fnl_new_localization_empty_name, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (usernameStr.isEmpty()) {
-                    Toast.makeText(mListener.context(), R.string.fli_localization_spam_request_failure, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mListener.context(), R.string.fnl_new_localization_empty_username, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
