@@ -1,11 +1,10 @@
 package me.nunum.whereami.service;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
-import android.util.TimeUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -91,6 +90,15 @@ public final class HttpService {
 
         return true;
     }
+
+    public boolean image(String url, OnResponse<Bitmap> onResponse){
+
+        AsyncHttpImpl.downloadImage(this.makeURL(url,""), this.headers, onResponse, true);
+
+        return true;
+    }
+
+
 
     public boolean paginateLocalizations(int currentPage, OnResponse<List<Localization>> onResponse) {
 
@@ -242,10 +250,10 @@ public final class HttpService {
         final Type type = new TypeToken<List<Localization>>() {
         }.getType();
 
-        final AsyncHttp<Void, List<Post>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
+        final AsyncHttpImpl<Void, List<Post>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
 
-        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d", currentPage)), type, this.headers, onResponse);
+        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d", currentPage)), type, this.headers, onResponse, true);
 
         return true;
     }

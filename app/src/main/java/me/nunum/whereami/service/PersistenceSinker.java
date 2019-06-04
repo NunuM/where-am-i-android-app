@@ -13,8 +13,6 @@ import java.util.List;
 
 import me.nunum.whereami.framework.Emitter;
 import me.nunum.whereami.framework.Marshaller;
-import me.nunum.whereami.framework.OnSample;
-import me.nunum.whereami.framework.OnSaved;
 import me.nunum.whereami.framework.OnSync;
 import me.nunum.whereami.framework.Receiver;
 import me.nunum.whereami.model.WifiDataSample;

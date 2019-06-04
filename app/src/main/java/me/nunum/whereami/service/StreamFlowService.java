@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -15,7 +14,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnCircuitTest;
 import me.nunum.whereami.framework.OnSample;
-import me.nunum.whereami.framework.OnSaved;
 import me.nunum.whereami.framework.OnSync;
 import me.nunum.whereami.framework.Receiver;
 import me.nunum.whereami.framework.StreamFlow;
