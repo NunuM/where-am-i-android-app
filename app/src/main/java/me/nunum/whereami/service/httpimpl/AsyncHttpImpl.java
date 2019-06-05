@@ -1,12 +1,15 @@
 package me.nunum.whereami.service.httpimpl;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -59,6 +62,34 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
     }
 
+
+    /**
+     * Makes an asynchronous GET HTTP request
+     *
+     * @param url
+     * @param headers
+     * @param useCache
+     */
+    public static void downloadImage(URL url,
+                    Map<String, String> headers,
+                    final OnResponse<Bitmap> onResponse, boolean useCache) {
+
+        Request<?> request = new BitmapRequest(url.toString(), headers, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                onResponse.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                onResponse.onFailure(error);
+            }
+        }).setShouldCache(useCache);
+
+        requestQueue.add(request);
+    }
+
+
     @Override
     public void get(URL url,
                     Type type,
@@ -68,6 +99,17 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         ResponseHandler<O> handler = new ResponseHandler<>(type, marshaller, onResponse);
 
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
+    }
+
+
+    public void get(URL url,
+                    Type type,
+                    Map<String, String> headers,
+                    OnResponse<O> onResponse, boolean useCache) {
+
+        ResponseHandler<O> handler = new ResponseHandler<>(type, marshaller, onResponse);
+
+        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(useCache));
     }
 
     /**
@@ -251,6 +293,30 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         @Override
         public byte[] getBody() throws AuthFailureError {
             return this.marshaled.getBytes();
+        }
+    }
+
+    public static class BitmapRequest extends ImageRequest {
+
+        private final Map<String, String> headers;
+
+        public BitmapRequest(String url,
+                             Map<String, String> headers,
+                             Response.Listener<Bitmap> listener,
+                             Response.ErrorListener errorListener) {
+            super(url,
+                    listener,
+                    200,
+                    200,
+                    ImageView.ScaleType.CENTER_CROP,
+                    Bitmap.Config.ALPHA_8,
+                    errorListener);
+            this.headers = headers;
+        }
+
+        @Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            return this.headers;
         }
     }
 

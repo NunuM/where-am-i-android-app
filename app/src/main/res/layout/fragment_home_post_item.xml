@@ -18,25 +18,26 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#000">
 
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/fhpi_post_image"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:src="@drawable/ic_action_add" />
+                android:background="@color/colorPrimary" />
 
             <TextView
+                android:id="@+id/fhpi_post_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingBottom="10dp"
                 android:paddingStart="5dp"
+                android:paddingLeft="5dp"
                 android:paddingTop="5dp"
-                android:text="TextView"
                 android:textColor="#fff"
                 android:textStyle="bold" />
 

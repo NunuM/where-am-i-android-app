@@ -34,7 +34,6 @@ import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.OnSample;
 import me.nunum.whereami.framework.StreamFlow;
-import me.nunum.whereami.model.Algorithm;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.TrainingProgress;
@@ -154,6 +153,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public Context context() {
         return this.getApplicationContext();
+    }
+
+    @Override
+    public void launchBrowserIntent(Intent intent) {
+        startActivity(intent);
     }
 
     @Override

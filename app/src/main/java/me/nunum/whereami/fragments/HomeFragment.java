@@ -1,14 +1,28 @@
 package me.nunum.whereami.fragments;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.List;
 
 import me.nunum.whereami.R;
+import me.nunum.whereami.adapters.PostRecyclerViewAdapter;
+import me.nunum.whereami.framework.EndlessRecyclerOnScrollListener;
+import me.nunum.whereami.framework.OnResponse;
+import me.nunum.whereami.model.Post;
+import me.nunum.whereami.service.HttpService;
+import me.nunum.whereami.service.Services;
+import me.nunum.whereami.utils.AppConfig;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +34,7 @@ import me.nunum.whereami.R;
  */
 public class HomeFragment extends Fragment {
 
+    private int mColumnCount = 1;
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,7 +63,80 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        final View hostView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        final HttpService service = (HttpService) mListener.getService(Services.HTTP);
+
+        LinearLayoutManager layoutManager = null;
+
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) hostView.findViewById(R.id.fh_post_swipe);
+
+        View view = hostView.findViewById(R.id.fh_post_list);
+
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+
+            Context context = view.getContext();
+            RecyclerView recyclerView = (RecyclerView) view;
+
+            if (mColumnCount <= 1) {
+                layoutManager = new LinearLayoutManager(context);
+                recyclerView.setLayoutManager(layoutManager);
+            } else {
+                layoutManager = new GridLayoutManager(context, mColumnCount);
+                recyclerView.setLayoutManager(layoutManager);
+            }
+
+            final PostRecyclerViewAdapter adapter = new PostRecyclerViewAdapter(this.mListener);
+            recyclerView.setAdapter(adapter);
+
+            final EndlessRecyclerOnScrollListener scrollListener = new EndlessRecyclerOnScrollListener(layoutManager) {
+
+                @Override
+                public void onLoadMore(int currentPage) {
+
+                    service.paginatePosts(currentPage, new OnResponse<List<Post>>() {
+                        @Override
+                        public void onSuccess(List<Post> o) {
+
+                            if (o.size() < visibleThreshold()) {
+                                setEnabled(false);
+                            } else {
+                                setEnabled(true);
+                            }
+
+                            if (swipeRefreshLayout.isRefreshing()) {
+                                swipeRefreshLayout.setRefreshing(false);
+                            }
+
+                            adapter.addAll(o);
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Toast.makeText(mListener.context(), R.string.fh_posts_request_failure, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            };
+
+            recyclerView.addOnScrollListener(scrollListener);
+
+            scrollListener.onLoadMore(AppConfig.FIRST_PAGE);
+
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    scrollListener.onLoadMore(AppConfig.FIRST_PAGE);
+                }
+            });
+        }
+
+        swipeRefreshLayout.setRefreshing(true);
+
+        mListener.setActionBarTitle(getString(R.string.fh_bar_title));
+
+        return hostView;
     }
 
 
@@ -80,6 +168,12 @@ public class HomeFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
+        Object getService(Services service);
 
+        void setActionBarTitle(String barTitle);
+
+        Context context();
+
+        void launchBrowserIntent(Intent intent);
     }
 }
