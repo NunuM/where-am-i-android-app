@@ -22,6 +22,7 @@ import com.android.volley.ClientError;
 import com.google.gson.Gson;
 
 import me.nunum.whereami.R;
+import me.nunum.whereami.fragments.HomeFragment;
 import me.nunum.whereami.fragments.LocalizationFragment;
 import me.nunum.whereami.fragments.NewLocalizationFragment;
 import me.nunum.whereami.fragments.NewPositionFragment;
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity
         NewPositionFragment.OnFragmentInteractionListener,
         NewLocalizationFragment.OnFragmentInteractionListener,
         TrainingStatusFragment.OnFragmentInteractionListener,
-        NewTrainingRequestFragment.OnFragmentInteractionListener {
+        NewTrainingRequestFragment.OnFragmentInteractionListener,
+        HomeFragment.OnFragmentInteractionListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -76,8 +78,13 @@ public class MainActivity extends AppCompatActivity
                 case R.id.navigation_home:
 
 
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.am_container, HomeFragment.newInstance())
+                            .commitAllowingStateLoss();
+
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_localization:
 
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -85,7 +92,7 @@ public class MainActivity extends AppCompatActivity
                             .commitAllowingStateLoss();
 
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_prediction:
 
                     return true;
             }

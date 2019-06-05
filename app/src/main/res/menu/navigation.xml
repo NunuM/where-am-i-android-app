@@ -7,12 +7,12 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_localization"
         android:icon="@drawable/ic_add_location_black_24dp"
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_prediction"
         android:icon="@drawable/ic_my_location_black_24dp"
         android:title="@string/title_prediction" />
 
