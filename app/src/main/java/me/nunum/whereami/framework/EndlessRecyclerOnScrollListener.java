@@ -18,7 +18,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     int firstVisibleItem, visibleItemCount, totalItemCount;
 
 
-    private int current_page = 0;
+    private int current_page = 1;
 
     private LinearLayoutManager mLinearLayoutManager;
 
@@ -56,9 +56,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
         }
         if (!loading && (totalItemCount - visibleItemCount)
                 <= (firstVisibleItem + visibleThreshold)) {
-            // End has been reached
 
-            // Do something
             current_page++;
 
             onLoadMore(current_page);

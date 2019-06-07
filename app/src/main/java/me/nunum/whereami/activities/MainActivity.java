@@ -22,6 +22,7 @@ import com.android.volley.ClientError;
 import com.google.gson.Gson;
 
 import me.nunum.whereami.R;
+import me.nunum.whereami.fragments.HomeFragment;
 import me.nunum.whereami.fragments.LocalizationFragment;
 import me.nunum.whereami.fragments.NewLocalizationFragment;
 import me.nunum.whereami.fragments.NewPositionFragment;
@@ -33,7 +34,6 @@ import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.OnSample;
 import me.nunum.whereami.framework.StreamFlow;
-import me.nunum.whereami.model.Algorithm;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.TrainingProgress;
@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity
         NewPositionFragment.OnFragmentInteractionListener,
         NewLocalizationFragment.OnFragmentInteractionListener,
         TrainingStatusFragment.OnFragmentInteractionListener,
-        NewTrainingRequestFragment.OnFragmentInteractionListener {
+        NewTrainingRequestFragment.OnFragmentInteractionListener,
+        HomeFragment.OnFragmentInteractionListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -76,8 +77,13 @@ public class MainActivity extends AppCompatActivity
                 case R.id.navigation_home:
 
 
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.am_container, HomeFragment.newInstance())
+                            .commitAllowingStateLoss();
+
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_localization:
 
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity
                             .commitAllowingStateLoss();
 
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_prediction:
 
                     return true;
             }
@@ -147,6 +153,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public Context context() {
         return this.getApplicationContext();
+    }
+
+    @Override
+    public void launchBrowserIntent(Intent intent) {
+        startActivity(intent);
     }
 
     @Override

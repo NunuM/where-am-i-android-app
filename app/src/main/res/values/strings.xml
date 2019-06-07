@@ -1,14 +1,17 @@
 <resources>
-    <string name="app_name">whereami</string>
+    <string name="app_name">Where Am I</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Localization</string>
     <string name="title_prediction">Prediction</string>
+
+    <string name="fh_bar_title">Posts</string>
+    <string name="fh_posts_request_failure">Was not possible to retrieve posts from the server</string>
 
     <string name="fli_localization_options_training">Training</string>
     <string name="fli_localization_options_spam">Spam</string>
     <string name="fli_localization_options_delete">Delete</string>
 
-    <string name="fli_localization_training_request_success">Cannot delete localizationId</string>
+    <string name="fli_localization_training_request_success">Your requested was queued</string>
     <string name="fli_localization_training_request_failure">Cannot delete localizationId</string>
 
     <string name="fli_localization_spam_request_success">Thank you for your report</string>

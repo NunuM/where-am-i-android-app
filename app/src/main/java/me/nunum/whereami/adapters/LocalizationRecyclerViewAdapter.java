@@ -20,7 +20,6 @@ import me.nunum.whereami.fragments.LocalizationFragment.OnListFragmentInteractio
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.SortedListCallbackImpl;
 import me.nunum.whereami.model.Localization;
-import me.nunum.whereami.model.TrainingProgress;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.Services;
 
