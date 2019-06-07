@@ -58,7 +58,7 @@
     <string name="fll_localization_list_request_failure">Was not possible to retrieve localizations from the server</string>
 
     <string name="fntr_new_training_algorithm_label">Algorithms</string>
-    <string name="fntr_new_training_algorithm_implementation_label">Implementation</string>
+    <string name="fntr_new_training_algorithm_implementation_label">Implementations</string>
     <string name="fntr_new_training_algorithm_invalid_request">Must choose an Algorithm and a Implementation</string>
     <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.2f - Deployed: %3$s </string>
 
