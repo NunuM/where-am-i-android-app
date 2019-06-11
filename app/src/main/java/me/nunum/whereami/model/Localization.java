@@ -2,11 +2,16 @@ package me.nunum.whereami.model;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 import me.nunum.whereami.framework.domain.Identifiable;
 import me.nunum.whereami.model.request.NewTrainingRequest;
 import me.nunum.whereami.model.request.SpamRequest;
 
-public class Localization implements Identifiable<Long>, Comparable<Localization> {
+public class Localization implements
+        Identifiable<Long>,
+        Comparable<Localization>,
+        Serializable {
 
 
     /**

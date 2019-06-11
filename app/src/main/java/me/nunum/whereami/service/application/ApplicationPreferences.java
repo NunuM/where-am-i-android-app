@@ -382,6 +382,22 @@ public class ApplicationPreferences {
                 return true;
             }
         },
+        HTTP_PREDICTION_RESOURCE {
+            @Override
+            public String defaultValue() {
+                return AppConfig.HTTP_PREDICTION_RESOURCE;
+            }
+
+            @Override
+            public String keyName() {
+                return "http_prediction_resource";
+            }
+
+            @Override
+            public boolean isString() {
+                return true;
+            }
+        },
         INSTANCE_ID {
             @Override
             public String defaultValue() {

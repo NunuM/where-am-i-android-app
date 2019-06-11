@@ -1,6 +1,8 @@
 package me.nunum.whereami.model;
 
-public class LocalizationStats {
+import java.io.Serializable;
+
+public class LocalizationStats implements Serializable {
 
     private Long samples;
 

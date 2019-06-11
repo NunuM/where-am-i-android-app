@@ -65,6 +65,10 @@
     <string name="fntr_new_training_algorithm_invalid_request">Must choose an Algorithm and a Implementation</string>
     <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.2f - Deployed: %3$s </string>
 
+    <string name="fp_prediction_actionbar_title">Prediction</string>
+
+    <string name="fpdi_prediction_label_item">%1s with accuracy of %2$.2f</string>
+
     <string-array name="pref_protocol_list_titles">
         <item>TCP</item>
         <item>HTTP</item>

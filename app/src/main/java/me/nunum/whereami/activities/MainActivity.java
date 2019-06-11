@@ -29,6 +29,8 @@ import me.nunum.whereami.fragments.NewPositionFragment;
 import me.nunum.whereami.fragments.NewTrainingRequestFragment;
 import me.nunum.whereami.fragments.PositionDetailsFragment;
 import me.nunum.whereami.fragments.PositionFragment;
+import me.nunum.whereami.fragments.PredictionDashboardFragment;
+import me.nunum.whereami.fragments.PredictionFragment;
 import me.nunum.whereami.fragments.TrainingStatusFragment;
 import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnResponse;
@@ -47,15 +49,20 @@ import me.nunum.whereami.service.application.ApplicationPreferences;
 import me.nunum.whereami.service.database.DatabaseStats;
 import me.nunum.whereami.utils.PermissionRequestCodes;
 
-public class MainActivity extends AppCompatActivity
-        implements LocalizationFragment.OnListFragmentInteractionListener,
+public class MainActivity
+        extends
+        AppCompatActivity
+        implements
+        LocalizationFragment.OnListFragmentInteractionListener,
         PositionFragment.OnListFragmentInteractionListener,
         PositionDetailsFragment.OnFragmentInteractionListener,
         NewPositionFragment.OnFragmentInteractionListener,
         NewLocalizationFragment.OnFragmentInteractionListener,
         TrainingStatusFragment.OnFragmentInteractionListener,
         NewTrainingRequestFragment.OnFragmentInteractionListener,
-        HomeFragment.OnFragmentInteractionListener {
+        HomeFragment.OnFragmentInteractionListener,
+        PredictionFragment.OnListFragmentInteractionListener,
+        PredictionDashboardFragment.OnFragmentInteractionListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -76,7 +83,6 @@ public class MainActivity extends AppCompatActivity
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
-
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.am_container, HomeFragment.newInstance())
@@ -92,6 +98,11 @@ public class MainActivity extends AppCompatActivity
 
                     return true;
                 case R.id.navigation_prediction:
+
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.am_container, PredictionFragment.newInstance())
+                            .commitAllowingStateLoss();
 
                     return true;
             }
@@ -263,6 +274,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void openPredictionDashboardFor(Localization localization) {
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.am_container, PredictionDashboardFragment.newInstance(localization))
+                .commitAllowingStateLoss();
+
+    }
+
+    @Override
     public void openNewTrainingFragment() {
 
         getSupportFragmentManager()
@@ -325,8 +346,10 @@ public class MainActivity extends AppCompatActivity
 
         HttpService service = (HttpService) getService(Services.HTTP);
 
-        service.newTrain(associatedLocalization().id(),
+        service.newTrain(
+                associatedLocalization().id(),
                 new NewTrainingRequest(algorithmId, providerId),
+
                 new OnResponse<TrainingProgress>() {
                     @Override
                     public void onSuccess(TrainingProgress o) {

@@ -31,6 +31,8 @@ public class AppConfig {
     public static final String HTTP_SAMPLES_RESOURCE = "fingerprint";
     public static final String HTTP_ALGORITHM_RESOURCE = "algorithm";
 
+    public static final String HTTP_PREDICTION_RESOURCE = "localization/:id/predict";
+
 
     public static final String HTTP_POSTS_RESOURCE = "/post";
 

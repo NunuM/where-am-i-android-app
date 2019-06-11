@@ -25,10 +25,12 @@ import me.nunum.whereami.model.Algorithm;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.Post;
+import me.nunum.whereami.model.Prediction;
 import me.nunum.whereami.model.TrainingProgress;
 import me.nunum.whereami.model.WifiDataSample;
 import me.nunum.whereami.model.request.NewLocalizationRequest;
 import me.nunum.whereami.model.request.NewPositionRequest;
+import me.nunum.whereami.model.request.NewPredictionRequest;
 import me.nunum.whereami.model.request.NewTrainingRequest;
 import me.nunum.whereami.model.request.PostRequest;
 import me.nunum.whereami.model.request.SpamRequest;
@@ -118,6 +120,28 @@ public final class HttpService {
         return true;
     }
 
+
+    public boolean requestNewPrediction(Localization localization,
+                                        NewPredictionRequest request,
+                                        OnResponse<List<Prediction>> onResponse) {
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_PREDICTION_RESOURCE);
+
+        final Type type = new TypeToken<List<Prediction>>() {
+        }.getType();
+
+        if (resource.contains(":id")) {
+            resource = resource.replace(":id", String.valueOf(localization.id()));
+        }
+
+        final AsyncHttp<NewPredictionRequest, List<Prediction>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
+
+        asyncHttp.post(this.makeURL(host, resource), headers, request, onResponse);
+
+        return true;
+    }
 
     public boolean deleteLocalization(long id, OnResponse<Void> onResponse) {
 
