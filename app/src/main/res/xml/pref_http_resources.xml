@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue="localizationId"
+        android:defaultValue="localization"
         android:key="http_localization_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -16,7 +16,7 @@
         android:title="@string/pref_http_localization_paging_title" />
 
     <EditTextPreference
-        android:defaultValue="localizationId/:id/positionId"
+        android:defaultValue="localization/:id/position"
         android:key="http_position_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -32,7 +32,7 @@
         android:title="@string/pref_http_fingerprint_resource" />
 
     <EditTextPreference
-        android:defaultValue="prediction"
+        android:defaultValue="/localization/:id/predict"
         android:key="http_prediction_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -48,7 +48,7 @@
         android:title="@string/pref_http_post_resource" />
 
     <EditTextPreference
-        android:defaultValue="localizationId/:id/train"
+        android:defaultValue="localization/:id/train"
         android:key="http_train_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -56,7 +56,7 @@
         android:title="@string/pref_http_train_resource" />
 
     <EditTextPreference
-        android:defaultValue="localizationId/:id/spam"
+        android:defaultValue="localization/:id/spam"
         android:key="http_localization_spam_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"
@@ -64,7 +64,7 @@
         android:title="@string/pref_http_localization_spam_resource" />
 
     <EditTextPreference
-        android:defaultValue="localizationId/:id/positionId/:it/spam"
+        android:defaultValue="localization/:id/position/:it/spam"
         android:key="http_position_spam_resource"
         android:selectAllOnFocus="true"
         android:singleLine="true"

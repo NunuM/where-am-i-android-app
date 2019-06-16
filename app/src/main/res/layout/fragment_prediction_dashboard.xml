@@ -6,18 +6,46 @@
     android:orientation="vertical"
     tools:context=".fragments.PredictionDashboardFragment">
 
-
-    <ToggleButton
-        android:id="@+id/fpda_toggle_btn"
+    <ProgressBar
+        android:id="@+id/fpda_prediction_progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ToggleButton" />
+        android:indeterminate="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/fpda_all_predictions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_weight="1"
+            android:text="All Predictions" />
+
+        <ToggleButton
+            android:id="@+id/fpda_toggle_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:textOff="@string/fpda_start_request_predictions_label"
+            android:textOn="@string/fpda_stop_request_predictions_label"  />
+
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fpda_predictions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/fragment_prediction_dashboard_item"/>
+        android:scrollbars="vertical"
+        tools:listitem="@layout/fragment_prediction_dashboard_item" />
 
 
 </LinearLayout>

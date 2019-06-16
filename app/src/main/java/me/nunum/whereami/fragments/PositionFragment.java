@@ -175,11 +175,11 @@ public class PositionFragment extends Fragment {
         }
 
         TextView samples = (TextView) hostView.findViewById(R.id.fpl_localization_stats_samples);
-        TextView accuracy = (TextView) hostView.findViewById(R.id.fpl_localization_stats_accuracy);
+        TextView nModels = (TextView) hostView.findViewById(R.id.fpl_localization_stats_models);
 
 
         samples.setText(localization.getStats().getSamples().toString());
-        accuracy.setText(localization.getStats().getAccuracy().toString());
+        nModels.setText(localization.getStats().getNumberOfTrainedModels().toString());
 
 
         mListener.setActionBarTitle(localization.getLabel());

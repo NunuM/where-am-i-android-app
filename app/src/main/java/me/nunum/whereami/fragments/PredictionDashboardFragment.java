@@ -1,5 +1,6 @@
 package me.nunum.whereami.fragments;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.ToggleButton;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -51,6 +55,12 @@ public class PredictionDashboardFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private Date lastUpdate;
+
+    private ProgressBar progressBar;
+
+    private final ValueAnimator valueAnimator = new ValueAnimator();
+
     private int mColumnCount = 1;
 
     private ScheduledFuture<?> future;
@@ -85,10 +95,18 @@ public class PredictionDashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final HttpService httpService = (HttpService) mListener.getService(Services.HTTP);
+
         // Inflate the layout for this fragment
         View hostView = inflater.inflate(R.layout.fragment_prediction_dashboard, container, false);
 
         final ToggleButton toggle = (ToggleButton) hostView.findViewById(R.id.fpda_toggle_btn);
+
+        Button requestAllPredictions = hostView.findViewById(R.id.fpda_all_predictions);
+
+        progressBar = hostView.findViewById(R.id.fpda_prediction_progress_bar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         final PredictionDashboardRecyclerViewAdapter adapter = new PredictionDashboardRecyclerViewAdapter(mListener);
 
@@ -99,11 +117,15 @@ public class PredictionDashboardFragment extends Fragment {
                 if (isChecked) {
                     future = startRequestPredictions(adapter);
                     toggle.setClickable(true);
+                    startProgressBar();
+
                 } else {
                     if (future != null) {
                         future.cancel(true);
                     }
                     toggle.setClickable(true);
+
+                    stopProgressBar();
                 }
             }
         });
@@ -123,6 +145,7 @@ public class PredictionDashboardFragment extends Fragment {
                 recyclerView.setLayoutManager(layoutManager);
             }
 
+
             recyclerView.setAdapter(adapter);
 
             final DividerItemDecoration dividerItemDecorator = new DividerItemDecoration(
@@ -131,6 +154,26 @@ public class PredictionDashboardFragment extends Fragment {
             );
             recyclerView.addItemDecoration(dividerItemDecorator);
         }
+
+
+        requestAllPredictions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                httpService.requestNewPrediction(localization,
+                        new NewPredictionRequest(new Date(1081157732L * 1000), true),
+                        new OnResponse<List<Prediction>>() {
+                            @Override
+                            public void onSuccess(List<Prediction> o) {
+                                adapter.addAll(o);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                Log.e("dsad", "onFailure: ", throwable);
+                            }
+                        });
+            }
+        });
 
         return hostView;
     }
@@ -148,10 +191,14 @@ public class PredictionDashboardFragment extends Fragment {
 
     private synchronized ScheduledFuture<?> startRequestPredictions(final PredictionDashboardRecyclerViewAdapter adapter) {
 
-        ApplicationPreferences preferences = ApplicationPreferences.instance(mListener.context());
+        final ApplicationPreferences preferences = ApplicationPreferences.instance(mListener.context());
 
         final Integer delay = preferences.getIntegerKey(ApplicationPreferences.KEYS.PRODUCER_DELAY);
         final Integer period = preferences.getIntegerKey(ApplicationPreferences.KEYS.PRODUCER_PERIOD);
+
+        if (progressBar != null) {
+            progressBar.setMax(period);
+        }
 
         final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -164,11 +211,12 @@ public class PredictionDashboardFragment extends Fragment {
                                 final HttpService httpService = (HttpService) mListener.getService(Services.HTTP);
 
                                 httpService.requestNewPrediction(localization,
-                                        new NewPredictionRequest(new Date(), false, wifiDataSamples),
+                                        new NewPredictionRequest(getLastUpdate(), false, wifiDataSamples),
                                         new OnResponse<List<Prediction>>() {
                                             @Override
                                             public void onSuccess(List<Prediction> o) {
                                                 adapter.addAll(o);
+                                                resetProgressBar();
                                             }
 
                                             @Override
@@ -189,6 +237,57 @@ public class PredictionDashboardFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
+        if (future != null) {
+            future.cancel(true);
+            future = null;
+        }
+    }
+
+
+    public void startProgressBar() {
+
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+            valueAnimator.setObjectValues(0, progressBar.getMax());
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    Integer integer = Integer.valueOf(animation.getAnimatedValue().toString());
+                    progressBar.setProgress(integer);
+                }
+            });
+
+            valueAnimator.setDuration(1000 * progressBar.getMax());
+            valueAnimator.start();
+        }
+    }
+
+
+    public void resetProgressBar() {
+        if (progressBar != null) {
+            progressBar.setProgress(0);
+        }
+        valueAnimator.start();
+    }
+
+    public void stopProgressBar() {
+        valueAnimator.end();
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+
+    public Date getLastUpdate() {
+
+        if (lastUpdate == null) {
+            lastUpdate = new Date();
+        }
+
+        Date clone = new Date(lastUpdate.getTime());
+
+        lastUpdate = new Date();
+
+        return clone;
     }
 
 

@@ -67,7 +67,13 @@
 
     <string name="fp_prediction_actionbar_title">Prediction</string>
 
-    <string name="fpdi_prediction_label_item">%1s with accuracy of %2$.2f</string>
+    <string name="fpdi_prediction_label_item">Batch %1d | accuracy of %2$.2f</string>
+
+    <string name="fpda_start_request_predictions_label">Predict</string>
+    <string name="fpda_stop_request_predictions_label">Stop</string>
+
+
+    <string name="fpdi_prediction_feedback_failure">Could not register your feedback</string>
 
     <string-array name="pref_protocol_list_titles">
         <item>TCP</item>
@@ -108,7 +114,7 @@
     <string name="pref_hostname_label">Hostname</string>
     <string name="pref_hostname_summary">All communication will use this endpoint. Just specify the scheme and authority (RFC3986).</string>
 
-    <string name="pref_hostname_default">https://nunum.me</string>
+    <string name="pref_hostname_default">http://192.168.1.6:8080</string>
 
 
     <string name="pref_http_post_resource">Posts Resource</string>

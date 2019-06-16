@@ -31,7 +31,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/fpl_localization_stats_accuracy"
+                    android:id="@+id/fpl_localization_stats_models"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Accuaracy"
+                    android:text="Trained Models"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#fff"
                     android:textStyle="bold" />

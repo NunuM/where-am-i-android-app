@@ -18,8 +18,11 @@ public class Prediction implements Comparable<Prediction> {
 
     private String predictionLabel;
 
+    private Integer predictionFeedback;
+
     public Prediction() {
-        this(0L,0f, 0L, 0L, 0L, 0L, "");
+
+        this(0L, 0f, 0L, 0L, 0L, 0L, "", 0);
     }
 
     public Prediction(Long id,
@@ -28,7 +31,8 @@ public class Prediction implements Comparable<Prediction> {
                       Long requestId,
                       Long providerId,
                       Long predictedPositionId,
-                      String predictionLabel) {
+                      String predictionLabel,
+                      Integer predictionFeedback) {
         this.id = id;
         this.accuracy = accuracy;
         this.localizationId = localizationId;
@@ -36,6 +40,7 @@ public class Prediction implements Comparable<Prediction> {
         this.providerId = providerId;
         this.predictedPositionId = predictedPositionId;
         this.predictionLabel = predictionLabel;
+        this.predictionFeedback = predictionFeedback;
     }
 
 
@@ -95,14 +100,25 @@ public class Prediction implements Comparable<Prediction> {
         this.id = id;
     }
 
+    public Integer getPredictionFeedback() {
+        return predictionFeedback;
+    }
+
+    public void setPredictionFeedback(Integer predictionFeedback) {
+        this.predictionFeedback = predictionFeedback;
+    }
+
     @Override
     public String toString() {
         return "Prediction{" +
-                "accuracy=" + accuracy +
+                "id=" + id +
+                ", accuracy=" + accuracy +
                 ", localizationId=" + localizationId +
                 ", requestId=" + requestId +
                 ", providerId=" + providerId +
                 ", predictedPositionId=" + predictedPositionId +
+                ", predictionLabel='" + predictionLabel + '\'' +
+                ", predictionFeedback=" + predictionFeedback +
                 '}';
     }
 

@@ -33,6 +33,7 @@ import me.nunum.whereami.model.request.NewPositionRequest;
 import me.nunum.whereami.model.request.NewPredictionRequest;
 import me.nunum.whereami.model.request.NewTrainingRequest;
 import me.nunum.whereami.model.request.PostRequest;
+import me.nunum.whereami.model.request.PredictionFeedbackRequest;
 import me.nunum.whereami.model.request.SpamRequest;
 import me.nunum.whereami.service.application.ApplicationPreferences;
 import me.nunum.whereami.service.httpimpl.AsyncHttpImpl;
@@ -116,6 +117,44 @@ public final class HttpService {
         final AsyncHttp<Void, List<Localization>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
         asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d", currentPage)), type, this.headers, onResponse);
+
+        return true;
+    }
+
+
+    public boolean paginateLocalizationsWithModels(int currentPage, OnResponse<List<Localization>> onResponse) {
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        final String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_LOCALIZATIONS_RESOURCE);
+
+        final Type type = new TypeToken<List<Localization>>() {
+        }.getType();
+
+        final AsyncHttp<Void, List<Localization>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
+
+        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d&trained=true", currentPage)), type, this.headers, onResponse);
+
+        return true;
+    }
+
+
+    public boolean predictionFeedback(Long localizationId,
+                                      Long predictionId,
+                                      PredictionFeedbackRequest request,
+                                      OnResponse<Prediction> onResponse) {
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_PREDICTION_RESOURCE);
+
+        if (resource.contains(":id")) {
+            resource = resource.replace(":id", String.valueOf(localizationId));
+        }
+
+        final AsyncHttp<PredictionFeedbackRequest, Prediction> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Prediction.class);
+
+        asyncHttp.put(makeURL(host, resource + "/" + predictionId), headers, request, onResponse);
 
         return true;
     }

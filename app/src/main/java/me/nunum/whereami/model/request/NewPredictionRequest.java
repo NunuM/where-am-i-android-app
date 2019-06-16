@@ -8,9 +8,7 @@ import java.util.List;
 
 import me.nunum.whereami.model.WifiDataSample;
 
-public class NewPredictionRequest {
-
-    private static Date p = new Date();
+public final class NewPredictionRequest {
 
     private String lastUpdate;
 
@@ -24,14 +22,19 @@ public class NewPredictionRequest {
         this(new Date(), new Date(), true, new ArrayList<WifiDataSample>());
     }
 
+    public NewPredictionRequest(Date lastUpdate, boolean onlyPolling) {
+        this(lastUpdate, new Date(), onlyPolling, new ArrayList<WifiDataSample>());
+    }
+
     public NewPredictionRequest(Date lastUpdate, boolean onlyPolling, List<WifiDataSample> samples) {
         this(lastUpdate, new Date(), onlyPolling, samples);
     }
 
     public NewPredictionRequest(Date lastUpdate, Date clientNow, boolean onlyPolling, List<WifiDataSample> samples) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS'Z'");
 
-        this.lastUpdate = simpleDateFormat.format(p);
+        this.lastUpdate = simpleDateFormat.format(lastUpdate);
         this.clientNow = simpleDateFormat.format(clientNow);
         this.onlyPolling = onlyPolling;
         this.samples = samples;

@@ -6,17 +6,17 @@ public class LocalizationStats implements Serializable {
 
     private Long samples;
 
-    private Float accuracy;
+    private Integer numberOfTrainedModels;
 
     private Integer positions;
 
     public LocalizationStats() {
-        this(0L, 0.0f, 0);
+        this(0L, 0, 0);
     }
 
-    public LocalizationStats(Long samples, Float accuracy, Integer positions) {
+    public LocalizationStats(Long samples, Integer numberOfTrainedModels, Integer positions) {
         this.samples = samples;
-        this.accuracy = accuracy;
+        this.numberOfTrainedModels = numberOfTrainedModels;
         this.positions = positions;
     }
 
@@ -28,12 +28,12 @@ public class LocalizationStats implements Serializable {
         this.samples = samples;
     }
 
-    public Float getAccuracy() {
-        return accuracy;
+    public Integer getNumberOfTrainedModels() {
+        return numberOfTrainedModels;
     }
 
-    public void setAccuracy(Float accuracy) {
-        this.accuracy = accuracy;
+    public void setNumberOfTrainedModels(Integer numberOfTrainedModels) {
+        this.numberOfTrainedModels = numberOfTrainedModels;
     }
 
     public Integer getPositions() {
@@ -53,7 +53,7 @@ public class LocalizationStats implements Serializable {
 
         if (getSamples() != null ? !getSamples().equals(that.getSamples()) : that.getSamples() != null)
             return false;
-        if (getAccuracy() != null ? !getAccuracy().equals(that.getAccuracy()) : that.getAccuracy() != null)
+        if (getNumberOfTrainedModels() != null ? !getNumberOfTrainedModels().equals(that.getNumberOfTrainedModels()) : that.getNumberOfTrainedModels() != null)
             return false;
         return getPositions() != null ? getPositions().equals(that.getPositions()) : that.getPositions() == null;
     }
@@ -61,7 +61,7 @@ public class LocalizationStats implements Serializable {
     @Override
     public int hashCode() {
         int result = getSamples() != null ? getSamples().hashCode() : 0;
-        result = 31 * result + (getAccuracy() != null ? getAccuracy().hashCode() : 0);
+        result = 31 * result + (getNumberOfTrainedModels() != null ? getNumberOfTrainedModels().hashCode() : 0);
         result = 31 * result + (getPositions() != null ? getPositions().hashCode() : 0);
         return result;
     }
@@ -70,7 +70,7 @@ public class LocalizationStats implements Serializable {
     public String toString() {
         return "LocalizationStats{" +
                 "samples=" + samples +
-                ", accuracy=" + accuracy +
+                ", numberOfTrainedModels=" + numberOfTrainedModels +
                 ", positions=" + positions +
                 '}';
     }

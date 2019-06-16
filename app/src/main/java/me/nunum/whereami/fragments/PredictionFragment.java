@@ -95,7 +95,7 @@ public class PredictionFragment extends Fragment {
                 @Override
                 public void onLoadMore(int currentPage) {
 
-                    service.paginateLocalizations(currentPage, new OnResponse<List<Localization>>() {
+                    service.paginateLocalizationsWithModels(currentPage, new OnResponse<List<Localization>>() {
                         @Override
                         public void onSuccess(List<Localization> o) {
 
