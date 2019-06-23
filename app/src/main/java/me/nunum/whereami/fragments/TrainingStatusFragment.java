@@ -6,9 +6,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +23,7 @@ import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.TrainingProgress;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.Services;
+import me.nunum.whereami.utils.StringUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +35,7 @@ import me.nunum.whereami.service.Services;
  */
 public class TrainingStatusFragment extends Fragment {
 
-    private int mColumnCount;
+    private static final String TAG = TrainingStatusFragment.class.getSimpleName();
 
     private OnFragmentInteractionListener mListener;
 
@@ -48,26 +49,21 @@ public class TrainingStatusFragment extends Fragment {
      *
      * @return A new instance of fragment TrainingStatusFragment.
      */
-    public static TrainingStatusFragment newInstance(int mColumnCount) {
-        TrainingStatusFragment fragment = new TrainingStatusFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        fragment.mColumnCount = 1;
-        return fragment;
+    public static TrainingStatusFragment newInstance() {
+        return new TrainingStatusFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View hostView = inflater.inflate(R.layout.fragment_training_status, container, false);
+        final View hostView = inflater.inflate(R.layout.fragment_training_status, container, false);
 
         final HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
@@ -75,22 +71,15 @@ public class TrainingStatusFragment extends Fragment {
 
         final Localization localization = mListener.associatedLocalization();
 
-        mListener.setActionBarTitle(localization.getLabel() + " training status");
-
-        View view = hostView.findViewById(R.id.fts_training_list);
-
-        LinearLayoutManager layoutManager = null;
+        final View view = hostView.findViewById(R.id.fts_training_list);
 
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                layoutManager = new LinearLayoutManager(context);
-                recyclerView.setLayoutManager(layoutManager);
-            } else {
-                layoutManager = new GridLayoutManager(context, mColumnCount);
-                recyclerView.setLayoutManager(layoutManager);
-            }
+            final Context context = view.getContext();
+            final RecyclerView recyclerView = (RecyclerView) view;
+
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
+
 
             final TrainingRecyclerViewAdapter viewAdapter = new TrainingRecyclerViewAdapter(mListener, localization.isOwner());
 
@@ -106,6 +95,9 @@ public class TrainingStatusFragment extends Fragment {
 
                 @Override
                 public void onFailure(Throwable throwable) {
+
+                    Log.e(TAG, "onFailure: Error retrieving training status", throwable);
+
                     if (swipeRefreshLayout.isRefreshing()) {
                         swipeRefreshLayout.setRefreshing(false);
                     }
@@ -135,7 +127,7 @@ public class TrainingStatusFragment extends Fragment {
 
         swipeRefreshLayout.setRefreshing(true);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fts_training_add_position_bottom);
+        final FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fts_training_add_position_bottom);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +135,7 @@ public class TrainingStatusFragment extends Fragment {
             }
         });
 
+        mListener.setActionBarTitle(mListener.context().getString(R.string.title_training_status, StringUtils.capitalize(localization.getLabel())));
 
         return hostView;
     }
@@ -162,6 +155,7 @@ public class TrainingStatusFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.i(TAG, "onDetach: Close fragment");
     }
 
     public interface OnFragmentInteractionListener {

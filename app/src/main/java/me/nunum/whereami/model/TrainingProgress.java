@@ -47,7 +47,7 @@ public class TrainingProgress implements Comparable<TrainingProgress> {
 
     public String prettyDate() {
 
-        SimpleDateFormat format = new SimpleDateFormat("M d, Y", Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat("MM d, Y", Locale.getDefault());
 
         return format.format(this.created);
     }

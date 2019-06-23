@@ -10,16 +10,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.android.volley.ClientError;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
 
 import me.nunum.whereami.R;
 import me.nunum.whereami.fragments.HomeFragment;
@@ -36,6 +44,7 @@ import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.OnSample;
 import me.nunum.whereami.framework.StreamFlow;
+import me.nunum.whereami.model.Device;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.TrainingProgress;
@@ -45,8 +54,10 @@ import me.nunum.whereami.model.request.NewTrainingRequest;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.Services;
 import me.nunum.whereami.service.StreamFlowService;
+import me.nunum.whereami.service.SyncOfflineDataService;
 import me.nunum.whereami.service.application.ApplicationPreferences;
 import me.nunum.whereami.service.database.DatabaseStats;
+import me.nunum.whereami.service.notification.FireNotificationManager;
 import me.nunum.whereami.utils.PermissionRequestCodes;
 
 public class MainActivity
@@ -70,7 +81,7 @@ public class MainActivity
     private Position position = null;
     private Cache servicesCache = null;
     private Localization localization = null;
-    private StreamFlow streamFlow = null;
+    private StreamFlowService streamFlow = null;
     private ApplicationPreferences preferences;
 
     private PositionDetailsFragment positionDetailsFragment;
@@ -80,6 +91,9 @@ public class MainActivity
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            clearBackStack();
+            changeActionBarBackButtonState(false);
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
@@ -93,7 +107,7 @@ public class MainActivity
 
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.am_container, LocalizationFragment.newInstance(1))
+                            .replace(R.id.am_container, LocalizationFragment.newInstance())
                             .commitAllowingStateLoss();
 
                     return true;
@@ -122,12 +136,98 @@ public class MainActivity
 
         streamFlow = new StreamFlowService(this.getApplicationContext());
 
-        this.servicesCache = new Cache(this.getApplicationContext());
+        servicesCache = new Cache(this.getApplicationContext());
 
         positionDetailsFragment = PositionDetailsFragment.newInstance();
 
-
         preferences.persistIfNull(ApplicationPreferences.KEYS.INSTANCE_ID);
+
+        FirebaseInstanceId
+                .getInstance()
+                .getInstanceId()
+                .addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                    @Override
+                    public void onSuccess(InstanceIdResult instanceIdResult) {
+
+                        HttpService service = (HttpService) servicesCache.get(Services.HTTP);
+
+                        service.updateDevice(new Device(instanceIdResult.getToken()), new OnResponse<Device>() {
+                            @Override
+                            public void onSuccess(Device o) {
+                                Log.i(TAG, "onSuccess: Send FireBase token at application start");
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                Log.e(TAG, "onFailure: Could not update FireBase token at application start", throwable);
+                            }
+                        });
+                    }
+                });
+
+
+        FirebaseMessaging
+                .getInstance()
+                .subscribeToTopic(FireNotificationManager.NEW_POSTS_TOPIC);
+
+        FirebaseMessaging
+                .getInstance()
+                .subscribeToTopic(FireNotificationManager.NEW_ALGORITHM_TOPIC);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.am_container, HomeFragment.newInstance())
+                .commitAllowingStateLoss();
+
+
+        final Intent intent = getIntent();
+        if (intent != null) {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                if (extras.containsKey("action")) {
+                    HashMap<String, String> map = new HashMap<>();
+
+                    for (String key : extras.keySet()) {
+                        Object o = extras.get(key);
+                        if (o != null)
+                            map.put(key, o.toString());
+                    }
+
+                    FireNotificationManager.processNotificationData(getApplicationContext(), map, System.currentTimeMillis());
+
+                    startActivity(new Intent(this, NotificationActivity.class));
+
+                    extras.clear();
+                }
+            }
+        }
+
+
+        startService(new Intent(this, SyncOfflineDataService.class));
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            changeActionBarBackButtonState(false);
+        }
+    }
+
+
+    private void changeActionBarBackButtonState(boolean visibility) {
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(visibility);
+
+    }
+
+
+    private void clearBackStack() {
+        final FragmentManager manager = getSupportFragmentManager();
+        if (manager.getBackStackEntryCount() > 0) {
+            FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
+            manager.popBackStackImmediate(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 
     @Override
@@ -136,8 +236,35 @@ public class MainActivity
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.am_container, PositionFragment.newInstance(1))
+                .replace(R.id.am_container, PositionFragment.newInstance())
+                .addToBackStack(PositionFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
+
+        changeActionBarBackButtonState(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        final FragmentManager manager = getSupportFragmentManager();
+
+        int counter = manager.getBackStackEntryCount();
+
+        switch (counter) {
+            case 0:
+                if (getSupportActionBar() != null)
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                break;
+            case 1:
+                manager.popBackStack();
+                if (getSupportActionBar() != null)
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                break;
+            default:
+                manager.popBackStack();
+                break;
+        }
+
+        return true;
     }
 
     @Override
@@ -148,6 +275,7 @@ public class MainActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.am_container, positionDetailsFragment)
+                .addToBackStack(PositionDetailsFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
     }
 
@@ -188,14 +316,15 @@ public class MainActivity
 
                 preferences.persistIfNull(ApplicationPreferences.KEYS.USERNAME, username);
 
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.am_container, LocalizationFragment.newInstance(1))
-                        .commitAllowingStateLoss();
+                getSupportFragmentManager().popBackStack();
+                changeActionBarBackButtonState(false);
             }
 
             @Override
             public void onFailure(Throwable throwable) {
+
+                Log.e(TAG, "onFailure: Not possible to create new localization", throwable);
+
                 if (throwable instanceof ClientError) {
                     ClientError error = (ClientError) throwable;
                     if (error.networkResponse.statusCode == 409) {
@@ -216,12 +345,15 @@ public class MainActivity
             return false;
         }
 
+        setScreenAlwaysOnFlag();
+
         return this.streamFlow.start(this.localization, this.position, onSampleCallback, this.servicesCache);
     }
 
     @Override
     public boolean stopSampling() {
         if (streamFlow.currentState() == StreamFlow.STREAM_STATE.RUNNING) {
+            clearScreenAlwaysOnFlag();
             return streamFlow.stop();
         }
 
@@ -231,7 +363,7 @@ public class MainActivity
     @Override
     public Long numberOfOfflineSamples() {
         final DatabaseStats stats = new DatabaseStats(this.getApplicationContext());
-        return stats.totalRecords();
+        return stats.totalRecords(associatedPosition());
     }
 
     @Override
@@ -252,12 +384,16 @@ public class MainActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.app_options_menu_about:
+                startActivity(new Intent(this, AboutActivity.class));
                 return true;
             case R.id.app_options_menu_settings:
 
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
 
+                return true;
+            case R.id.app_options_menu_notification:
+                startActivity(new Intent(this, NotificationActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -279,7 +415,10 @@ public class MainActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.am_container, PredictionDashboardFragment.newInstance(localization))
+                .addToBackStack(PredictionDashboardFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
+
+        changeActionBarBackButtonState(true);
 
     }
 
@@ -289,6 +428,7 @@ public class MainActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.am_container, NewTrainingRequestFragment.newInstance())
+                .addToBackStack(NewTrainingRequestFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
 
     }
@@ -315,8 +455,10 @@ public class MainActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.am_container, NewLocalizationFragment.newInstance(location.getLatitude(), location.getLongitude(), username))
+                .addToBackStack(NewLocalizationFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
 
+        changeActionBarBackButtonState(true);
     }
 
     @Override
@@ -326,8 +468,11 @@ public class MainActivity
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.am_container, TrainingStatusFragment.newInstance(1))
+                .replace(R.id.am_container, TrainingStatusFragment.newInstance())
+                .addToBackStack(TrainingStatusFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
+
+        changeActionBarBackButtonState(true);
     }
 
     @Override
@@ -336,6 +481,7 @@ public class MainActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.am_container, NewPositionFragment.newInstance())
+                .addToBackStack(NewPositionFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
 
     }
@@ -353,13 +499,18 @@ public class MainActivity
                 new OnResponse<TrainingProgress>() {
                     @Override
                     public void onSuccess(TrainingProgress o) {
-                        openTrainingStatus(associatedLocalization());
-
+                        getSupportFragmentManager().popBackStack();
                     }
 
                     @Override
                     public void onFailure(Throwable throwable) {
+                        if (throwable instanceof ClientError) {
+                            int statusCode = ((ClientError) throwable).networkResponse.statusCode;
 
+                            Toast.makeText(getApplicationContext(), getString(R.string.fntr_new_training_algorithm_request_failure_w_status, statusCode), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Toast.makeText(getApplicationContext(), R.string.fntr_new_training_algorithm_request_failure, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -477,18 +628,24 @@ public class MainActivity
         service.newPosition(localization, new NewPositionRequest(label), new OnResponse<Position>() {
             @Override
             public void onSuccess(Position o) {
-
                 getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.am_container, PositionFragment.newInstance(1))
-                        .commitAllowingStateLoss();
-
+                        .popBackStack();
             }
 
             @Override
             public void onFailure(Throwable throwable) {
+                Log.e(TAG, "onFailure: Duplicate position error", throwable);
                 Toast.makeText(context(), R.string.fnp_new_position_label_duplicate_input, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public void setScreenAlwaysOnFlag() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    public void clearScreenAlwaysOnFlag() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 }

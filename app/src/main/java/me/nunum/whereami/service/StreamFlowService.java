@@ -29,22 +29,16 @@ public class StreamFlowService implements
         StreamFlow,
         Receiver<List<WifiDataSample>> {
 
+    private static final String TAG = StreamFlowService.class.getSimpleName();
     private final Context context;
-    private FLUSH_MODE flushMode;
-    private STREAM_STATE streamState;
-
-    private Receiver<List<WifiDataSample>> sinker;
-    private ScheduledFuture<?> worker;
-    private ScheduledFuture<?> offlineWorker;
-
     private final ApplicationPreferences preferences;
     private final ScheduledExecutorService executorService;
-
+    private FLUSH_MODE flushMode;
+    private STREAM_STATE streamState;
+    private Receiver<List<WifiDataSample>> sinker;
+    private ScheduledFuture<?> worker;
     private AtomicLong batch = new AtomicLong(1);
-
     private ConcurrentSkipListMap<Long, List<WifiDataSample>> holder;
-
-    private static final String TAG = StreamFlowService.class.getSimpleName();
 
     public StreamFlowService(Context context) {
         this.context = context;
@@ -102,10 +96,29 @@ public class StreamFlowService implements
 
                             @Override
                             public void failed(Long batch, Throwable throwable) {
-                                Log.e(TAG, "failed batch number " + batch, throwable);
+                                Log.e(TAG, "failed: Batch number " + batch + " was not transmitted for the serving, using fallback mechanism", throwable);
+
+                                final boolean containsKey = holder.containsKey(batch);
+                                final List<WifiDataSample> samples = holder.remove(batch);
+
+                                if (containsKey) {
+                                    final PersistenceSinker persistenceSinker = new PersistenceSinker(context, new OnSync() {
+                                        @Override
+                                        public void batchNumber(Long batch, Position p) {
+                                            onSampleCallback.emitted(false, samples.size(), position);
+                                        }
+
+                                        @Override
+                                        public void failed(Long batch, Throwable throwable) {
+                                            Log.e(TAG, "failed: Could not persist samples into database", throwable);
+                                        }
+                                    });
+                                    persistenceSinker.receive(samples, batch);
+                                }
                             }
                         });
 
+                        Log.i(TAG, String.format("onConnectionSucceeded: Starting sampling. Delay %d. Period %d", delay, period));
                         worker = executorService
                                 .scheduleAtFixedRate(new WifiService(context, position, localization, StreamFlowService.this), delay, period, TimeUnit.SECONDS);
                     }
@@ -123,12 +136,12 @@ public class StreamFlowService implements
                                     onSampleCallback.emitted(true, numberOfSamples, p);
                                 }
 
-                                Log.i(TAG, "batchNumber: " + batch + ". Sended: " + numberOfSamples + " . Size of holder:" + holder.size());
+                                Log.i(TAG, "batchNumber: " + batch + ". Send " + numberOfSamples + " . Size of holder:" + holder.size());
                             }
 
                             @Override
                             public void failed(Long batch, Throwable throwable) {
-
+                                Log.e(TAG, "failed: ");
                             }
                         }, StreamFlowService.this);
 
@@ -158,7 +171,7 @@ public class StreamFlowService implements
             this.streamState = STREAM_STATE.STOP;
         }
 
-        Log.i(TAG, "stop: Stop worker:? " + wasCanceled);
+        Log.i(TAG, "stop: Stop worker: " + wasCanceled);
 
         return wasCanceled;
     }

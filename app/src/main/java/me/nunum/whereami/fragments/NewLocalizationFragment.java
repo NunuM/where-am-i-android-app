@@ -3,6 +3,7 @@ package me.nunum.whereami.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import me.nunum.whereami.R;
  * create an instance of this fragment.
  */
 public class NewLocalizationFragment extends Fragment {
+
+    public static final String TAG = NewLocalizationFragment.class.getSimpleName();
 
     private double lat = 0;
     private double lng = 0;
@@ -54,6 +57,7 @@ public class NewLocalizationFragment extends Fragment {
             this.lng = getArguments().getDouble("lng");
             this.username = getArguments().getString("username");
         }
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
     @Override
@@ -111,6 +115,7 @@ public class NewLocalizationFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.i(TAG, "onDetach: Closed fragment");
     }
 
     public interface OnFragmentInteractionListener {

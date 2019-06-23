@@ -2,6 +2,7 @@ package me.nunum.whereami.adapters;
 
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import me.nunum.whereami.service.Services;
 public class LocalizationRecyclerViewAdapter
         extends RecyclerView.Adapter<LocalizationRecyclerViewAdapter.ViewHolder> {
 
+    private static final String TAG = LocalizationRecyclerViewAdapter.class.getSimpleName();
 
     private final SortedList<Localization> localizations;
     private final OnListFragmentInteractionListener listener;
@@ -100,6 +102,8 @@ public class LocalizationRecyclerViewAdapter
                                     @Override
                                     public void onFailure(Throwable throwable) {
 
+                                        Log.e(TAG, "onFailure: Error submitting spam request for the localization :" + holder.mItem.getId(), throwable);
+
                                         if (throwable instanceof ClientError) {
                                             ClientError error = (ClientError) throwable;
                                             if (error.networkResponse.statusCode == 409) {
@@ -124,6 +128,9 @@ public class LocalizationRecyclerViewAdapter
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+
+                                        Log.e(TAG, "onFailure: Error deleting localization " + holder.mItem.getId(), throwable);
+
                                         Toast.makeText(listener.context(), R.string.fli_localization_delete_request_failure, Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -143,8 +150,6 @@ public class LocalizationRecyclerViewAdapter
             @Override
             public void onClick(View v) {
                 if (null != listener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     listener.onLocalizationSelected(holder.mItem);
                 }
             }
@@ -171,9 +176,5 @@ public class LocalizationRecyclerViewAdapter
             mIdLocalizationOptionsButton = (Button) view.findViewById(R.id.fli_localization_options);
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mIdLocalizationUsername.getText() + "'";
-        }
     }
 }

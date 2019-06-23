@@ -167,7 +167,7 @@ public class PersistenceSinker
 
     public synchronized boolean isEmpty() {
 
-        long numEntries = 0l;
+        long numEntries = 0L;
 
         SQLiteDatabase readableDatabase = null;
 

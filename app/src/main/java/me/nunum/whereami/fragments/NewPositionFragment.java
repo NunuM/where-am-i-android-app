@@ -3,6 +3,7 @@ package me.nunum.whereami.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import me.nunum.whereami.R;
  */
 public class NewPositionFragment extends Fragment {
 
+    private static final String TAG = NewPositionFragment.class.getSimpleName();
+
     private OnFragmentInteractionListener mListener;
 
     public NewPositionFragment() {
@@ -35,15 +38,13 @@ public class NewPositionFragment extends Fragment {
      * @return A new instance of fragment NewPositionFragment.
      */
     public static NewPositionFragment newInstance() {
-        NewPositionFragment fragment = new NewPositionFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new NewPositionFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
     @Override
@@ -87,6 +88,7 @@ public class NewPositionFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.i(TAG, "onDetach: Closed fragment");
     }
 
 

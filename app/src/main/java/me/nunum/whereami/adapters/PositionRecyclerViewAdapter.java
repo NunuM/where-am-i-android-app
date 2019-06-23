@@ -2,6 +2,7 @@ package me.nunum.whereami.adapters;
 
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,8 @@ import me.nunum.whereami.service.Services;
  * specified {@link OnListFragmentInteractionListener}.
  */
 public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRecyclerViewAdapter.ViewHolder> {
+
+    private static final String TAG = PositionRecyclerViewAdapter.class.getSimpleName();
 
     private final SortedList<Position> mValues;
     private final OnListFragmentInteractionListener mListener;
@@ -102,6 +105,9 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+
+                                        Log.e(TAG, "onFailure: Error deleting position " + holder.mItem.getId(), throwable);
+
                                         Toast.makeText(mListener.context(), R.string.fli_localization_delete_request_failure, Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -117,6 +123,9 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+
+                                        Log.e(TAG, "onFailure: Error submititng spam report for the position " + holder.mItem.getId(), throwable);
+
                                         Toast.makeText(mListener.context(), R.string.fli_localization_spam_request_failure, Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -136,8 +145,6 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onPositionSelected(holder.mItem);
                 }
             }
@@ -160,11 +167,6 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
             mView = view;
             mIdPositionLabel = (TextView) view.findViewById(R.id.fpi_position_label);
             mIdPositionOptionsMenu = (Button) view.findViewById(R.id.fpi_position_options);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mIdPositionLabel.getText() + "'";
         }
     }
 }

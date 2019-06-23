@@ -15,7 +15,7 @@ public class PersistenceWifiMarshaller implements Marshaller<WifiDataSample, Con
 
         values.put("bssid", wifiData.getBssid());
         values.put("timestamp", wifiData.getTimeStamp());
-        values.put("poistion", wifiData.getPositionId());
+        values.put("position", wifiData.getPositionId());
         values.put("centerfreq0", wifiData.getCenterFreq0());
         values.put("centerfreq1", wifiData.getCenterFreq1());
         values.put("channel_width", wifiData.getChannelWidth());

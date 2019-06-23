@@ -3,6 +3,7 @@ package me.nunum.whereami.service;
 import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.WifiDataSample;
 
 public class WifiService implements Runnable {
+
+    private static final String TAG = WifiService.class.getSimpleName();
 
     private final Position position;
     private final Localization localization;
@@ -45,6 +48,8 @@ public class WifiService implements Runnable {
      */
     @Override
     public void run() {
+
+        Log.i(TAG, "run: Launched new task to collect samples");
 
         if (this.wifiManager.isWifiEnabled()) {
             if (this.wifiManager.startScan()) {

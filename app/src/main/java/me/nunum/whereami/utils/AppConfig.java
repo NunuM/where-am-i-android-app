@@ -10,16 +10,15 @@ public class AppConfig {
 
     public static final String PREFERENCES_KEY_NAME = "localizations";
 
-    public static final String REMOTE_HOST = "213.22.28.97";
     public static final Integer REMOTE_HOST_SINK_PORT = 8080;
     public static final Integer REMOTE_HOST_EXCHANGE_PORT = 9000;
 
     public static final Integer POOL_SIZE = 1;
-    public static final Integer SINKER_DELAY = 9000;
-    public static final Integer SINKER_PERIOD = 1000;
+    public static final Integer SINKER_DELAY = 1;
+    public static final Integer SINKER_PERIOD = 30;
 
-    public static final Integer PRODUCER_DELAY = 9000;
-    public static final Integer PRODUCER_PERIOD = 10000;
+    public static final Integer PRODUCER_DELAY = 1;
+    public static final Integer PRODUCER_PERIOD = 30;
 
     public static final String HTTP_REMOTE_HOST = "http://192.168.1.6:8080";
     public static final String HTTP_LOCALIZATIONS_RESOURCE = "/localization";
@@ -30,6 +29,8 @@ public class AppConfig {
     public static final String HTTP_POSITION_SPAM_RESOURCE = "localization/:id/position/:it/spam";
     public static final String HTTP_SAMPLES_RESOURCE = "fingerprint";
     public static final String HTTP_ALGORITHM_RESOURCE = "algorithm";
+    public static final String HTTP_DEVICE_RESOURCE = "device";
+    public static final Boolean HTTP_PAGINATE_ONLY_MY_LOCALIZATIONS= false;
 
     public static final String HTTP_PREDICTION_RESOURCE = "localization/:id/predict";
 

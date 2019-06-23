@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,10 +33,8 @@ import me.nunum.whereami.utils.AppConfig;
  */
 public class LocalizationFragment extends Fragment {
 
+    private static final String TAG = LocalizationFragment.class.getSimpleName();
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -48,21 +45,14 @@ public class LocalizationFragment extends Fragment {
     }
 
     @SuppressWarnings("unused")
-    public static LocalizationFragment newInstance(int columnCount) {
-        LocalizationFragment fragment = new LocalizationFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+    public static LocalizationFragment newInstance() {
+        return new LocalizationFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
     @Override
@@ -71,32 +61,25 @@ public class LocalizationFragment extends Fragment {
 
         final HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
-        LinearLayoutManager layoutManager = null;
-
-        View hostView = inflater.inflate(R.layout.fragment_localization_list, container, false);
+        final View hostView = inflater.inflate(R.layout.fragment_localization_list, container, false);
 
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) hostView.findViewById(R.id.fll_localization_swipe);
 
-        View view = hostView.findViewById(R.id.fll_localization_list);
+        final View view = hostView.findViewById(R.id.fll_localization_list);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
 
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final Context context = view.getContext();
+            final RecyclerView recyclerView = (RecyclerView) view;
 
-            if (mColumnCount <= 1) {
-                layoutManager = new LinearLayoutManager(context);
-                recyclerView.setLayoutManager(layoutManager);
-            } else {
-                layoutManager = new GridLayoutManager(context, mColumnCount);
-                recyclerView.setLayoutManager(layoutManager);
-            }
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
 
             final LocalizationRecyclerViewAdapter adapter = new LocalizationRecyclerViewAdapter(mListener);
             recyclerView.setAdapter(adapter);
 
-            DividerItemDecoration dividerItemDecorator = new DividerItemDecoration(
+            final DividerItemDecoration dividerItemDecorator = new DividerItemDecoration(
                     recyclerView.getContext(),
                     DividerItemDecoration.VERTICAL
             );
@@ -126,6 +109,9 @@ public class LocalizationFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+
+                            Log.e(TAG, "onFailure: Could not retrieve positions from the server", throwable);
+
                             Toast.makeText(getContext(), R.string.fll_localization_list_request_failure, Toast.LENGTH_SHORT).show();
 
                             if (swipeRefreshLayout.isRefreshing()) {
@@ -151,12 +137,11 @@ public class LocalizationFragment extends Fragment {
 
         swipeRefreshLayout.setRefreshing(true);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fll_localization_add_position_bottom);
+        final FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fll_localization_add_position_bottom);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.openNewLocalizationFragment();
-                Log.i("s", "onClick: one more");
             }
         });
 
@@ -181,22 +166,10 @@ public class LocalizationFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.i(TAG, "onDetach: Closed fragment");
     }
 
-    public static Fragment newInstance() {
-        return new LocalizationFragment();
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnListFragmentInteractionListener {
 
         void onLocalizationSelected(Localization item);

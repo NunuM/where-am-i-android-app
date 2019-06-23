@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.net.URL;
 import java.util.List;
-import java.util.logging.Logger;
 
 import me.nunum.whereami.R;
 import me.nunum.whereami.fragments.HomeFragment;
@@ -90,7 +88,7 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
 
             @Override
             public void onFailure(Throwable throwable) {
-                Log.i(TAG, "onFailure: Could not request image", throwable);
+                Log.e(TAG, "onFailure: Could not request image", throwable);
             }
         });
 

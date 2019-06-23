@@ -31,8 +31,8 @@ import me.nunum.whereami.service.Services;
  * create an instance of this fragment.
  */
 public class NewTrainingRequestFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    private static final String TAG = NewTrainingRequestFragment.class.getSimpleName();
 
     private List<Algorithm> algorithmsList = null;
 
@@ -42,30 +42,21 @@ public class NewTrainingRequestFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment NewTrainingRequestFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NewTrainingRequestFragment newInstance() {
-        NewTrainingRequestFragment fragment = new NewTrainingRequestFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new NewTrainingRequestFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View hostView = inflater.inflate(R.layout.fragment_new_training_request, container, false);
+        final View hostView = inflater.inflate(R.layout.fragment_new_training_request, container, false);
 
         final ListView algorithms = (ListView) hostView.findViewById(R.id.fntr_algorithm_list);
         final ListView algorithmsImplementations = (ListView) hostView.findViewById(R.id.fntr_algorithm_implementation_list);
@@ -74,7 +65,6 @@ public class NewTrainingRequestFragment extends Fragment {
 
         final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mListener.context(), android.R.layout.simple_list_item_single_choice);
         final ArrayAdapter<CharSequence> adapterForImplementations = new ArrayAdapter<CharSequence>(mListener.context(), android.R.layout.simple_list_item_single_choice);
-
 
         algorithms.setAdapter(adapter);
         algorithmsImplementations.setAdapter(adapterForImplementations);
@@ -94,7 +84,7 @@ public class NewTrainingRequestFragment extends Fragment {
             }
         });
 
-        HttpService service = (HttpService) mListener.getService(Services.HTTP);
+        final HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
         service.allAlgorithms(new OnResponse<List<Algorithm>>() {
             @Override
@@ -108,6 +98,7 @@ public class NewTrainingRequestFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
+                Log.e(TAG, "onFailure: Error request available algorithms from the server", throwable);
                 Toast.makeText(mListener.context(), R.string.fntr_request_algorithm_error, Toast.LENGTH_SHORT).show();
             }
         });
@@ -121,11 +112,11 @@ public class NewTrainingRequestFragment extends Fragment {
                     if (AdapterView.INVALID_POSITION != itemPosition
                             && itemPosition < algorithmsList.size()) {
 
-                        Algorithm algorithm = algorithmsList.get(itemPosition);
+                        final Algorithm algorithm = algorithmsList.get(itemPosition);
 
-                        int providerSize = algorithm.getProviders().size();
+                        final int providerSize = algorithm.getProviders().size();
 
-                        int checkedItemPosition = algorithmsImplementations.getCheckedItemPosition();
+                        final int checkedItemPosition = algorithmsImplementations.getCheckedItemPosition();
 
                         if (checkedItemPosition != AdapterView.INVALID_POSITION
                                 && checkedItemPosition < providerSize) {
@@ -164,6 +155,8 @@ public class NewTrainingRequestFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        algorithmsList = null;
+        Log.i(TAG, "onDetach: Close fragment");
     }
 
     public interface OnFragmentInteractionListener {

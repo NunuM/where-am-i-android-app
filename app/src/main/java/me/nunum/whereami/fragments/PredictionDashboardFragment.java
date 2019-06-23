@@ -3,9 +3,9 @@ package me.nunum.whereami.fragments;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +17,6 @@ import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.ToggleButton;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -49,20 +48,14 @@ import me.nunum.whereami.service.application.ApplicationPreferences;
  */
 public class PredictionDashboardFragment extends Fragment {
 
+    private static final String TAG = PredictionDashboardFragment.class.getSimpleName();
+
     private static final String LOCALIZATION_PARAM = "localization";
-
-    private Localization localization;
-
-    private OnFragmentInteractionListener mListener;
-
-    private Date lastUpdate;
-
-    private ProgressBar progressBar;
-
     private final ValueAnimator valueAnimator = new ValueAnimator();
-
-    private int mColumnCount = 1;
-
+    private Localization localization;
+    private OnFragmentInteractionListener mListener;
+    private Date lastUpdate;
+    private ProgressBar progressBar;
     private ScheduledFuture<?> future;
 
     public PredictionDashboardFragment() {
@@ -90,20 +83,23 @@ public class PredictionDashboardFragment extends Fragment {
         if (getArguments() != null) {
             localization = (Localization) getArguments().getSerializable(LOCALIZATION_PARAM);
         }
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
 
         final HttpService httpService = (HttpService) mListener.getService(Services.HTTP);
 
         // Inflate the layout for this fragment
-        View hostView = inflater.inflate(R.layout.fragment_prediction_dashboard, container, false);
+        final View hostView = inflater.inflate(R.layout.fragment_prediction_dashboard, container, false);
 
         final ToggleButton toggle = (ToggleButton) hostView.findViewById(R.id.fpda_toggle_btn);
 
-        Button requestAllPredictions = hostView.findViewById(R.id.fpda_all_predictions);
+        final Button requestAllPredictions = hostView.findViewById(R.id.fpda_all_predictions);
 
         progressBar = hostView.findViewById(R.id.fpda_prediction_progress_bar);
         progressBar.setVisibility(View.INVISIBLE);
@@ -116,6 +112,7 @@ public class PredictionDashboardFragment extends Fragment {
                 toggle.setClickable(false);
                 if (isChecked) {
                     future = startRequestPredictions(adapter);
+                    mListener.setScreenAlwaysOnFlag();
                     toggle.setClickable(true);
                     startProgressBar();
 
@@ -130,20 +127,14 @@ public class PredictionDashboardFragment extends Fragment {
             }
         });
 
-        LinearLayoutManager layoutManager = null;
-
-        View view = hostView.findViewById(R.id.fpda_predictions);
+        final View view = hostView.findViewById(R.id.fpda_predictions);
 
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                layoutManager = new LinearLayoutManager(context);
-                recyclerView.setLayoutManager(layoutManager);
-            } else {
-                layoutManager = new GridLayoutManager(context, mColumnCount);
-                recyclerView.setLayoutManager(layoutManager);
-            }
+            final Context context = view.getContext();
+            final RecyclerView recyclerView = (RecyclerView) view;
+
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
 
 
             recyclerView.setAdapter(adapter);
@@ -169,7 +160,7 @@ public class PredictionDashboardFragment extends Fragment {
 
                             @Override
                             public void onFailure(Throwable throwable) {
-                                Log.e("dsad", "onFailure: ", throwable);
+                                Log.e(TAG, "onFailure: Error retrieving all predictions from the server", throwable);
                             }
                         });
             }
@@ -202,6 +193,8 @@ public class PredictionDashboardFragment extends Fragment {
 
         final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
+        Log.i(TAG, "startRequestPredictions: Starting request predictions with delay of " + delay + " and one period of" + period + " seconds");
+
         return executorService.scheduleAtFixedRate(new WifiService(mListener.context(),
                         new Position(),
                         localization,
@@ -221,7 +214,7 @@ public class PredictionDashboardFragment extends Fragment {
 
                                             @Override
                                             public void onFailure(Throwable throwable) {
-                                                Log.e("RRRR", "onFailure: ___________________", throwable);
+                                                Log.e(TAG, "onFailure: Error retrieving a new prediction from the server", throwable);
                                             }
                                         });
                             }
@@ -229,19 +222,19 @@ public class PredictionDashboardFragment extends Fragment {
                 , delay, period, TimeUnit.SECONDS);
     }
 
-    private void stopRequestPredictions() {
-
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
 
         if (future != null) {
+            mListener.clearScreenAlwaysOnFlag();
             future.cancel(true);
             future = null;
         }
+
+        mListener = null;
+
+        Log.i(TAG, "onDetach: Close fragment");
     }
 
 
@@ -295,5 +288,9 @@ public class PredictionDashboardFragment extends Fragment {
         Object getService(Services service);
 
         Context context();
+
+        void setScreenAlwaysOnFlag();
+
+        void clearScreenAlwaysOnFlag();
     }
 }

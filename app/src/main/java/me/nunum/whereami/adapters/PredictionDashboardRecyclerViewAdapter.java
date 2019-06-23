@@ -3,6 +3,7 @@ package me.nunum.whereami.adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import me.nunum.whereami.service.Services;
 public class PredictionDashboardRecyclerViewAdapter
         extends RecyclerView.Adapter<PredictionDashboardRecyclerViewAdapter.ViewHolder> {
 
+    private static final String TAG = PredictionDashboardRecyclerViewAdapter.class.getSimpleName();
 
     private final SortedList<Prediction> mValues;
     private final PredictionDashboardFragment.OnFragmentInteractionListener mListener;
@@ -78,6 +80,7 @@ public class PredictionDashboardRecyclerViewAdapter
 
                     @Override
                     public void onFailure(Throwable throwable) {
+                        Log.e(TAG, "onFailure: Error registering positive feedback " + p.getId(), throwable);
                         Toast.makeText(mListener.context(), R.string.fpdi_prediction_feedback_failure, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -98,6 +101,7 @@ public class PredictionDashboardRecyclerViewAdapter
 
                     @Override
                     public void onFailure(Throwable throwable) {
+                        Log.e(TAG, "onFailure: Error registering negative feedback " + p.getId(), throwable);
                         Toast.makeText(mListener.context(), R.string.fpdi_prediction_feedback_failure, Toast.LENGTH_SHORT).show();
                     }
                 });

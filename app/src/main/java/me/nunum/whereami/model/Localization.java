@@ -3,6 +3,7 @@ package me.nunum.whereami.model;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import me.nunum.whereami.framework.domain.Identifiable;
 import me.nunum.whereami.model.request.NewTrainingRequest;
@@ -35,6 +36,9 @@ public class Localization implements
     private boolean isOwner;
 
 
+    private Date created;
+
+
     /**
      *
      */
@@ -42,15 +46,16 @@ public class Localization implements
 
 
     public Localization() {
-        this(0L, "", "", true, new LocalizationStats());
+        this(0L, "", "", true, new LocalizationStats(), new Date());
     }
 
-    public Localization(Long id, String label, String user, boolean isOwner, LocalizationStats stats) {
+    public Localization(Long id, String label, String user, boolean isOwner, LocalizationStats stats, Date created) {
         this.id = id;
         this.label = label;
         this.user = user;
         this.isOwner = isOwner;
         this.stats = stats;
+        this.created = created;
     }
 
 
@@ -186,7 +191,7 @@ public class Localization implements
      */
     @Override
     public int compareTo(@NonNull Localization o) {
-        return this.getLabel().toLowerCase().compareTo(o.getLabel().toLowerCase());
+        return o.created.compareTo(this.created);
     }
 
 

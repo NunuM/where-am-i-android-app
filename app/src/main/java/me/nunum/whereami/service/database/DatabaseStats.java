@@ -7,6 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import me.nunum.whereami.model.Position;
+
 
 public class DatabaseStats {
 
@@ -21,15 +23,15 @@ public class DatabaseStats {
     /**
      * @return number of samples
      */
-    public Long totalRecords() {
-        Long total = 0l;
+    public Long totalRecords(Position position) {
+        long total = 0L;
 
         SQLiteDatabase database = null;
 
 
         try {
             database = this.service.getReadableDatabase();
-            total = DatabaseUtils.queryNumEntries(database, DatabaseService.FINGERPRINT, null);
+            total = DatabaseUtils.queryNumEntries(database, DatabaseService.FINGERPRINT, "position=" + position.getId());
         } catch (SQLException e) {
             Log.e(TAG, "totalRecords: Error getting database reads", e);
         } finally {
@@ -40,47 +42,5 @@ public class DatabaseStats {
         }
 
         return total;
-    }
-
-    public Long totalOfSamplesForLocalization(int lozalization) {
-        Long total = 0l;
-
-        SQLiteDatabase database = null;
-
-        try {
-            database = this.service.getReadableDatabase();
-            total = DatabaseUtils.queryNumEntries(database, DatabaseService.FINGERPRINT, "build_id=" + lozalization);
-        } catch (SQLException e) {
-            Log.e(TAG, "totalOfSamplesForLocalization: Error getting database reads", e);
-        } finally {
-
-            if (database != null) {
-                database.close();
-            }
-        }
-
-        return total;
-    }
-
-    public Long totalOfSamplesForPosition(int lozalization, int position) {
-
-        Long total = 0l;
-
-        SQLiteDatabase database = null;
-
-        try {
-            database = this.service.getReadableDatabase();
-            total = DatabaseUtils.queryNumEntries(database, DatabaseService.FINGERPRINT, "build_id=" + lozalization + " and position=" + position);
-        } catch (SQLException e) {
-            Log.e(TAG, "totalOfSamplesForPosition: Error getting database reads", e);
-        } finally {
-
-            if (database != null) {
-                database.close();
-            }
-        }
-
-        return total;
-
     }
 }

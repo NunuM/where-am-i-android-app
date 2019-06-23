@@ -20,7 +20,8 @@
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#fff"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAllCaps="true" />
 
 
         <LinearLayout

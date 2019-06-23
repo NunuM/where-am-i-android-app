@@ -11,6 +11,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="16dp"
         android:layout_weight="1.7"
+        android:textAllCaps="true"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <Button

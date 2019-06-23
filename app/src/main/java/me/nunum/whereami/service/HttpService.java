@@ -22,6 +22,7 @@ import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.OnSync;
 import me.nunum.whereami.framework.Receiver;
 import me.nunum.whereami.model.Algorithm;
+import me.nunum.whereami.model.Device;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.Post;
@@ -67,7 +68,7 @@ public final class HttpService {
         this.headers.put("timezone", TimeZone.getDefault().getID());
     }
 
-    public static HttpService create(Context context, Gson marshaller) {
+    public synchronized static HttpService create(Context context, Gson marshaller) {
 
         if (service == null) {
             service = new HttpService(context, marshaller);
@@ -76,12 +77,34 @@ public final class HttpService {
         return service;
     }
 
+
+    private Map<String, String> getHeaders() {
+        this.headers.put("x-app", this.applicationPreferences.getStringKey(KEYS.INSTANCE_ID));
+        return headers;
+    }
+
+
+    public boolean updateDevice(Device device, OnResponse<Device> onResponse) {
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        final String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_DEVICE_RESOURCE);
+
+        final AsyncHttp<Device, Device> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Device.class);
+
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), device, onResponse);
+
+        return true;
+    }
+
+
     /**
      * @param localizationRequest
      * @param onResponse
      * @return boolean
      */
-    public boolean newLocalization(NewLocalizationRequest localizationRequest, OnResponse<Localization> onResponse) {
+    public boolean newLocalization(NewLocalizationRequest localizationRequest,
+                                   OnResponse<Localization> onResponse) {
 
         final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
 
@@ -89,7 +112,7 @@ public final class HttpService {
 
         final AsyncHttp<NewLocalizationRequest, Localization> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Localization.class);
 
-        asyncHttp.post(this.makeURL(host, resource), this.headers, localizationRequest, onResponse);
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), localizationRequest, onResponse);
 
         return true;
     }
@@ -97,7 +120,7 @@ public final class HttpService {
     public boolean image(String url, OnResponse<Bitmap> onResponse) {
 
         try {
-            AsyncHttpImpl.downloadImage(new URL(url), this.headers, onResponse, true);
+            AsyncHttpImpl.downloadImage(new URL(url), getHeaders(), onResponse, true);
         } catch (MalformedURLException e) {
             return false;
         }
@@ -111,12 +134,20 @@ public final class HttpService {
 
         final String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_LOCALIZATIONS_RESOURCE);
 
+        final Boolean onlyMy = this.applicationPreferences.getBooleanKey(KEYS.HTTP_PAGINATE_ONLY_MY_LOCALIZATIONS);
+
         final Type type = new TypeToken<List<Localization>>() {
         }.getType();
 
         final AsyncHttp<Void, List<Localization>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d", currentPage)), type, this.headers, onResponse);
+        String query = String.format(Locale.getDefault(), "page=%d", currentPage);
+
+        if (onlyMy) {
+            query += "&owner=true";
+        }
+
+        asyncHttp.get(this.makeURL(host, resource, query), type, getHeaders(), onResponse);
 
         return true;
     }
@@ -133,7 +164,7 @@ public final class HttpService {
 
         final AsyncHttp<Void, List<Localization>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d&trained=true", currentPage)), type, this.headers, onResponse);
+        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d&trained=true", currentPage)), type, getHeaders(), onResponse);
 
         return true;
     }
@@ -154,7 +185,7 @@ public final class HttpService {
 
         final AsyncHttp<PredictionFeedbackRequest, Prediction> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Prediction.class);
 
-        asyncHttp.put(makeURL(host, resource + "/" + predictionId), headers, request, onResponse);
+        asyncHttp.put(makeURL(host, resource + "/" + predictionId), getHeaders(), request, onResponse);
 
         return true;
     }
@@ -177,7 +208,7 @@ public final class HttpService {
 
         final AsyncHttp<NewPredictionRequest, List<Prediction>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.post(this.makeURL(host, resource), headers, request, onResponse);
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), request, onResponse);
 
         return true;
     }
@@ -190,7 +221,7 @@ public final class HttpService {
 
         final AsyncHttp<Void, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
 
-        asyncHttp.delete(this.makeURL(host, resource.concat("/" + id)), this.headers, onResponse);
+        asyncHttp.delete(this.makeURL(host, resource.concat("/" + id)), getHeaders(), onResponse);
 
         return true;
     }
@@ -211,7 +242,7 @@ public final class HttpService {
 
         final AsyncHttp<Void, List<TrainingProgress>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.get(this.makeURL(host, resource), headers, onResponse);
+        asyncHttp.get(this.makeURL(host, resource), getHeaders(), onResponse);
 
         return true;
     }
@@ -229,7 +260,7 @@ public final class HttpService {
 
         final AsyncHttp<SpamRequest, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
 
-        asyncHttp.post(this.makeURL(host, resource), this.headers, request, onResponse);
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), request, onResponse);
 
         return true;
     }
@@ -251,7 +282,7 @@ public final class HttpService {
 
         final AsyncHttp<SpamRequest, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
 
-        asyncHttp.post(this.makeURL(host, resource), this.headers, request, onResponse);
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), request, onResponse);
 
         return true;
     }
@@ -268,7 +299,7 @@ public final class HttpService {
 
         final AsyncHttp<NewTrainingRequest, TrainingProgress> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, TrainingProgress.class);
 
-        asyncHttp.post(this.makeURL(host, resource), this.headers, request, onResponse);
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), request, onResponse);
 
         return true;
     }
@@ -287,7 +318,7 @@ public final class HttpService {
 
         final AsyncHttp<Void, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
 
-        asyncHttp.delete(this.makeURL(host, resource), this.headers, onResponse);
+        asyncHttp.delete(this.makeURL(host, resource), getHeaders(), onResponse);
 
         return true;
     }
@@ -300,7 +331,7 @@ public final class HttpService {
 
         final AsyncHttp<PostRequest, Post> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Post.class);
 
-        asyncHttp.post(this.makeURL(host, resource), this.headers, request, onResponse);
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), request, onResponse);
 
         return true;
     }
@@ -318,7 +349,7 @@ public final class HttpService {
         final AsyncHttpImpl<Void, List<Post>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
 
-        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d", currentPage)), type, this.headers, onResponse, true);
+        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d", currentPage)), type, getHeaders(), onResponse, true);
 
         return true;
     }
@@ -332,7 +363,7 @@ public final class HttpService {
 
         final AsyncHttp<Void, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
 
-        asyncHttp.delete(this.makeURL(host, resource.concat("/" + id)), this.headers, onResponse);
+        asyncHttp.delete(this.makeURL(host, resource.concat("/" + id)), getHeaders(), onResponse);
 
         return true;
     }
@@ -350,7 +381,7 @@ public final class HttpService {
 
         final AsyncHttpImpl<NewPositionRequest, Position> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Position.class);
 
-        asyncHttp.post(this.makeURL(host, resource), this.headers, request, onResponse);
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), request, onResponse);
 
         return true;
     }
@@ -372,7 +403,7 @@ public final class HttpService {
 
         final AsyncHttpImpl<Void, List<Position>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.get(this.makeURL(host, resource), type, this.headers, onResponse);
+        asyncHttp.get(this.makeURL(host, resource), type, getHeaders(), onResponse);
 
         return true;
     }
@@ -388,7 +419,7 @@ public final class HttpService {
 
         final AsyncHttpImpl<Void, List<Algorithm>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.get(this.makeURL(host, resource), type, this.headers, onResponse);
+        asyncHttp.get(this.makeURL(host, resource), type, getHeaders(), onResponse);
 
         return true;
     }
@@ -405,7 +436,7 @@ public final class HttpService {
 
         final AsyncHttpImpl<Void, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
 
-        asyncHttp.delete(this.makeURL(host, resource.concat("/" + position.id())), this.headers, onResponse);
+        asyncHttp.delete(this.makeURL(host, resource.concat("/" + position.id())), getHeaders(), onResponse);
 
         return true;
     }

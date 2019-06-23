@@ -15,6 +15,12 @@
         android:summary="@string/pref_http_localization_paging_description"
         android:title="@string/pref_http_localization_paging_title" />
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="http_only_my_localizations"
+        android:summary="@string/pref_http_display_only_my_localizations_description"
+        android:title="@string/pref_http_display_only_my_localizations" />
+
     <EditTextPreference
         android:defaultValue="localization/:id/position"
         android:key="http_position_resource"

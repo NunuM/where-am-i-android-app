@@ -3,6 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Localization</string>
     <string name="title_prediction">Prediction</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_training_status">%1$s Training Status</string>
 
     <string name="fh_bar_title">Posts</string>
     <string name="fh_posts_request_failure">Was not possible to retrieve posts from the server</string>
@@ -16,7 +18,7 @@
 
     <string name="fli_localization_spam_request_success">Thank you for your report</string>
     <string name="fli_localization_spam_request_failure">Cannot send your report</string>
-    <string name="fli_localization_delete_request_failure">Cannot delete localizationId</string>
+    <string name="fli_localization_delete_request_failure">Cannot delete localization</string>
 
     <string name="fntr_request_algorithm_error">Was not possible to retrieve algorithms from the server</string>
     <string name="fntr_training_submit_btn">Train</string>
@@ -24,6 +26,7 @@
     <string name="ftli_delete_training_request_failure">Was not possible to delete.</string>
     <string name="ftli_training_request_failure">Was not possible to retrieve training status from the server</string>
     <string name="ftli_delete_training_request">Delete</string>
+    <string name="ftli_delete_training_status_sub_header">STATUS: %1$s.  LAST UPDATE: %2$s</string>
 
     <string name="fpi_position_options_spam">Spam</string>
     <string name="fpi_position_options_delete">Delete</string>
@@ -55,6 +58,7 @@
     <string name="fnl_new_localization_empty_username">A localization must have a username</string>
 
     <string name="app_options_menu_about">About</string>
+    <string name="app_options_menu_notifications">Notifications</string>
     <string name="app_options_menu_settings">Settings</string>
 
     <string name="fll_localization_actionbar_title">Localizations</string>
@@ -63,6 +67,8 @@
     <string name="fntr_new_training_algorithm_label">Algorithms</string>
     <string name="fntr_new_training_algorithm_implementation_label">Implementations</string>
     <string name="fntr_new_training_algorithm_invalid_request">Must choose an Algorithm and a Implementation</string>
+    <string name="fntr_new_training_algorithm_request_failure">The server does not have taken the request</string>
+    <string name="fntr_new_training_algorithm_request_failure_w_status">The server does not have taken the request responding with %1d status code</string>
     <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.2f - Deployed: %3$s </string>
 
     <string name="fp_prediction_actionbar_title">Prediction</string>
@@ -72,11 +78,23 @@
     <string name="fpda_start_request_predictions_label">Predict</string>
     <string name="fpda_stop_request_predictions_label">Stop</string>
 
+    <string name="notification_item_sub_header">RECEIVED IN %1$s</string>
 
     <string name="fpdi_prediction_feedback_failure">Could not register your feedback</string>
 
+    <string name="notification_new_algorithm">A %1s algorithm with id of %2s is waiting for your approval</string>
+    <string name="notification_new_model">The provider %1s have conclude the Training model for the localization %2s</string>
+    <string name="notification_delete_algorithm">One provider for the algorithm %1s was deleted</string>
+
+    <string name="ab_app_version"><b>Version</b>: </string>
+    <string name="ab_app_author"><b>Author</b>: <a href="https://github.com/NunuM">Nuno Gonçalves (NunuM)</a></string>
+    <string name="ab_app_server_page"><b>Website</b>: <a href="https://whereami.nunum.me">WhereAmI</a></string>
+    <string name="ab_app_code_page"><b>Github</b>: <a href="https://github.com/NunuM/where-am-i-android-app">Project</a></string>
+    <string name="ab_app_code_donate"><b>Donate</b>: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RZGRRMR7FM9W&amp;source=url">PayPal</a></string>
+    <string name="ab_app_description"><b>Where Am I</b> is an open source application to test novel algorithms that are able to determine the users localization using labeled WI-FI fingerprints.</string>
+    <string name="ab_made_author">Made with ❤️ by NunuM</string>
+
     <string-array name="pref_protocol_list_titles">
-        <item>TCP</item>
         <item>HTTP</item>
     </string-array>
 
@@ -137,6 +155,9 @@
 
     <string name="pref_http_position_title">Position Resource</string>
     <string name="pref_http_position_description">Within a localizationId, there are positions.</string>
+
+    <string name="pref_http_display_only_my_localizations">My Localizations</string>
+    <string name="pref_http_display_only_my_localizations_description">List only my localizations.</string>
 
     <string name="pref_http_localization_paging_title">Pagination</string>
     <string name="pref_http_localization_paging_description"><![CDATA[The applications will fetch N localizations per request. Ex=.../?page=3]]></string>

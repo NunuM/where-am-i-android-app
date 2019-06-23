@@ -14,16 +14,127 @@ import me.nunum.whereami.utils.AppConfig;
 
 public class ApplicationPreferences {
 
+    private static final String TAG = "ApplicationPreferences";
+    private static ApplicationPreferences instance = null;
     private final Context context;
     private final SharedPreferences preferences;
-
-    private static ApplicationPreferences instance = null;
-
-    private static final String TAG = "ApplicationPreferences";
 
     protected ApplicationPreferences(Context context) {
         this.context = context;
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public static ApplicationPreferences instance(final Context context) {
+
+        if (instance == null) {
+            instance = new ApplicationPreferences(context);
+        }
+        return instance;
+    }
+
+    @NonNull
+    public final Integer getIntegerKey(KEYS keys) {
+        if (!keys.isInt()) {
+            throw new IllegalArgumentException("Key must be of integer type");
+        }
+
+        try {
+            final String string = this.preferences.getString(keys.keyName(), keys.defaultValue().toString());
+            return Integer.valueOf(string);
+        } catch (ClassCastException | NumberFormatException e) {
+            Log.i(TAG, "getIntegerKey: cannot get pref " + keys.keyName() + " value due cast exception", e);
+        }
+
+        return keys.defaultValue();
+    }
+
+    @NonNull
+    public final Boolean getBooleanKey(KEYS keys) {
+        if (!keys.isBoolean()) {
+            throw new IllegalArgumentException("Key must be of boolean type");
+        }
+
+        try {
+            final Boolean value = this.preferences.getBoolean(keys.keyName(), (Boolean) keys.defaultValue());
+            return value;
+        } catch (ClassCastException | NumberFormatException e) {
+            Log.i(TAG, "getBooleanKey: cannot get pref " + keys.keyName() + " value due cast exception", e);
+        }
+
+        return keys.defaultValue();
+    }
+
+
+    public final String getStringKey(KEYS keys) {
+
+        if (!keys.isString()) {
+            throw new IllegalArgumentException("Key must be of string type");
+        }
+        final String o = keys.defaultValue();
+        return this.preferences.getString(keys.keyName(), o);
+    }
+
+
+    public boolean setStringKey(KEYS key, final String value) {
+        if (!key.isString()) {
+            throw new IllegalArgumentException("Key must be of string type");
+        }
+
+        SharedPreferences.Editor edit = this.preferences.edit();
+        edit.putString(key.keyName(), value);
+        edit.apply();
+        return true;
+    }
+
+    public boolean setIntegerKey(KEYS key, final int value) {
+        if (!key.isString()) {
+            throw new IllegalArgumentException("Key must be of string type");
+        }
+
+
+        final SharedPreferences preferences = this.context.getSharedPreferences(AppConfig.PREFERENCES_KEY_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putInt(key.keyName(), value);
+        edit.apply();
+        return true;
+    }
+
+    public boolean setBooleanKey(KEYS key, final boolean value) {
+        if (!key.isBoolean()) {
+            throw new IllegalArgumentException("Key must be of string type");
+        }
+
+        final SharedPreferences preferences = this.context.getSharedPreferences(AppConfig.PREFERENCES_KEY_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putBoolean(key.keyName(), value);
+        edit.apply();
+
+        return true;
+    }
+
+
+    public void persistIfNull(KEYS key) {
+
+        String string = this.preferences.getString(key.keyName(), null);
+
+        if (string == null) {
+            SharedPreferences.Editor editor = this.preferences.edit();
+            editor.putString(key.keyName(), (String) key.defaultValue());
+            editor.apply();
+        }
+
+    }
+
+    public void persistIfNull(KEYS key, String value) {
+
+        String string = this.preferences.getString(key.keyName(), null);
+
+        if (string == null) {
+            SharedPreferences.Editor editor = this.preferences.edit();
+            editor.putString(key.keyName(), value);
+            editor.apply();
+        }
+
     }
 
     public static enum KEYS {
@@ -62,7 +173,7 @@ public class ApplicationPreferences {
         ONLINE_PROTOCOL {
             @Override
             public String defaultValue() {
-                return "TCP";
+                return "HTTP";
             }
 
             @Override
@@ -78,7 +189,7 @@ public class ApplicationPreferences {
         OFFLINE_PROTOCOL {
             @Override
             public String defaultValue() {
-                return "TCP";
+                return "HTTP";
             }
 
             @Override
@@ -398,6 +509,38 @@ public class ApplicationPreferences {
                 return true;
             }
         },
+        HTTP_DEVICE_RESOURCE {
+            @Override
+            public String defaultValue() {
+                return AppConfig.HTTP_DEVICE_RESOURCE;
+            }
+
+            @Override
+            public String keyName() {
+                return "http_prediction_resource";
+            }
+
+            @Override
+            public boolean isString() {
+                return true;
+            }
+        },
+        HTTP_PAGINATE_ONLY_MY_LOCALIZATIONS {
+            @Override
+            public Boolean defaultValue() {
+                return AppConfig.HTTP_PAGINATE_ONLY_MY_LOCALIZATIONS;
+            }
+
+            @Override
+            public String keyName() {
+                return "http_only_my_localizations";
+            }
+
+            @Override
+            public boolean isBoolean() {
+                return true;
+            }
+        },
         INSTANCE_ID {
             @Override
             public String defaultValue() {
@@ -509,120 +652,6 @@ public class ApplicationPreferences {
         public abstract <T> T defaultValue();
 
         public abstract String keyName();
-    }
-
-
-    @NonNull
-    public final Integer getIntegerKey(KEYS keys) {
-        if (!keys.isInt()) {
-            throw new IllegalArgumentException("Key must be of integer type");
-        }
-
-        try {
-            final String string = this.preferences.getString(keys.keyName(), keys.defaultValue().toString());
-            return Integer.valueOf(string);
-        } catch (ClassCastException | NumberFormatException e) {
-            Log.i(TAG, "getIntegerKey: cannot get pref " + keys.keyName() + " value due cast exception", e);
-        }
-
-        return keys.defaultValue();
-    }
-
-    @NonNull
-    public final Boolean getBooleanKey(KEYS keys) {
-        if (!keys.isBoolean()) {
-            throw new IllegalArgumentException("Key must be of boolean type");
-        }
-
-        try {
-            final Boolean value = this.preferences.getBoolean(keys.keyName(), (Boolean) keys.defaultValue());
-            return value;
-        } catch (ClassCastException | NumberFormatException e) {
-            Log.i(TAG, "getBooleanKey: cannot get pref " + keys.keyName() + " value due cast exception", e);
-        }
-
-        return keys.defaultValue();
-    }
-
-
-    public final String getStringKey(KEYS keys) {
-
-        if (!keys.isString()) {
-            throw new IllegalArgumentException("Key must be of string type");
-        }
-        final String o = keys.defaultValue();
-        return this.preferences.getString(keys.keyName(), o);
-    }
-
-
-    public boolean setStringKey(KEYS key, final String value) {
-        if (!key.isString()) {
-            throw new IllegalArgumentException("Key must be of string type");
-        }
-
-        SharedPreferences.Editor edit = this.preferences.edit();
-        edit.putString(key.keyName(), value);
-        edit.apply();
-        return true;
-    }
-
-    public boolean setIntegerKey(KEYS key, final int value) {
-        if (!key.isString()) {
-            throw new IllegalArgumentException("Key must be of string type");
-        }
-
-
-        final SharedPreferences preferences = this.context.getSharedPreferences(AppConfig.PREFERENCES_KEY_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = preferences.edit();
-        edit.putInt(key.keyName(), value);
-        edit.apply();
-        return true;
-    }
-
-    public boolean setBooleanKey(KEYS key, final boolean value) {
-        if (!key.isBoolean()) {
-            throw new IllegalArgumentException("Key must be of string type");
-        }
-
-        final SharedPreferences preferences = this.context.getSharedPreferences(AppConfig.PREFERENCES_KEY_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = preferences.edit();
-        edit.putBoolean(key.keyName(), value);
-        edit.apply();
-
-        return true;
-    }
-
-
-    public void persistIfNull(KEYS key) {
-
-        String string = this.preferences.getString(key.keyName(), null);
-
-        if (string == null) {
-            SharedPreferences.Editor editor = this.preferences.edit();
-            editor.putString(key.keyName(), (String) key.defaultValue());
-            editor.apply();
-        }
-
-    }
-
-    public void persistIfNull(KEYS key, String value) {
-
-        String string = this.preferences.getString(key.keyName(), null);
-
-        if (string == null) {
-            SharedPreferences.Editor editor = this.preferences.edit();
-            editor.putString(key.keyName(), value);
-            editor.apply();
-        }
-
-    }
-
-    public static ApplicationPreferences instance(final Context context) {
-
-        if (instance == null) {
-            instance = new ApplicationPreferences(context);
-        }
-        return instance;
     }
 
 }

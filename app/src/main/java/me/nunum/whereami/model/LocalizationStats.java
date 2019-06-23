@@ -74,4 +74,8 @@ public class LocalizationStats implements Serializable {
                 ", positions=" + positions +
                 '}';
     }
+
+    public void incrementSamples() {
+        this.samples += 1;
+    }
 }

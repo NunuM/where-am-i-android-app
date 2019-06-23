@@ -3,11 +3,12 @@ package me.nunum.whereami.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ import me.nunum.whereami.utils.AppConfig;
  */
 public class HomeFragment extends Fragment {
 
-    private int mColumnCount = 1;
+    private static final String TAG = HomeFragment.class.getSimpleName();
 
     private OnFragmentInteractionListener mListener;
 
@@ -42,50 +43,39 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment HomeFragment.
-     */
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
 
-        return fragment;
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         final View hostView = inflater.inflate(R.layout.fragment_home, container, false);
 
         final HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
-        LinearLayoutManager layoutManager = null;
-
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) hostView.findViewById(R.id.fh_post_swipe);
 
-        View view = hostView.findViewById(R.id.fh_post_list);
+        final View view = hostView.findViewById(R.id.fh_post_list);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
 
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final Context context = view.getContext();
+            final RecyclerView recyclerView = (RecyclerView) view;
 
-            if (mColumnCount <= 1) {
-                layoutManager = new LinearLayoutManager(context);
-                recyclerView.setLayoutManager(layoutManager);
-            } else {
-                layoutManager = new GridLayoutManager(context, mColumnCount);
-                recyclerView.setLayoutManager(layoutManager);
-            }
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
 
             final PostRecyclerViewAdapter adapter = new PostRecyclerViewAdapter(this.mListener);
             recyclerView.setAdapter(adapter);
@@ -114,6 +104,10 @@ public class HomeFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+
+                            Log.e(TAG, "onFailure: Could not retrieve posts from the server", throwable);
+
+                            swipeRefreshLayout.setRefreshing(false);
                             Toast.makeText(mListener.context(), R.string.fh_posts_request_failure, Toast.LENGTH_LONG).show();
                         }
                     });
@@ -155,18 +149,9 @@ public class HomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.i(TAG, "onDetach: Closed fragment");
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         Object getService(Services service);
 

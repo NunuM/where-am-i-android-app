@@ -3,6 +3,7 @@ package me.nunum.whereami.adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,6 @@ import java.util.List;
 
 import me.nunum.whereami.R;
 import me.nunum.whereami.fragments.TrainingStatusFragment;
-import me.nunum.whereami.framework.OnListSizeChange;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.SortedListCallbackImpl;
 import me.nunum.whereami.model.TrainingProgress;
@@ -25,10 +25,11 @@ import me.nunum.whereami.service.Services;
 
 public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRecyclerViewAdapter.ViewHolder> {
 
+    private static final String TAG = TrainingRecyclerViewAdapter.class.getSimpleName();
+
     private final SortedList<TrainingProgress> mValues;
-    private OnListSizeChange mSizeListener;
-    private boolean canDelete;
-    private TrainingStatusFragment.OnFragmentInteractionListener mListener;
+    private final boolean canDelete;
+    private final TrainingStatusFragment.OnFragmentInteractionListener mListener;
 
     public TrainingRecyclerViewAdapter(TrainingStatusFragment.OnFragmentInteractionListener listener, boolean canDelete) {
         this.mValues = new SortedList<>(TrainingProgress.class, new SortedListCallbackImpl<TrainingProgress>(this));
@@ -42,10 +43,6 @@ public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRe
             this.mValues.add(positions.get(i));
         }
         this.mValues.endBatchedUpdates();
-
-        if (mSizeListener != null) {
-            mSizeListener.currentSize(mValues.size());
-        }
     }
 
     @NonNull
@@ -63,7 +60,8 @@ public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRe
         holder.mItem = mValues.get(position);
 
         holder.mAlgorithmName.setText(holder.mItem.getAlgorithmName().toUpperCase());
-        holder.mTrainingStatus.setText(String.format("STATUS: %s.  LAST UPDATE: %s", holder.mItem.getStatus().toUpperCase(), holder.mItem.prettyDate()));
+
+        holder.mTrainingStatus.setText(mListener.context().getString(R.string.ftli_delete_training_status_sub_header, holder.mItem.getStatus().toUpperCase(), holder.mItem.prettyDate()));
 
         if (!canDelete) {
             holder.mIdTrainingOptionsMenu.setVisibility(View.INVISIBLE);
@@ -93,6 +91,7 @@ public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRe
 
                                         @Override
                                         public void onFailure(Throwable throwable) {
+                                            Log.e(TAG, "onFailure: Error deleting training " + holder.mItem.getId(), throwable);
                                             Toast.makeText(mListener.context(), R.string.ftli_delete_training_request_failure, Toast.LENGTH_LONG).show();
                                         }
                                     });

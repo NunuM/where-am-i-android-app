@@ -28,7 +28,7 @@ import me.nunum.whereami.framework.OnResponse;
 
 public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
-    private static final String TAG = AsyncHttp.class.getName();
+    private static final String TAG = AsyncHttp.class.getSimpleName();
 
     private static final String DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -60,6 +60,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
+        Log.d(TAG, "get  " + url.toString());
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
     }
 
@@ -72,8 +73,8 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
      * @param useCache
      */
     public static void downloadImage(URL url,
-                    Map<String, String> headers,
-                    final OnResponse<Bitmap> onResponse, boolean useCache) {
+                                     Map<String, String> headers,
+                                     final OnResponse<Bitmap> onResponse, boolean useCache) {
 
         Request<?> request = new BitmapRequest(url.toString(), headers, new Response.Listener<Bitmap>() {
             @Override
@@ -99,6 +100,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(type, marshaller, onResponse);
 
+        Log.d(TAG, "get  " + url.toString());
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
     }
 
@@ -110,6 +112,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(type, marshaller, onResponse);
 
+        Log.d(TAG, "get  " + url.toString());
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(useCache));
     }
 
@@ -128,6 +131,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
+        Log.d(TAG, "put  " + url.toString());
         requestQueue.add(new PostRequest(Request.Method.PUT, url.toString(), this.marshaller.toJson(t), headers, handler, handler));
     }
 
@@ -146,6 +150,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
+        Log.d(TAG, "post  " + url.toString());
         requestQueue.add(new PostRequest(url.toString(), this.marshaller.toJson(t), headers, handler, handler));
     }
 
@@ -162,6 +167,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
+        Log.d(TAG, "delete " + url.toString());
         requestQueue.add(new DeleteRequest(url.toString(), headers, handler, handler));
     }
 

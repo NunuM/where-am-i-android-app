@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,6 +27,7 @@ import me.nunum.whereami.model.Position;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.Services;
 import me.nunum.whereami.utils.AppConfig;
+import me.nunum.whereami.utils.StringUtils;
 
 /**
  * A fragment representing a list of Items.
@@ -37,10 +37,8 @@ import me.nunum.whereami.utils.AppConfig;
  */
 public class PositionFragment extends Fragment {
 
+    private static final String TAG = PositionFragment.class.getSimpleName();
 
-    private static final String ARG_COLUMN_COUNT = "column-count";
-
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -50,22 +48,15 @@ public class PositionFragment extends Fragment {
     public PositionFragment() {
     }
 
-    @SuppressWarnings("unused")
-    public static PositionFragment newInstance(int columnCount) {
-        PositionFragment fragment = new PositionFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+
+    public static PositionFragment newInstance() {
+        return new PositionFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+        Log.i(TAG, "onCreate: Open fragment");
     }
 
     @Override
@@ -75,11 +66,9 @@ public class PositionFragment extends Fragment {
 
         final HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
-        View hostView = inflater.inflate(R.layout.fragment_position_list, container, false);
+        final View hostView = inflater.inflate(R.layout.fragment_position_list, container, false);
 
-        View view = hostView.findViewById(R.id.fpl_position_list);
-
-        LinearLayoutManager layoutManager = null;
+        final View view = hostView.findViewById(R.id.fpl_position_list);
 
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) hostView.findViewById(R.id.fpl_position_swipe);
 
@@ -87,15 +76,11 @@ public class PositionFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                layoutManager = new LinearLayoutManager(context);
-                recyclerView.setLayoutManager(layoutManager);
-            } else {
-                layoutManager = new GridLayoutManager(context, mColumnCount);
-                recyclerView.setLayoutManager(layoutManager);
-            }
+            final Context context = view.getContext();
+            final RecyclerView recyclerView = (RecyclerView) view;
+
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            recyclerView.setLayoutManager(layoutManager);
 
             final PositionRecyclerViewAdapter viewAdapter = new PositionRecyclerViewAdapter(mListener);
 
@@ -108,7 +93,6 @@ public class PositionFragment extends Fragment {
                     positions.setText(String.format("%d", size));
                 }
             });
-
 
             recyclerView.setAdapter(viewAdapter);
 
@@ -135,6 +119,9 @@ public class PositionFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+
+                            Log.e(PositionFragment.TAG, "onFailure: Error retrieving positions from the server", throwable);
+
                             Toast.makeText(mListener.context(), R.string.fpi_position_list_request_failure, Toast.LENGTH_LONG).show();
 
                             if (swipeRefreshLayout.isRefreshing()) {
@@ -161,12 +148,11 @@ public class PositionFragment extends Fragment {
 
         swipeRefreshLayout.setRefreshing(true);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fpl_position_add_position_bottom);
+        final FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fpl_position_add_position_bottom);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.openNewPositionFragment();
-                Log.i("s", "onClick: one more");
             }
         });
 
@@ -174,15 +160,13 @@ public class PositionFragment extends Fragment {
             floatingActionButton.hide();
         }
 
-        TextView samples = (TextView) hostView.findViewById(R.id.fpl_localization_stats_samples);
-        TextView nModels = (TextView) hostView.findViewById(R.id.fpl_localization_stats_models);
-
+        final TextView samples = (TextView) hostView.findViewById(R.id.fpl_localization_stats_samples);
+        final TextView nModels = (TextView) hostView.findViewById(R.id.fpl_localization_stats_models);
 
         samples.setText(localization.getStats().getSamples().toString());
         nModels.setText(localization.getStats().getNumberOfTrainedModels().toString());
 
-
-        mListener.setActionBarTitle(localization.getLabel());
+        mListener.setActionBarTitle(StringUtils.capitalize(localization.getLabel()));
 
         return hostView;
     }
@@ -203,18 +187,9 @@ public class PositionFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Log.i(TAG, "onDetach: Close fragment");
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnListFragmentInteractionListener {
 
         void onPositionSelected(Position item);
