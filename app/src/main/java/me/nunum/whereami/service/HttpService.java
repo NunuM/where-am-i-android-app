@@ -109,7 +109,7 @@ public final class HttpService {
     public boolean image(String url, OnResponse<Bitmap> onResponse) {
 
         try {
-            AsyncHttpImpl.downloadImage(new URL(url), getHeaders(), onResponse, true);
+            AsyncHttpImpl.downloadImage(new URL(url), getHeaders(), onResponse, true, context);
         } catch (MalformedURLException e) {
             return false;
         }

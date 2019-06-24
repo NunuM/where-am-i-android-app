@@ -517,7 +517,7 @@ public class ApplicationPreferences {
 
             @Override
             public String keyName() {
-                return "http_prediction_resource";
+                return "http_device_resource";
             }
 
             @Override

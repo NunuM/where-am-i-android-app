@@ -74,7 +74,7 @@ public class PredictionDashboardRecyclerViewAdapter
                 service.predictionFeedback(p.getLocalizationId(), p.getId(), new PredictionFeedbackRequest(true), new OnResponse<Prediction>() {
                     @Override
                     public void onSuccess(Prediction o) {
-                        holder.mPositiveFeedback.setVisibility(View.INVISIBLE);
+                        holder.mNegativeFeedback.setVisibility(View.INVISIBLE);
                         holder.mPositiveFeedback.setClickable(false);
                     }
 
@@ -95,7 +95,7 @@ public class PredictionDashboardRecyclerViewAdapter
                 service.predictionFeedback(p.getLocalizationId(), p.getId(), new PredictionFeedbackRequest(), new OnResponse<Prediction>() {
                     @Override
                     public void onSuccess(Prediction o) {
-                        holder.mNegativeFeedback.setVisibility(View.INVISIBLE);
+                        holder.mPositiveFeedback.setVisibility(View.INVISIBLE);
                         holder.mNegativeFeedback.setClickable(false);
                     }
 

@@ -6,13 +6,13 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
@@ -29,10 +29,12 @@ import me.nunum.whereami.framework.OnResponse;
 
 public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
+    private static final long ONE_DAY_IN_MS = 86400000L;
+
     private static final String TAG = AsyncHttp.class.getSimpleName();
 
     private static final String DEFAULT_CONTENT_TYPE = "application/json";
-    private static RequestQueue requestQueue;
+    private final RequestQueue requestQueue;
     private final Type tClass;
     private final Gson marshaller;
 
@@ -40,15 +42,13 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         this.marshaller = marshaller;
         this.tClass = aClass;
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(context);
-        }
+        this.requestQueue = RequestQueueSingleton.getInstance(context).getRequestQueue();
     }
 
 
     public static void downloadImage(URL url,
                                      Map<String, String> headers,
-                                     final OnResponse<Bitmap> onResponse, boolean useCache) {
+                                     final OnResponse<Bitmap> onResponse, boolean useCache, Context context) {
 
         Request<?> request = new BitmapRequest(url.toString(), headers, new Response.Listener<Bitmap>() {
             @Override
@@ -62,7 +62,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
             }
         }).setShouldCache(useCache);
 
-        requestQueue.add(request);
+        RequestQueueSingleton.getInstance(context).getRequestQueue().add(request);
     }
 
 
@@ -74,7 +74,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
         Log.d(TAG, "get  " + url.toString());
-        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
+        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(false));
     }
 
     @Override
@@ -86,7 +86,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         ResponseHandler<O> handler = new ResponseHandler<>(type, marshaller, onResponse);
 
         Log.d(TAG, "get  " + url.toString());
-        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
+        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(false));
     }
 
 
@@ -111,7 +111,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
         Log.d(TAG, "put  " + url.toString());
-        requestQueue.add(new PostRequest(Request.Method.PUT, url.toString(), this.marshaller.toJson(t), headers, handler, handler));
+        requestQueue.add(new PostRequest(Request.Method.PUT, url.toString(), this.marshaller.toJson(t), headers, handler, handler).setShouldCache(false));
     }
 
 
@@ -124,7 +124,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
         Log.d(TAG, "post  " + url.toString());
-        requestQueue.add(new PostRequest(url.toString(), this.marshaller.toJson(t), headers, handler, handler));
+        requestQueue.add(new PostRequest(url.toString(), this.marshaller.toJson(t), headers, handler, handler).setShouldCache(false));
     }
 
 
@@ -136,7 +136,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
         Log.d(TAG, "delete " + url.toString());
-        requestQueue.add(new DeleteRequest(url.toString(), headers, handler, handler));
+        requestQueue.add(new DeleteRequest(url.toString(), headers, handler, handler).setShouldCache(false));
     }
 
 
@@ -146,10 +146,11 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         }.getType();
 
         TestHandler handler = new TestHandler(circuitTestCallback);
-        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
+        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(false));
     }
 
     static class BitmapRequest extends ImageRequest {
+
 
         private final Map<String, String> headers;
 
@@ -171,6 +172,17 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         @Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             return this.headers;
+        }
+
+
+        @Override
+        protected Response<Bitmap> parseNetworkResponse(NetworkResponse response) {
+            Response<Bitmap> bitmapResponse = super.parseNetworkResponse(response);
+            long diff = System.currentTimeMillis() - bitmapResponse.cacheEntry.serverDate;
+            if (diff < ONE_DAY_IN_MS) {
+                bitmapResponse.cacheEntry.ttl = System.currentTimeMillis() + ONE_DAY_IN_MS;
+            }
+            return bitmapResponse;
         }
     }
 
@@ -205,6 +217,11 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         public Map<String, String> getHeaders() throws AuthFailureError {
             return this.headers;
         }
+
+        @Override
+        protected Response<String> parseNetworkResponse(NetworkResponse response) {
+            return super.parseNetworkResponse(response);
+        }
     }
 
     class PostRequest extends StringRequest {
@@ -213,12 +230,11 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         private final Map<String, String> headers;
 
 
-
         private PostRequest(String url,
-                           String marshaled,
-                           Map<String, String> headers,
-                           Response.Listener<String> listener,
-                           Response.ErrorListener errorListener) {
+                            String marshaled,
+                            Map<String, String> headers,
+                            Response.Listener<String> listener,
+                            Response.ErrorListener errorListener) {
 
             super(Method.POST, url, listener, errorListener);
             this.headers = headers;
@@ -227,11 +243,11 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
 
         private PostRequest(int method,
-                           String url,
-                           String marshaled,
-                           Map<String, String> headers,
-                           Response.Listener<String> listener,
-                           Response.ErrorListener errorListener) {
+                            String url,
+                            String marshaled,
+                            Map<String, String> headers,
+                            Response.Listener<String> listener,
+                            Response.ErrorListener errorListener) {
 
             super(method, url, listener, errorListener);
             this.headers = headers;
@@ -341,8 +357,8 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
 
         private ResponseHandler(Type type,
-                               Gson marshaller,
-                               OnResponse<O> onHttpResponse) {
+                                Gson marshaller,
+                                OnResponse<O> onHttpResponse) {
             this.type = type;
             this.marshaller = marshaller;
             this.onHttpResponse = onHttpResponse;
