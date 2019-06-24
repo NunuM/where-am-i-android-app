@@ -1,5 +1,6 @@
 package me.nunum.whereami.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -54,15 +55,16 @@ public class LocalizationRecyclerViewAdapter
         this.localizations.endBatchedUpdates();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_localization_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.mItem = localizations.get(position);
         holder.mIdLocalizationLabel.setText(localizations.get(position).getLabel());
         holder.mIdLocalizationUsername.setText(localizations.get(position).getUser());
@@ -162,18 +164,18 @@ public class LocalizationRecyclerViewAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdLocalizationLabel;
-        public final TextView mIdLocalizationUsername;
-        public final Button mIdLocalizationOptionsButton;
-        public Localization mItem;
+        final View mView;
+        final TextView mIdLocalizationLabel;
+        final TextView mIdLocalizationUsername;
+        final Button mIdLocalizationOptionsButton;
+        Localization mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdLocalizationLabel = (TextView) view.findViewById(R.id.fli_localization_label);
-            mIdLocalizationUsername = (TextView) view.findViewById(R.id.fli_localization_username);
-            mIdLocalizationOptionsButton = (Button) view.findViewById(R.id.fli_localization_options);
+            mIdLocalizationLabel = view.findViewById(R.id.fli_localization_label);
+            mIdLocalizationUsername = view.findViewById(R.id.fli_localization_username);
+            mIdLocalizationOptionsButton = view.findViewById(R.id.fli_localization_options);
         }
 
     }

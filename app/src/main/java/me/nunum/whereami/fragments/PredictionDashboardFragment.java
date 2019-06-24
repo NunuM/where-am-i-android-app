@@ -97,7 +97,7 @@ public class PredictionDashboardFragment extends Fragment {
         // Inflate the layout for this fragment
         final View hostView = inflater.inflate(R.layout.fragment_prediction_dashboard, container, false);
 
-        final ToggleButton toggle = (ToggleButton) hostView.findViewById(R.id.fpda_toggle_btn);
+        final ToggleButton toggle = hostView.findViewById(R.id.fpda_toggle_btn);
 
         final Button requestAllPredictions = hostView.findViewById(R.id.fpda_all_predictions);
 
@@ -184,8 +184,8 @@ public class PredictionDashboardFragment extends Fragment {
 
         final ApplicationPreferences preferences = ApplicationPreferences.instance(mListener.context());
 
-        final Integer delay = preferences.getIntegerKey(ApplicationPreferences.KEYS.PRODUCER_DELAY);
-        final Integer period = preferences.getIntegerKey(ApplicationPreferences.KEYS.PRODUCER_PERIOD);
+        final int delay = preferences.getIntegerKey(ApplicationPreferences.KEYS.PRODUCER_DELAY);
+        final int period = preferences.getIntegerKey(ApplicationPreferences.KEYS.PRODUCER_PERIOD);
 
         if (progressBar != null) {
             progressBar.setMax(period);
@@ -238,7 +238,7 @@ public class PredictionDashboardFragment extends Fragment {
     }
 
 
-    public void startProgressBar() {
+    private void startProgressBar() {
 
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
@@ -246,7 +246,7 @@ public class PredictionDashboardFragment extends Fragment {
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    Integer integer = Integer.valueOf(animation.getAnimatedValue().toString());
+                    int integer = Integer.valueOf(animation.getAnimatedValue().toString());
                     progressBar.setProgress(integer);
                 }
             });
@@ -257,20 +257,20 @@ public class PredictionDashboardFragment extends Fragment {
     }
 
 
-    public void resetProgressBar() {
+    private void resetProgressBar() {
         if (progressBar != null) {
             progressBar.setProgress(0);
         }
         valueAnimator.start();
     }
 
-    public void stopProgressBar() {
+    private void stopProgressBar() {
         valueAnimator.end();
         progressBar.setVisibility(View.INVISIBLE);
     }
 
 
-    public Date getLastUpdate() {
+    private Date getLastUpdate() {
 
         if (lastUpdate == null) {
             lastUpdate = new Date();

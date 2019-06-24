@@ -54,7 +54,7 @@ public class WifiDataSample {
         return bssid;
     }
 
-    public void setBssid(String bssid) {
+    private void setBssid(String bssid) {
         this.bssid = bssid;
     }
 
@@ -62,7 +62,7 @@ public class WifiDataSample {
         return ssid;
     }
 
-    public void setSsid(String ssid) {
+    private void setSsid(String ssid) {
         this.ssid = ssid;
     }
 
@@ -70,7 +70,7 @@ public class WifiDataSample {
         return levelDBM;
     }
 
-    public void setLevelDBM(int levelDBM) {
+    private void setLevelDBM(int levelDBM) {
         this.levelDBM = levelDBM;
     }
 
@@ -78,7 +78,7 @@ public class WifiDataSample {
         return centerFreq0;
     }
 
-    public void setCenterFreq0(int centerFreq0) {
+    private void setCenterFreq0(int centerFreq0) {
         this.centerFreq0 = centerFreq0;
     }
 
@@ -86,7 +86,7 @@ public class WifiDataSample {
         return centerFreq1;
     }
 
-    public void setCenterFreq1(int centerFreq1) {
+    private void setCenterFreq1(int centerFreq1) {
         this.centerFreq1 = centerFreq1;
     }
 
@@ -94,7 +94,7 @@ public class WifiDataSample {
         return channelWidth;
     }
 
-    public void setChannelWidth(int channelWidth) {
+    private void setChannelWidth(int channelWidth) {
         this.channelWidth = channelWidth;
     }
 
@@ -102,7 +102,7 @@ public class WifiDataSample {
         return frequency;
     }
 
-    public void setFrequency(int frequency) {
+    private void setFrequency(int frequency) {
         this.frequency = frequency;
     }
 
@@ -110,20 +110,20 @@ public class WifiDataSample {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    private void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 
 
-    public void setPositionId(Long positionId) {
+    private void setPositionId(Long positionId) {
         this.positionId = positionId;
     }
 
-    public void setFloorId(Long floorId) {
+    private void setFloorId(Long floorId) {
         this.floorId = floorId;
     }
 
-    public void setLocalizationId(Long localizationId) {
+    private void setLocalizationId(Long localizationId) {
         this.localizationId = localizationId;
     }
 

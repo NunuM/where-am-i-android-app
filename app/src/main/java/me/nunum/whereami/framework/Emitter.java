@@ -6,10 +6,5 @@ package me.nunum.whereami.framework;
 
 public interface Emitter<T> {
 
-    /**
-     * Send data in batches to the receiver.
-     *
-     * @param receiver
-     */
     void emitTo(Receiver<T> receiver);
 }

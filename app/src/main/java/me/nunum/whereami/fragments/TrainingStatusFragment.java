@@ -2,6 +2,7 @@ package me.nunum.whereami.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -60,14 +61,14 @@ public class TrainingStatusFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View hostView = inflater.inflate(R.layout.fragment_training_status, container, false);
 
         final HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) hostView.findViewById(R.id.fts_training_swipe);
+        final SwipeRefreshLayout swipeRefreshLayout = hostView.findViewById(R.id.fts_training_swipe);
 
         final Localization localization = mListener.associatedLocalization();
 
@@ -127,7 +128,7 @@ public class TrainingStatusFragment extends Fragment {
 
         swipeRefreshLayout.setRefreshing(true);
 
-        final FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fts_training_add_position_bottom);
+        final FloatingActionButton floatingActionButton = hostView.findViewById(R.id.fts_training_add_position_bottom);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

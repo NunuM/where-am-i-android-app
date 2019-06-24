@@ -2,6 +2,7 @@ package me.nunum.whereami.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,13 +49,13 @@ public class NewPositionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_position, container, false);
 
-        final EditText labelName = (EditText) view.findViewById(R.id.fnp_input_label);
-        Button submit = (Button) view.findViewById(R.id.fnp_submit_btn);
+        final EditText labelName = view.findViewById(R.id.fnp_input_label);
+        Button submit = view.findViewById(R.id.fnp_submit_btn);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

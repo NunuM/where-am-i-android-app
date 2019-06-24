@@ -29,10 +29,9 @@ public class PersistenceSinker
 
     private final Context context;
     private final DatabaseService databaseService;
-    private OnSync onSync;
-    private Receiver<List<WifiDataSample>> receiver;
-
     private final Marshaller<WifiDataSample, ContentValues> marshaller;
+    private final OnSync onSync;
+    private final Receiver<List<WifiDataSample>> receiver;
 
     public PersistenceSinker(Context context, OnSync onSync) {
         this.context = context;
@@ -52,6 +51,7 @@ public class PersistenceSinker
         this.databaseService = DatabaseService.getInstance(this.context);
     }
 
+    @SuppressWarnings("TryFinallyCanBeTryWithResources")
     @Override
     public synchronized void receive(List<WifiDataSample> data, Long batchNumber) {
 
@@ -90,6 +90,7 @@ public class PersistenceSinker
         emitTo(receiver);
     }
 
+    @SuppressWarnings("TryFinallyCanBeTryWithResources")
     @Override
     public void emitTo(Receiver<List<WifiDataSample>> receiver) {
 
@@ -98,11 +99,12 @@ public class PersistenceSinker
         final List<WifiDataSample> list = new ArrayList<>(10);
 
         SQLiteDatabase writableDatabase = null;
+        Cursor cursor = null;
 
         try {
             writableDatabase = databaseService.getWritableDatabase();
 
-            final Cursor cursor = writableDatabase.rawQuery("SELECT rowid,* FROM " + DatabaseService.FINGERPRINT + " LIMIT " + AppConfig.DATABASE_BATCH, null);
+            cursor = writableDatabase.rawQuery("SELECT rowid,* FROM " + DatabaseService.FINGERPRINT + " LIMIT " + AppConfig.DATABASE_BATCH, null);
 
             while (cursor.moveToNext()) {
 
@@ -142,7 +144,7 @@ public class PersistenceSinker
             int i;
             StringBuilder values = new StringBuilder();
             for (i = 0; i < longs.size() - 1; i++) {
-                values.append(longs.get(i).toString() + ",");
+                values.append(longs.get(i).toString()).append(",");
             }
 
             values.append(longs.get(i));
@@ -155,6 +157,11 @@ public class PersistenceSinker
             Log.e(TAG, "emitTo: Some error at db", exception);
 
         } finally {
+
+            if (cursor != null) {
+                cursor.close();
+            }
+
             if (writableDatabase != null) {
                 writableDatabase.close();
             }
@@ -165,6 +172,7 @@ public class PersistenceSinker
     }
 
 
+    @SuppressWarnings("TryFinallyCanBeTryWithResources")
     public synchronized boolean isEmpty() {
 
         long numEntries = 0L;

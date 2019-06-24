@@ -1,7 +1,7 @@
 package me.nunum.whereami.model.request;
 
 
-public final class FingerprintRequest {
+final class FingerprintRequest {
 
     private String bssid;
     private String ssid;

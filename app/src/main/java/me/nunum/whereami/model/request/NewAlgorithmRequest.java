@@ -1,6 +1,7 @@
 package me.nunum.whereami.model.request;
 
-public final class NewAlgorithmRequest {
+@SuppressWarnings("SameParameterValue")
+final class NewAlgorithmRequest {
 
     private final String name;
 
@@ -13,7 +14,7 @@ public final class NewAlgorithmRequest {
         this("", "", "");
     }
 
-    public NewAlgorithmRequest(String name, String authorName, String paperURL) {
+    private NewAlgorithmRequest(String name, String authorName, String paperURL) {
         this.name = name;
         this.authorName = authorName;
         this.paperURL = paperURL;

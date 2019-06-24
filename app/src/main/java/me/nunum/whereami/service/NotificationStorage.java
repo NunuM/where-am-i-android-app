@@ -20,10 +20,10 @@ public class NotificationStorage {
         persistNotification(context, message, false, sentTime);
     }
 
-    public static void persistNotification(final Context context,
-                                           final String message,
-                                           final boolean seen,
-                                           final long sentTime) {
+    private static void persistNotification(final Context context,
+                                            final String message,
+                                            final boolean seen,
+                                            final long sentTime) {
         DatabaseService service = DatabaseService.getInstance(context);
         SQLiteDatabase database = null;
         try {

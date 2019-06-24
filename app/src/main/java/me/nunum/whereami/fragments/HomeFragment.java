@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
 
         final HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) hostView.findViewById(R.id.fh_post_swipe);
+        final SwipeRefreshLayout swipeRefreshLayout = hostView.findViewById(R.id.fh_post_swipe);
 
         final View view = hostView.findViewById(R.id.fh_post_list);
 

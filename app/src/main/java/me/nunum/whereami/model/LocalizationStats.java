@@ -2,6 +2,7 @@ package me.nunum.whereami.model;
 
 import java.io.Serializable;
 
+@SuppressWarnings("SameParameterValue")
 public class LocalizationStats implements Serializable {
 
     private Long samples;
@@ -14,7 +15,7 @@ public class LocalizationStats implements Serializable {
         this(0L, 0, 0);
     }
 
-    public LocalizationStats(Long samples, Integer numberOfTrainedModels, Integer positions) {
+    private LocalizationStats(Long samples, Integer numberOfTrainedModels, Integer positions) {
         this.samples = samples;
         this.numberOfTrainedModels = numberOfTrainedModels;
         this.positions = positions;

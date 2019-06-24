@@ -62,7 +62,7 @@ public class PredictionFragment extends Fragment {
 
         final View viewHost = inflater.inflate(R.layout.fragment_prediction_list, container, false);
 
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) viewHost.findViewById(R.id.fpl_prediction_swipe);
+        final SwipeRefreshLayout swipeRefreshLayout = viewHost.findViewById(R.id.fpl_prediction_swipe);
 
         View view = viewHost.findViewById(R.id.fpl_prediction_list);
 

@@ -42,11 +42,10 @@ import me.nunum.whereami.utils.AppConfig;
 
 import static me.nunum.whereami.service.application.ApplicationPreferences.KEYS;
 
+@SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
 public final class HttpService {
 
     private final static String TAG = HttpService.class.getSimpleName();
-
-    private static HttpService service;
 
     private final Context context;
     private final Gson gson;
@@ -69,12 +68,7 @@ public final class HttpService {
     }
 
     public synchronized static HttpService create(Context context, Gson marshaller) {
-
-        if (service == null) {
-            service = new HttpService(context, marshaller);
-        }
-
-        return service;
+        return new HttpService(context, marshaller);
     }
 
 
@@ -98,11 +92,6 @@ public final class HttpService {
     }
 
 
-    /**
-     * @param localizationRequest
-     * @param onResponse
-     * @return boolean
-     */
     public boolean newLocalization(NewLocalizationRequest localizationRequest,
                                    OnResponse<Localization> onResponse) {
 

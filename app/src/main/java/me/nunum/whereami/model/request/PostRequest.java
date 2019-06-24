@@ -1,5 +1,6 @@
 package me.nunum.whereami.model.request;
 
+@SuppressWarnings("SameParameterValue")
 public final class PostRequest {
 
     private final String title;
@@ -13,7 +14,7 @@ public final class PostRequest {
         this("", "", "");
     }
 
-    public PostRequest(String title, String imageURL, String sourceURL) {
+    private PostRequest(String title, String imageURL, String sourceURL) {
         this.title = title;
         this.imageURL = imageURL;
         this.sourceURL = sourceURL;

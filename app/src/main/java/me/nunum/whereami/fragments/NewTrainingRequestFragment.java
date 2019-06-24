@@ -2,6 +2,7 @@ package me.nunum.whereami.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,18 +54,18 @@ public class NewTrainingRequestFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View hostView = inflater.inflate(R.layout.fragment_new_training_request, container, false);
 
-        final ListView algorithms = (ListView) hostView.findViewById(R.id.fntr_algorithm_list);
-        final ListView algorithmsImplementations = (ListView) hostView.findViewById(R.id.fntr_algorithm_implementation_list);
+        final ListView algorithms = hostView.findViewById(R.id.fntr_algorithm_list);
+        final ListView algorithmsImplementations = hostView.findViewById(R.id.fntr_algorithm_implementation_list);
 
-        final Button submit = (Button) hostView.findViewById(R.id.fntr_submit_btn);
+        final Button submit = hostView.findViewById(R.id.fntr_submit_btn);
 
-        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mListener.context(), android.R.layout.simple_list_item_single_choice);
-        final ArrayAdapter<CharSequence> adapterForImplementations = new ArrayAdapter<CharSequence>(mListener.context(), android.R.layout.simple_list_item_single_choice);
+        final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(mListener.context(), android.R.layout.simple_list_item_single_choice);
+        final ArrayAdapter<CharSequence> adapterForImplementations = new ArrayAdapter<>(mListener.context(), android.R.layout.simple_list_item_single_choice);
 
         algorithms.setAdapter(adapter);
         algorithmsImplementations.setAdapter(adapterForImplementations);

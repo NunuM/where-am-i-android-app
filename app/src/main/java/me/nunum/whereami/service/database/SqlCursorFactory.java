@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQuery;
 
-public class SqlCursorFactory implements SQLiteDatabase.CursorFactory {
+class SqlCursorFactory implements SQLiteDatabase.CursorFactory {
 
     @Override
     public Cursor newCursor(SQLiteDatabase db, SQLiteCursorDriver masterQuery, String editTable, SQLiteQuery query) {

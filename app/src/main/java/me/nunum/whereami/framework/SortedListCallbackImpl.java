@@ -5,9 +5,10 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.Comparator;
 
+@SuppressWarnings("JavadocReference")
 public class SortedListCallbackImpl<T extends Comparable<T>> extends SortedList.Callback<T> {
 
-    private RecyclerView.Adapter<?> adapter;
+    private final RecyclerView.Adapter<?> adapter;
 
     public SortedListCallbackImpl(RecyclerView.Adapter<?> adapter) {
         this.adapter = adapter;

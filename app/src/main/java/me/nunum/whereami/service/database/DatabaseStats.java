@@ -23,6 +23,7 @@ public class DatabaseStats {
     /**
      * @return number of samples
      */
+    @SuppressWarnings("TryFinallyCanBeTryWithResources")
     public Long totalRecords(Position position) {
         long total = 0L;
 

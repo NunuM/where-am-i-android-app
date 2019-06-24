@@ -1,5 +1,6 @@
 package me.nunum.whereami.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -60,8 +61,9 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
         }
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_position_item, parent, false);
 
@@ -69,7 +71,7 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mIdPositionLabel.setText(mValues.get(position).getLabel());
 
@@ -157,16 +159,16 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdPositionLabel;
-        public final Button mIdPositionOptionsMenu;
-        public Position mItem;
+        final View mView;
+        final TextView mIdPositionLabel;
+        final Button mIdPositionOptionsMenu;
+        Position mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdPositionLabel = (TextView) view.findViewById(R.id.fpi_position_label);
-            mIdPositionOptionsMenu = (Button) view.findViewById(R.id.fpi_position_options);
+            mIdPositionLabel = view.findViewById(R.id.fpi_position_label);
+            mIdPositionOptionsMenu = view.findViewById(R.id.fpi_position_options);
         }
     }
 }

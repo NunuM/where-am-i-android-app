@@ -9,27 +9,24 @@ import android.util.Log;
 import me.nunum.whereami.utils.AppConfig;
 
 /**
- * Created by handson on 07/02/2018.
+ * Created by nuno on 07/02/2018.
  */
 
+@SuppressWarnings("SameReturnValue")
 public class ApplicationPreferences {
 
     private static final String TAG = "ApplicationPreferences";
-    private static ApplicationPreferences instance = null;
+
     private final Context context;
     private final SharedPreferences preferences;
 
-    protected ApplicationPreferences(Context context) {
+    private ApplicationPreferences(Context context) {
         this.context = context;
         this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static ApplicationPreferences instance(final Context context) {
-
-        if (instance == null) {
-            instance = new ApplicationPreferences(context);
-        }
-        return instance;
+        return new ApplicationPreferences(context);
     }
 
     @NonNull
@@ -55,8 +52,7 @@ public class ApplicationPreferences {
         }
 
         try {
-            final Boolean value = this.preferences.getBoolean(keys.keyName(), (Boolean) keys.defaultValue());
-            return value;
+            return this.preferences.getBoolean(keys.keyName(), (Boolean) keys.defaultValue());
         } catch (ClassCastException | NumberFormatException e) {
             Log.i(TAG, "getBooleanKey: cannot get pref " + keys.keyName() + " value due cast exception", e);
         }
@@ -75,6 +71,7 @@ public class ApplicationPreferences {
     }
 
 
+    @SuppressWarnings("SameReturnValue")
     public boolean setStringKey(KEYS key, final String value) {
         if (!key.isString()) {
             throw new IllegalArgumentException("Key must be of string type");
@@ -86,6 +83,7 @@ public class ApplicationPreferences {
         return true;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public boolean setIntegerKey(KEYS key, final int value) {
         if (!key.isString()) {
             throw new IllegalArgumentException("Key must be of string type");
@@ -99,6 +97,7 @@ public class ApplicationPreferences {
         return true;
     }
 
+    @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
     public boolean setBooleanKey(KEYS key, final boolean value) {
         if (!key.isBoolean()) {
             throw new IllegalArgumentException("Key must be of string type");
@@ -137,7 +136,8 @@ public class ApplicationPreferences {
 
     }
 
-    public static enum KEYS {
+    @SuppressWarnings({"unchecked", "BooleanMethodIsAlwaysInverted"})
+    public enum KEYS {
         PREDICTION_RESOURCE {
             @Override
             public String defaultValue() {
@@ -637,20 +637,21 @@ public class ApplicationPreferences {
             }
         };
 
-        public boolean isString() {
+        boolean isString() {
             return false;
         }
 
-        public boolean isInt() {
+        boolean isInt() {
             return false;
         }
 
-        public boolean isBoolean() {
+        boolean isBoolean() {
             return false;
         }
 
-        public abstract <T> T defaultValue();
+        protected abstract <T> T defaultValue();
 
+        @SuppressWarnings("WeakerAccess")
         public abstract String keyName();
     }
 

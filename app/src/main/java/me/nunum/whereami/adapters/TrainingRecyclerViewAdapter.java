@@ -78,25 +78,21 @@ public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRe
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
 
-                            switch (menuItem.getItemId()) {
-                                case R.id.ftli_delete_training_request:
+                            if (menuItem.getItemId() == R.id.ftli_delete_training_request) {
+                                HttpService service = (HttpService) mListener.getService(Services.HTTP);
 
-                                    HttpService service = (HttpService) mListener.getService(Services.HTTP);
+                                service.deleteTraining(mListener.associatedLocalization().id(), holder.mItem, new OnResponse<Void>() {
+                                    @Override
+                                    public void onSuccess(Void o) {
+                                        mValues.remove(holder.mItem);
+                                    }
 
-                                    service.deleteTraining(mListener.associatedLocalization().id(), holder.mItem, new OnResponse<Void>() {
-                                        @Override
-                                        public void onSuccess(Void o) {
-                                            mValues.remove(holder.mItem);
-                                        }
-
-                                        @Override
-                                        public void onFailure(Throwable throwable) {
-                                            Log.e(TAG, "onFailure: Error deleting training " + holder.mItem.getId(), throwable);
-                                            Toast.makeText(mListener.context(), R.string.ftli_delete_training_request_failure, Toast.LENGTH_LONG).show();
-                                        }
-                                    });
-
-                                    break;
+                                    @Override
+                                    public void onFailure(Throwable throwable) {
+                                        Log.e(TAG, "onFailure: Error deleting training " + holder.mItem.getId(), throwable);
+                                        Toast.makeText(mListener.context(), R.string.ftli_delete_training_request_failure, Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                             return false;
                         }
@@ -116,14 +112,14 @@ public class TrainingRecyclerViewAdapter extends RecyclerView.Adapter<TrainingRe
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public View mView;
-        public TextView mAlgorithmName;
-        public TextView mTrainingStatus;
-        public Button mIdTrainingOptionsMenu;
-        public TrainingProgress mItem;
+        final View mView;
+        final TextView mAlgorithmName;
+        final TextView mTrainingStatus;
+        final Button mIdTrainingOptionsMenu;
+        TrainingProgress mItem;
 
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
             mAlgorithmName = itemView.findViewById(R.id.ftli_algorithm_display_name);

@@ -1,5 +1,6 @@
 package me.nunum.whereami.adapters;
 
+import android.support.annotation.NonNull;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,15 +35,16 @@ public class PredictionListRecyclerViewAdapter
         this.mValues.endBatchedUpdates();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_prediction_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdLocalizationLabel.setText(mValues.get(position).getLabel());
         holder.mIdLocalizationUsername.setText(mValues.get(position).getUser());
@@ -62,16 +64,16 @@ public class PredictionListRecyclerViewAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdLocalizationLabel;
-        public final TextView mIdLocalizationUsername;
-        public Localization mItem;
+        final View mView;
+        final TextView mIdLocalizationLabel;
+        final TextView mIdLocalizationUsername;
+        Localization mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdLocalizationLabel = (TextView) view.findViewById(R.id.fpi_localization_label);
-            mIdLocalizationUsername = (TextView) view.findViewById(R.id.fpi_localization_username);
+            mIdLocalizationLabel = view.findViewById(R.id.fpi_localization_label);
+            mIdLocalizationUsername = view.findViewById(R.id.fpi_localization_username);
         }
     }
 }

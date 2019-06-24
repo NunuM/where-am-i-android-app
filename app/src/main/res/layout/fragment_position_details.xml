@@ -13,7 +13,7 @@
         <TextView
             android:id="@+id/fpd_position_header_label"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
             android:padding="40dp"
@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_weight="1.5"
                 android:text="@string/fpd_position_number_of_online_samples"
                 android:textStyle="bold" />
@@ -59,7 +60,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1.5"
                 android:text="@string/fpd_position_number_of_offline_samples"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="16dp" />
 
             <TextView
                 android:id="@+id/fpd_position_number_of_offline_samples"
@@ -82,7 +84,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1.5"
                 android:text="@string/fpd_position_number_of_routers"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="16dp" />
 
             <TextView
                 android:id="@+id/fpd_position_number_of_routers"

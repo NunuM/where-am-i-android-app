@@ -2,6 +2,7 @@ package me.nunum.whereami.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -60,7 +61,7 @@ public class PositionFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -70,7 +71,7 @@ public class PositionFragment extends Fragment {
 
         final View view = hostView.findViewById(R.id.fpl_position_list);
 
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) hostView.findViewById(R.id.fpl_position_swipe);
+        final SwipeRefreshLayout swipeRefreshLayout = hostView.findViewById(R.id.fpl_position_swipe);
 
         final Localization localization = mListener.associatedLocalization();
 
@@ -84,7 +85,7 @@ public class PositionFragment extends Fragment {
 
             final PositionRecyclerViewAdapter viewAdapter = new PositionRecyclerViewAdapter(mListener);
 
-            final TextView positions = (TextView) hostView.findViewById(R.id.fpl_localization_stats_positions);
+            final TextView positions = hostView.findViewById(R.id.fpl_localization_stats_positions);
             positions.setText(localization.getStats().getPositions().toString());
 
             viewAdapter.setSizeListener(new OnListSizeChange() {
@@ -148,7 +149,7 @@ public class PositionFragment extends Fragment {
 
         swipeRefreshLayout.setRefreshing(true);
 
-        final FloatingActionButton floatingActionButton = (FloatingActionButton) hostView.findViewById(R.id.fpl_position_add_position_bottom);
+        final FloatingActionButton floatingActionButton = hostView.findViewById(R.id.fpl_position_add_position_bottom);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,8 +161,8 @@ public class PositionFragment extends Fragment {
             floatingActionButton.hide();
         }
 
-        final TextView samples = (TextView) hostView.findViewById(R.id.fpl_localization_stats_samples);
-        final TextView nModels = (TextView) hostView.findViewById(R.id.fpl_localization_stats_models);
+        final TextView samples = hostView.findViewById(R.id.fpl_localization_stats_samples);
+        final TextView nModels = hostView.findViewById(R.id.fpl_localization_stats_models);
 
         samples.setText(localization.getStats().getSamples().toString());
         nModels.setText(localization.getStats().getNumberOfTrainedModels().toString());
@@ -202,6 +203,6 @@ public class PositionFragment extends Fragment {
 
         void setActionBarTitle(final String barTitle);
 
-        public void openNewPositionFragment();
+        void openNewPositionFragment();
     }
 }

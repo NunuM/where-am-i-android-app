@@ -12,8 +12,8 @@ import me.nunum.whereami.service.Services;
 public class Cache {
 
 
-    private WeakHashMap<Integer, Object> cache;
     private final Context context;
+    private final WeakHashMap<Integer, Object> cache;
 
 
     public Cache(Context context) {
@@ -38,13 +38,11 @@ public class Cache {
 
     private Object createService(Services service) {
 
-        switch (service) {
-            case HTTP:
-                return HttpService.create(this.context, new Gson());
-            default:
-                throw new UnsupportedOperationException("Invalid service");
+        if (service == Services.HTTP) {
+            return HttpService.create(this.context, new Gson());
         }
 
+        throw new UnsupportedOperationException("Invalid service");
     }
 
 }

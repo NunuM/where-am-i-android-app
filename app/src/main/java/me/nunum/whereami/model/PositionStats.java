@@ -1,5 +1,6 @@
 package me.nunum.whereami.model;
 
+@SuppressWarnings("SameParameterValue")
 public class PositionStats {
 
 
@@ -15,7 +16,7 @@ public class PositionStats {
         this(0, 0, 0, "");
     }
 
-    public PositionStats(Integer routers, Integer samples, Integer networks, String strongestSignal) {
+    private PositionStats(Integer routers, Integer samples, Integer networks, String strongestSignal) {
         this.routers = routers;
         this.samples = samples;
         this.networks = networks;

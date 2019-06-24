@@ -3,7 +3,7 @@ package me.nunum.whereami.service.database;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 
-public class DatabaseServiceErrorHandler implements DatabaseErrorHandler {
+class DatabaseServiceErrorHandler implements DatabaseErrorHandler {
 
     /**
      * The method invoked when database corruption is detected.

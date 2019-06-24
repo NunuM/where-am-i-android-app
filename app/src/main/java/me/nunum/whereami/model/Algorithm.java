@@ -2,6 +2,7 @@ package me.nunum.whereami.model;
 
 import java.util.ArrayList;
 
+@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 public class Algorithm {
     private String name;
     private Long id;
@@ -14,7 +15,7 @@ public class Algorithm {
         this("", 0L, "", new ArrayList<AlgorithmProvider>());
     }
 
-    public Algorithm(String name, Long id, String authorName, ArrayList<AlgorithmProvider> providers) {
+    private Algorithm(String name, Long id, String authorName, ArrayList<AlgorithmProvider> providers) {
         this.name = name;
         this.id = id;
         this.authorName = authorName;

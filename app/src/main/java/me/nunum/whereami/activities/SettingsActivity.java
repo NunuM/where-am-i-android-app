@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+    private static final Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
@@ -167,7 +167,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             onProtocolPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue != null && newValue instanceof String) {
+                    if (newValue instanceof String) {
                         final String value = (String) newValue;
 
                         if ("HTTP".equalsIgnoreCase(value)) {
@@ -192,7 +192,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             offProtocolPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue != null && newValue instanceof String) {
+                    if (newValue instanceof String) {
                         final String value = (String) newValue;
 
                         if ("HTTP".equalsIgnoreCase(value)) {

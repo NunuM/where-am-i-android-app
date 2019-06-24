@@ -20,12 +20,12 @@
 
         <Button
             android:id="@+id/fpda_all_predictions"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/text_margin"
             android:layout_marginLeft="@dimen/text_margin"
             android:layout_weight="1"
-            android:text="All Predictions" />
+            android:text="@string/fpda_start_request_all_predictions_label" />
 
         <ToggleButton
             android:id="@+id/fpda_toggle_btn"

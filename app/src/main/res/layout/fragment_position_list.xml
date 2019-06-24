@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -13,7 +13,6 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textViewLeaveRemainingDescription"
             android:background="#000"
             android:paddingBottom="30dp"
             android:paddingTop="30dp"
@@ -56,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Samples"
+                    android:text="@string/fpl_samples"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#fff"
                     android:textStyle="bold" />
@@ -65,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Trained Models"
+                    android:text="@string/fpl_models"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#fff"
                     android:textStyle="bold" />
@@ -74,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Positions"
+                    android:text="@string/fpl_positions"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#fff"
                     android:textStyle="bold" />
@@ -82,14 +81,12 @@
 
         </TableLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/fpl_position_swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/fpl_position_list"
                 android:name="me.nunum.whereami.adapters.PositionFragment"
                 android:layout_width="wrap_content"

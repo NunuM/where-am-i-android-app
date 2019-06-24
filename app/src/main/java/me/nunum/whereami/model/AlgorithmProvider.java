@@ -1,5 +1,6 @@
 package me.nunum.whereami.model;
 
+@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 public class AlgorithmProvider {
 
     private Long id;
@@ -14,7 +15,7 @@ public class AlgorithmProvider {
         this(0L, "", false, 0f);
     }
 
-    public AlgorithmProvider(Long id, String method, Boolean isDeployed, Float predictionRate) {
+    private AlgorithmProvider(Long id, String method, Boolean isDeployed, Float predictionRate) {
         this.id = id;
         this.method = method;
         this.isDeployed = isDeployed;

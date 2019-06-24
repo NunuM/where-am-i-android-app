@@ -44,7 +44,6 @@ public class WifiService implements Runnable {
      * The general contract of the method <code>run</code> is that it may
      * take any action whatsoever.
      *
-     * @see Thread#run()
      */
     @Override
     public void run() {

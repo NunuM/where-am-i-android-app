@@ -129,13 +129,13 @@ public class PredictionDashboardRecyclerViewAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public final View mView;
-        public final TextView mRequestId;
-        public final TextView mPredictedLabel;
-        public final Button mPositiveFeedback;
-        public final Button mNegativeFeedback;
+        final View mView;
+        final TextView mRequestId;
+        final TextView mPredictedLabel;
+        final Button mPositiveFeedback;
+        final Button mNegativeFeedback;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             this.mView = itemView;
             this.mRequestId = itemView.findViewById(R.id.fpdi_prediction_request_id_label);

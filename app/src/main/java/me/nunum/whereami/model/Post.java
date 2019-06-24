@@ -27,7 +27,7 @@ public class Post implements Comparable<Post> {
         this.created = created;
     }
 
-    public Long getId() {
+    private Long getId() {
         return id;
     }
 
@@ -51,7 +51,7 @@ public class Post implements Comparable<Post> {
         this.imageURL = imageURL;
     }
 
-    public Date getCreated() {
+    private Date getCreated() {
         return created;
     }
 

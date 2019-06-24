@@ -2,6 +2,7 @@ package me.nunum.whereami.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import me.nunum.whereami.R;
  */
 public class NewLocalizationFragment extends Fragment {
 
-    public static final String TAG = NewLocalizationFragment.class.getSimpleName();
+    private static final String TAG = NewLocalizationFragment.class.getSimpleName();
 
     private double lat = 0;
     private double lng = 0;
@@ -61,15 +62,15 @@ public class NewLocalizationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_new_localization, container, false);
 
-        final EditText localizationLabel = (EditText) view.findViewById(R.id.fnl_input_localization_label);
-        final EditText username = (EditText) view.findViewById(R.id.fnl_input_user);
-        final Switch isPrivate = (Switch) view.findViewById(R.id.fnl_is_private);
-        final Button submit = (Button) view.findViewById(R.id.fnl_submit_btn);
+        final EditText localizationLabel = view.findViewById(R.id.fnl_input_localization_label);
+        final EditText username = view.findViewById(R.id.fnl_input_user);
+        final Switch isPrivate = view.findViewById(R.id.fnl_is_private);
+        final Button submit = view.findViewById(R.id.fnl_submit_btn);
 
         if (!this.username.isEmpty()) {
             username.setText(this.username);

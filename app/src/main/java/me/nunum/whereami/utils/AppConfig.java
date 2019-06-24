@@ -43,7 +43,7 @@ public class AppConfig {
 
     public static final String DEFAULT_USERNAME = "Anonymous";
 
-    public static final String LOCALIZATION_URI = HTTP_REMOTE_HOST + HTTP_LOCALIZATIONS_RESOURCE;
+    private static final String LOCALIZATION_URI = HTTP_REMOTE_HOST + HTTP_LOCALIZATIONS_RESOURCE;
     public static final String POSITIONS_URI = LOCALIZATION_URI + "/%d" + HTTP_LOCALIZATION_POSITIONS_RESOURCE;
 
     public static final String DATABASE_NAME = "wifi";

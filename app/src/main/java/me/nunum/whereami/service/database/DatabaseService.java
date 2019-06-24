@@ -20,8 +20,8 @@ public class DatabaseService extends SQLiteOpenHelper {
     public static final String NOTIFICATIONS = "NOTIFICATIONS";
 
 
-    private DatabaseService(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
+    private DatabaseService(Context context, SQLiteDatabase.CursorFactory factory, DatabaseErrorHandler errorHandler) {
+        super(context, AppConfig.DATABASE_NAME, factory, AppConfig.DATABASE_VERSION, errorHandler);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class DatabaseService extends SQLiteOpenHelper {
     public static synchronized DatabaseService getInstance(Context context) {
 
         if (sInstance == null) {
-            sInstance = new DatabaseService(context, AppConfig.DATABASE_NAME, new SqlCursorFactory(), AppConfig.DATABASE_VERSION, new DatabaseServiceErrorHandler());
+            sInstance = new DatabaseService(context, new SqlCursorFactory(), new DatabaseServiceErrorHandler());
         }
 
         return sInstance;

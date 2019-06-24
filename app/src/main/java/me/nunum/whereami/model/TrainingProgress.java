@@ -52,6 +52,14 @@ public class TrainingProgress implements Comparable<TrainingProgress> {
         return format.format(this.created);
     }
 
+    public Algorithm getAlgorithm() {
+        return algorithm;
+    }
+
+    public void setAlgorithm(Algorithm algorithm) {
+        this.algorithm = algorithm;
+    }
+
     public Long getAlgorithmId() {
         return this.algorithm.getId();
     }

@@ -26,18 +26,16 @@ import me.nunum.whereami.framework.AsyncHttp;
 import me.nunum.whereami.framework.OnCircuitTest;
 import me.nunum.whereami.framework.OnResponse;
 
+
 public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
     private static final String TAG = AsyncHttp.class.getSimpleName();
 
     private static final String DEFAULT_CONTENT_TYPE = "application/json";
-
-    private final Type tClass;
-
-    private final Gson marshaller;
     private static RequestQueue requestQueue;
+    private final Type tClass;
+    private final Gson marshaller;
 
-    @SuppressWarnings("unchecked")
     public AsyncHttpImpl(Context context, Gson marshaller, Type aClass) {
 
         this.marshaller = marshaller;
@@ -47,31 +45,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         }
     }
 
-    /**
-     * Makes an asynchronous GET HTTP request
-     *
-     * @param url
-     * @param headers
-     */
-    @Override
-    public void get(URL url,
-                    Map<String, String> headers,
-                    OnResponse<O> onResponse) {
 
-        ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
-
-        Log.d(TAG, "get  " + url.toString());
-        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
-    }
-
-
-    /**
-     * Makes an asynchronous GET HTTP request
-     *
-     * @param url
-     * @param headers
-     * @param useCache
-     */
     public static void downloadImage(URL url,
                                      Map<String, String> headers,
                                      final OnResponse<Bitmap> onResponse, boolean useCache) {
@@ -91,6 +65,17 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         requestQueue.add(request);
     }
 
+
+    @Override
+    public void get(URL url,
+                    Map<String, String> headers,
+                    OnResponse<O> onResponse) {
+
+        ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
+
+        Log.d(TAG, "get  " + url.toString());
+        requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
+    }
 
     @Override
     public void get(URL url,
@@ -116,13 +101,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(useCache));
     }
 
-    /**
-     * Makes an asynchronous PUT HTTP request
-     *
-     * @param url
-     * @param headers
-     * @param t       Entity
-     */
+
     @Override
     public void put(URL url,
                     Map<String, String> headers,
@@ -135,13 +114,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         requestQueue.add(new PostRequest(Request.Method.PUT, url.toString(), this.marshaller.toJson(t), headers, handler, handler));
     }
 
-    /**
-     * Makes an asynchronous POST HTTP request
-     *
-     * @param url
-     * @param headers
-     * @param t       Entity
-     */
+
     @Override
     public void post(URL url,
                      Map<String, String> headers,
@@ -154,12 +127,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         requestQueue.add(new PostRequest(url.toString(), this.marshaller.toJson(t), headers, handler, handler));
     }
 
-    /**
-     * Makes an asynchronous DELETE HTTP request
-     *
-     * @param url
-     * @param headers
-     */
+
     @Override
     public void delete(URL url,
                        Map<String, String> headers,
@@ -171,13 +139,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         requestQueue.add(new DeleteRequest(url.toString(), headers, handler, handler));
     }
 
-    /**
-     * Test current server connectivity
-     *
-     * @param url
-     * @param headers
-     * @param circuitTestCallback
-     */
+
     @Override
     public void circuitTester(URL url, Map<String, String> headers, OnCircuitTest circuitTestCallback) {
         Type type = new TypeToken<Void>() {
@@ -187,8 +149,32 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler));
     }
 
+    static class BitmapRequest extends ImageRequest {
 
-    protected class GetRequest extends StringRequest {
+        private final Map<String, String> headers;
+
+        BitmapRequest(String url,
+                      Map<String, String> headers,
+                      Response.Listener<Bitmap> listener,
+                      Response.ErrorListener errorListener) {
+            super(url,
+                    listener,
+                    200,
+                    200,
+                    ImageView.ScaleType.CENTER_CROP,
+                    Bitmap.Config.ALPHA_8,
+                    errorListener);
+            this.headers = headers;
+        }
+
+        @SuppressWarnings("RedundantThrows")
+        @Override
+        public Map<String, String> getHeaders() throws AuthFailureError {
+            return this.headers;
+        }
+    }
+
+    class GetRequest extends StringRequest {
 
         private final Map<String, String> headers;
 
@@ -199,10 +185,10 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
          * @param listener      Listener to receive the String response
          * @param errorListener Error listener, or null to ignore errors
          */
-        public GetRequest(String url,
-                          Map<String, String> headers,
-                          Response.Listener<String> listener,
-                          Response.ErrorListener errorListener) {
+        GetRequest(String url,
+                   Map<String, String> headers,
+                   Response.Listener<String> listener,
+                   Response.ErrorListener errorListener) {
             super(Method.GET, url, listener, errorListener);
             this.headers = headers;
         }
@@ -214,28 +200,21 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
          *
          * @throws AuthFailureError In the event of auth failure
          */
+        @SuppressWarnings("RedundantThrows")
         @Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             return this.headers;
         }
     }
 
-    protected class PostRequest extends StringRequest {
+    class PostRequest extends StringRequest {
 
         private final String marshaled;
         private final Map<String, String> headers;
 
 
-        /**
-         * Create a POST request.
-         *
-         * @param url
-         * @param marshaled
-         * @param headers
-         * @param listener
-         * @param errorListener
-         */
-        public PostRequest(String url,
+
+        private PostRequest(String url,
                            String marshaled,
                            Map<String, String> headers,
                            Response.Listener<String> listener,
@@ -247,16 +226,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         }
 
 
-        /**
-         * Create a POST request.
-         *
-         * @param url
-         * @param marshaled
-         * @param headers
-         * @param listener
-         * @param errorListener
-         */
-        public PostRequest(int method,
+        private PostRequest(int method,
                            String url,
                            String marshaled,
                            Map<String, String> headers,
@@ -283,6 +253,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
          *
          * @throws AuthFailureError In the event of auth failure
          */
+        @SuppressWarnings("RedundantThrows")
         @Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             return this.headers;
@@ -297,38 +268,14 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
          *
          * @throws AuthFailureError in the event of auth failure
          */
+        @SuppressWarnings("RedundantThrows")
         @Override
         public byte[] getBody() throws AuthFailureError {
             return this.marshaled.getBytes();
         }
     }
 
-    public static class BitmapRequest extends ImageRequest {
-
-        private final Map<String, String> headers;
-
-        public BitmapRequest(String url,
-                             Map<String, String> headers,
-                             Response.Listener<Bitmap> listener,
-                             Response.ErrorListener errorListener) {
-            super(url,
-                    listener,
-                    200,
-                    200,
-                    ImageView.ScaleType.CENTER_CROP,
-                    Bitmap.Config.ALPHA_8,
-                    errorListener);
-            this.headers = headers;
-        }
-
-        @Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            return this.headers;
-        }
-    }
-
-
-    protected class DeleteRequest extends StringRequest {
+    class DeleteRequest extends StringRequest {
 
         private final Map<String, String> headers;
 
@@ -339,10 +286,10 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
          * @param listener      Listener to receive the String response
          * @param errorListener Error listener, or null to ignore errors
          */
-        public DeleteRequest(String url,
-                             Map<String, String> headers,
-                             Response.Listener<String> listener,
-                             Response.ErrorListener errorListener) {
+        DeleteRequest(String url,
+                      Map<String, String> headers,
+                      Response.Listener<String> listener,
+                      Response.ErrorListener errorListener) {
             super(Method.DELETE, url, listener, errorListener);
             this.headers = headers;
         }
@@ -354,37 +301,28 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
          *
          * @throws AuthFailureError In the event of auth failure
          */
+        @SuppressWarnings("RedundantThrows")
         @Override
         public Map<String, String> getHeaders() throws AuthFailureError {
             return this.headers;
         }
     }
 
-    protected class TestHandler
+    class TestHandler
             implements Response.Listener<String>, Response.ErrorListener {
 
         private final OnCircuitTest onCircuitTest;
 
-        public TestHandler(OnCircuitTest onCircuitTest) {
+        private TestHandler(OnCircuitTest onCircuitTest) {
             this.onCircuitTest = onCircuitTest;
         }
 
-        /**
-         * Callback method that an error has been occurred with the
-         * provided error code and optional user-readable message.
-         *
-         * @param error
-         */
+
         @Override
         public void onErrorResponse(VolleyError error) {
             onCircuitTest.onConnectionFailed();
         }
 
-        /**
-         * Called when a response is received.
-         *
-         * @param response
-         */
         @Override
         public void onResponse(String response) {
             onCircuitTest.onConnectionSucceeded();
@@ -392,7 +330,8 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
     }
 
 
-    protected class ResponseHandler<O>
+    @SuppressWarnings("TypeParameterHidesVisibleType")
+    class ResponseHandler<O>
             implements Response.Listener<String>, Response.ErrorListener {
 
 
@@ -401,7 +340,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         private final OnResponse<O> onHttpResponse;
 
 
-        public ResponseHandler(Type type,
+        private ResponseHandler(Type type,
                                Gson marshaller,
                                OnResponse<O> onHttpResponse) {
             this.type = type;
@@ -409,12 +348,9 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
             this.onHttpResponse = onHttpResponse;
         }
 
-        /**
-         * Called when a response is received.
-         *
-         * @param response
-         */
+
         @Override
+        @SuppressWarnings("unchecked")
         public void onResponse(String response) {
 
             try {
@@ -429,12 +365,6 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         }
 
 
-        /**
-         * Callback method that an error has been occurred with the
-         * provided error code and optional user-readable message.
-         *
-         * @param error
-         */
         @Override
         public void onErrorResponse(VolleyError error) {
             this.onHttpResponse.onFailure(error);

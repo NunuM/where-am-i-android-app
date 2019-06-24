@@ -22,6 +22,7 @@
 
     <string name="fntr_request_algorithm_error">Was not possible to retrieve algorithms from the server</string>
     <string name="fntr_training_submit_btn">Train</string>
+    <string name="fntr_training_submit_btn_label">Submit</string>
 
     <string name="ftli_delete_training_request_failure">Was not possible to delete.</string>
     <string name="ftli_training_request_failure">Was not possible to retrieve training status from the server</string>
@@ -68,14 +69,19 @@
     <string name="fntr_new_training_algorithm_implementation_label">Implementations</string>
     <string name="fntr_new_training_algorithm_invalid_request">Must choose an Algorithm and a Implementation</string>
     <string name="fntr_new_training_algorithm_request_failure">The server does not have taken the request</string>
-    <string name="fntr_new_training_algorithm_request_failure_w_status">The server does not have taken the request responding with %1d status code</string>
+    <string name="fntr_new_training_algorithm_request_failure_w_status">The server does not have taken the request responding with %1$d status code</string>
     <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.2f - Deployed: %3$s </string>
+
+    <string name="fpl_samples">Samples</string>
+    <string name="fpl_models">Trained Models</string>
+    <string name="fpl_positions">Positions</string>
 
     <string name="fp_prediction_actionbar_title">Prediction</string>
 
     <string name="fpdi_prediction_label_item">Batch %1d | accuracy of %2$.2f</string>
 
     <string name="fpda_start_request_predictions_label">Predict</string>
+    <string name="fpda_start_request_all_predictions_label">All Predicts</string>
     <string name="fpda_stop_request_predictions_label">Stop</string>
 
     <string name="notification_item_sub_header">RECEIVED IN %1$s</string>

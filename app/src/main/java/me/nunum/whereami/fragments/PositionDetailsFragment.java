@@ -4,6 +4,7 @@ import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,7 +56,7 @@ public class PositionDetailsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -63,7 +64,7 @@ public class PositionDetailsFragment extends Fragment {
 
         final Position position = this.mListener.associatedPosition();
 
-        final TextView headerLabel = (TextView) view.findViewById(R.id.fpd_position_header_label);
+        final TextView headerLabel = view.findViewById(R.id.fpd_position_header_label);
         final TextView onlineSamples = view.findViewById(R.id.fpd_position_number_of_online_samples);
         final TextView offlineSamples = view.findViewById(R.id.fpd_position_number_of_offline_samples);
         final TextView numberOfRouters = view.findViewById(R.id.fpd_position_number_of_routers);
@@ -78,7 +79,7 @@ public class PositionDetailsFragment extends Fragment {
         numberOfNetworks.setText(position.getStats().getNetworks().toString());
         topRouter.setText(position.getStats().getStrongestSignal());
 
-        toggleButton = (ToggleButton) view.findViewById(R.id.fpd_position_samples_toggle);
+        toggleButton = view.findViewById(R.id.fpd_position_samples_toggle);
         toggleButton.setSaveEnabled(false);
 
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -191,6 +192,7 @@ public class PositionDetailsFragment extends Fragment {
 
         boolean startSampling(OnSample onSampleCallback);
 
+        @SuppressWarnings("UnusedReturnValue")
         boolean stopSampling();
 
     }

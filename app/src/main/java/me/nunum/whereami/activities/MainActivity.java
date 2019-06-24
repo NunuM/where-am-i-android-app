@@ -12,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -86,7 +87,7 @@ public class MainActivity
 
     private PositionDetailsFragment positionDetailsFragment;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -129,7 +130,7 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        final BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         preferences = ApplicationPreferences.instance(this.getApplicationContext());
@@ -402,10 +403,11 @@ public class MainActivity
 
     @Override
     public void setActionBarTitle(String title) {
-        try {
+
+        final ActionBar supportActionBar = getSupportActionBar();
+
+        if (supportActionBar != null) {
             getSupportActionBar().setTitle(title);
-        } catch (NullPointerException e) {
-            Log.e(TAG, "setActionBarTitle: Not able to update header, probably is missing", e);
         }
     }
 
@@ -448,13 +450,20 @@ public class MainActivity
             return;
         }
 
-        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        double lat = 0;
+        double lng = 0;
+
+        if (locationManager != null) {
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+        }
 
         final String username = preferences.getStringKey(ApplicationPreferences.KEYS.USERNAME);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.am_container, NewLocalizationFragment.newInstance(location.getLatitude(), location.getLongitude(), username))
+                .replace(R.id.am_container, NewLocalizationFragment.newInstance(lat, lng, username))
                 .addToBackStack(NewLocalizationFragment.class.getSimpleName())
                 .commitAllowingStateLoss();
 

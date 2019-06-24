@@ -56,13 +56,9 @@ public interface StreamFlow {
 
     boolean stop();
 
-    /**
-     * @return
-     */
+
     STREAM_STATE currentState();
 
-    /**
-     * @return
-     */
+
     FLUSH_MODE currentFlushMode();
 }

@@ -36,7 +36,7 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
 
     public PostRecyclerViewAdapter(HomeFragment.OnFragmentInteractionListener mListener) {
         this.mListener = mListener;
-        this.mList = new SortedList<Post>(Post.class, new SortedListCallbackImpl<Post>(this));
+        this.mList = new SortedList<>(Post.class, new SortedListCallbackImpl<Post>(this));
     }
 
 
@@ -104,10 +104,10 @@ public class PostRecyclerViewAdapter extends RecyclerView.Adapter<PostRecyclerVi
         private final ImageView mPostImageView;
         private final TextView mPostTitle;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            this.mPostTitle = (TextView) itemView.findViewById(R.id.fhpi_post_title);
-            this.mPostImageView = (ImageView) itemView.findViewById(R.id.fhpi_post_image);
+            this.mPostTitle = itemView.findViewById(R.id.fhpi_post_title);
+            this.mPostImageView = itemView.findViewById(R.id.fhpi_post_image);
         }
     }
 }

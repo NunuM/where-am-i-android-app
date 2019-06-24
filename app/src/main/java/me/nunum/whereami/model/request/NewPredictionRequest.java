@@ -29,7 +29,7 @@ public final class NewPredictionRequest {
         this(lastUpdate, new Date(), onlyPolling, samples);
     }
 
-    public NewPredictionRequest(Date lastUpdate, Date clientNow, boolean onlyPolling, List<WifiDataSample> samples) {
+    private NewPredictionRequest(Date lastUpdate, Date clientNow, boolean onlyPolling, List<WifiDataSample> samples) {
         SimpleDateFormat simpleDateFormat =
                 new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS'Z'");
 

@@ -37,8 +37,8 @@ public class StreamFlowService implements
     private STREAM_STATE streamState;
     private Receiver<List<WifiDataSample>> sinker;
     private ScheduledFuture<?> worker;
-    private AtomicLong batch = new AtomicLong(1);
-    private ConcurrentSkipListMap<Long, List<WifiDataSample>> holder;
+    private final AtomicLong batch = new AtomicLong(1);
+    private final ConcurrentSkipListMap<Long, List<WifiDataSample>> holder;
 
     public StreamFlowService(Context context) {
         this.context = context;
@@ -176,17 +176,12 @@ public class StreamFlowService implements
         return wasCanceled;
     }
 
-    /**
-     * @return
-     */
+
     @Override
     public STREAM_STATE currentState() {
         return this.streamState;
     }
 
-    /**
-     * @return
-     */
     @Override
     public FLUSH_MODE currentFlushMode() {
         return this.flushMode;
