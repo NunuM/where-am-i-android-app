@@ -89,8 +89,10 @@
     <string name="fpdi_prediction_feedback_failure">Could not register your feedback</string>
 
     <string name="notification_new_algorithm">A %1s algorithm with id of %2s is waiting for your approval</string>
-    <string name="notification_new_model">The provider %1s have conclude the Training model for the localization %2s</string>
+    <string name="notification_new_model">The provider %1s have conclude the training model for the localization %2s</string>
     <string name="notification_delete_algorithm">One provider for the algorithm %1s was deleted</string>
+
+    <string name="new_notification">You have a new Notification</string>
 
     <string name="ab_app_version"><b>Version</b>: </string>
     <string name="ab_app_author"><b>Author</b>: <a href="https://github.com/NunuM">Nuno Gonçalves (NunuM)</a></string>
@@ -99,6 +101,9 @@
     <string name="ab_app_code_donate"><b>Donate</b>: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RZGRRMR7FM9W&amp;source=url">PayPal</a></string>
     <string name="ab_app_description"><b>Where Am I</b> is an open source application to test novel algorithms that are able to determine the users localization using labeled WI-FI fingerprints.</string>
     <string name="ab_made_author">Made with ❤️ by NunuM</string>
+
+    <string name="an_notification_options_menu_delete_all">Delete All</string>
+    <string name="an_notification_options_menu_seen_all">Mark as Seen</string>
 
     <string-array name="pref_protocol_list_titles">
         <item>HTTP</item>

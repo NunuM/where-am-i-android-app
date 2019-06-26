@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/an_notification_options_delete_all"
+        android:title="@string/an_notification_options_menu_delete_all" />
+
+    <item
+        android:id="@+id/an_notification_options_mark_as_seen"
+        android:title="@string/an_notification_options_menu_seen_all" />
+</menu>

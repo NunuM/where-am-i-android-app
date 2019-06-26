@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 import me.nunum.whereami.R;
 import me.nunum.whereami.service.database.DatabaseService;
@@ -29,10 +30,11 @@ public class NotificationStorage {
         try {
             database = service.getWritableDatabase();
 
-            ContentValues contentValues = new ContentValues(3);
+            ContentValues contentValues = new ContentValues(5);
             contentValues.put("message", message);
             contentValues.put("seen", seen ? 1 : 0);
             contentValues.put("created", sentTime);
+            contentValues.put("uid", UUID.randomUUID().toString());
 
             SimpleDateFormat format = new SimpleDateFormat("HH:mm MM/d/Y", Locale.getDefault());
             contentValues.put("prettyDate", context.getString(R.string.notification_item_sub_header, format.format(new Date(sentTime))));

@@ -24,15 +24,19 @@ public class SyncOfflineDataService extends IntentService implements OnSync {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
 
-        final HttpService service = HttpService.create(getApplicationContext(), new Gson());
+        try {
+            final HttpService service = HttpService.create(getApplicationContext(), new Gson());
 
-        PersistenceSinker sinker = new PersistenceSinker(getApplicationContext(), this, service.httpSinker(this));
+            PersistenceSinker sinker = new PersistenceSinker(getApplicationContext(), this, service.httpSinker(this));
 
-        while (!sinker.isEmpty()) {
-            sinker.run();
+            while (!sinker.isEmpty()) {
+                sinker.run();
+            }
+        } catch (Throwable e) {
+            Log.e(TAG, "onHandleIntent: Service error", e);
+        } finally {
+            stopSelf();
         }
-
-        stopSelf();
     }
 
     @Override

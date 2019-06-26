@@ -2,6 +2,8 @@ package me.nunum.whereami.service.notification;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -15,6 +17,7 @@ import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.model.Device;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.NotificationStorage;
+import me.nunum.whereami.utils.AppConfig;
 
 /**
  * Created by nuno on 03/06/2019.
@@ -29,8 +32,8 @@ public class FireNotificationManager extends FirebaseMessagingService {
     public static final String NEW_POSTS_TOPIC = "newPosts";
     public static final String NEW_ALGORITHM_TOPIC = "newPosts";
 
-    public static void processNotificationData(final Context context, final Map<String, String> data, long sentTime) {
-
+    public static boolean processNotificationData(final Context context, final Map<String, String> data, long sentTime) {
+        boolean showToast = false;
         Log.i(TAG, "processNotificationData: Process notification");
 
         final String action = data.get(NOTIFICATION_TYPE);
@@ -50,6 +53,7 @@ public class FireNotificationManager extends FirebaseMessagingService {
                             NotificationStorage.persistNotification(context, message, sentTime);
                         }
 
+                        showToast = true;
                         break;
                     case TRAINED_FINISHED:
 
@@ -62,6 +66,7 @@ public class FireNotificationManager extends FirebaseMessagingService {
                             NotificationStorage.persistNotification(context, message, sentTime);
                         }
 
+                        showToast = true;
                         break;
                     case DELETE_ALGORITHM_PROVIDER:
 
@@ -72,6 +77,7 @@ public class FireNotificationManager extends FirebaseMessagingService {
                             NotificationStorage.persistNotification(context, message, sentTime);
                         }
 
+                        showToast = true;
                         break;
                     case UNKNOWN:
 
@@ -85,6 +91,7 @@ public class FireNotificationManager extends FirebaseMessagingService {
             Log.i(TAG, "onMessageReceived: Not send action key:" + data);
         }
 
+        return showToast;
     }
 
     @Override
@@ -117,7 +124,9 @@ public class FireNotificationManager extends FirebaseMessagingService {
         final Map<String, String> data = remoteMessage.getData();
         final long sentTime = remoteMessage.getSentTime();
 
-        processNotificationData(getApplicationContext(), data, sentTime);
+        if(processNotificationData(getApplicationContext(), data, sentTime)){
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(AppConfig.BROADCAST_NEW_NOTIFICATION_ACTION));
+        }
     }
 
     public enum MESSAGE_TYPE {

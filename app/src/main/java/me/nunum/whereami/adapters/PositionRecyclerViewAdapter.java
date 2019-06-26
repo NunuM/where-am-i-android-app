@@ -158,7 +158,7 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
         final TextView mIdPositionLabel;
         final Button mIdPositionOptionsMenu;

@@ -62,5 +62,5 @@ public class AppConfig {
 
     public static final String CONNECTIVITY_TEST_HOST = "http://www.mocky.io";
 
-
+    public static final String BROADCAST_NEW_NOTIFICATION_ACTION = "me_nunum_whereami_new_notification";
 }
