@@ -128,7 +128,7 @@ public final class HttpService {
         final Type type = new TypeToken<List<Localization>>() {
         }.getType();
 
-        final AsyncHttp<Void, List<Localization>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
+        final AsyncHttpImpl<Void, List<Localization>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
         String query = String.format(Locale.getDefault(), "page=%d", currentPage);
 
@@ -136,7 +136,7 @@ public final class HttpService {
             query += "&owner=true";
         }
 
-        asyncHttp.get(this.makeURL(host, resource, query), type, getHeaders(), onResponse);
+        asyncHttp.get(this.makeURL(host, resource, query), type, getHeaders(), onResponse, true);
 
         return true;
     }
@@ -337,7 +337,6 @@ public final class HttpService {
 
         final AsyncHttpImpl<Void, List<Post>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-
         asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d", currentPage)), type, getHeaders(), onResponse, true);
 
         return true;
@@ -392,7 +391,7 @@ public final class HttpService {
 
         final AsyncHttpImpl<Void, List<Position>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.get(this.makeURL(host, resource), type, getHeaders(), onResponse);
+        asyncHttp.get(this.makeURL(host, resource), type, getHeaders(), onResponse, true);
 
         return true;
     }

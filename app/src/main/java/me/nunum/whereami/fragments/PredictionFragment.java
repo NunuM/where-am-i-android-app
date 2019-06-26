@@ -111,7 +111,7 @@ public class PredictionFragment extends Fragment {
 
                             Log.e(TAG, "onFailure: Error retrieving localization", throwable);
 
-                            Toast.makeText(getContext(), R.string.fll_localization_list_request_failure, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mListener.context(), R.string.fll_localization_list_request_failure, Toast.LENGTH_SHORT).show();
 
                             if (swipeRefreshLayout.isRefreshing()) {
                                 swipeRefreshLayout.setRefreshing(false);

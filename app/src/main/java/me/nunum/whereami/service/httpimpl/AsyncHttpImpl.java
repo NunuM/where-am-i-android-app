@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,6 +24,7 @@ import java.net.URL;
 import java.util.Map;
 
 import me.nunum.whereami.framework.AsyncHttp;
+import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnCircuitTest;
 import me.nunum.whereami.framework.OnResponse;
 
@@ -221,6 +223,19 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         @Override
         protected Response<String> parseNetworkResponse(NetworkResponse response) {
             return super.parseNetworkResponse(response);
+        }
+
+        @Override
+        public void deliverError(VolleyError error) {
+            if (error instanceof NoConnectionError) {
+                com.android.volley.Cache.Entry entry = getCacheEntry();
+                if(entry != null) {
+                    Response<String> response = parseNetworkResponse(new NetworkResponse(entry.data, entry.responseHeaders));
+                    deliverResponse(response.result);
+                    return;
+                }
+            }
+            super.deliverError(error);
         }
     }
 
