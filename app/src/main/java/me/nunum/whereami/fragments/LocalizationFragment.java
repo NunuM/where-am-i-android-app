@@ -166,7 +166,6 @@ public class LocalizationFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
         Log.i(TAG, "onDetach: Closed fragment");
     }
 

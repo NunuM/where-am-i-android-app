@@ -18,6 +18,7 @@ import me.nunum.whereami.R;
 import me.nunum.whereami.framework.OnSample;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
+import me.nunum.whereami.utils.StringUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,7 +72,7 @@ public class PositionDetailsFragment extends Fragment {
         final TextView numberOfNetworks = view.findViewById(R.id.fpd_position_number_of_network_names);
         final TextView topRouter = view.findViewById(R.id.fpd_position_top_router);
 
-        headerLabel.setText(position.getLabel());
+        headerLabel.setText(StringUtils.capitalize(position.getLabel().toLowerCase()));
         onlineSamples.setText(position.getStats().getSamples().toString());
         offlineSamples.setText(mListener.numberOfOfflineSamples().toString());
 
@@ -155,7 +156,6 @@ public class PositionDetailsFragment extends Fragment {
         if (toggleButton != null) {
             toggleButton.setChecked(false);
         }
-        mListener = null;
         toggleButton = null;
         Log.i(TAG, "onDetach: Close fragment");
     }

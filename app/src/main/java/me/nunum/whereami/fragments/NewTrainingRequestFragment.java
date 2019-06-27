@@ -155,7 +155,6 @@ public class NewTrainingRequestFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
         algorithmsList = null;
         Log.i(TAG, "onDetach: Close fragment");
     }

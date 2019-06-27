@@ -23,6 +23,7 @@ import me.nunum.whereami.framework.SortedListCallbackImpl;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.service.HttpService;
 import me.nunum.whereami.service.Services;
+import me.nunum.whereami.utils.StringUtils;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Position} and makes a call to the
@@ -73,7 +74,7 @@ public class PositionRecyclerViewAdapter extends RecyclerView.Adapter<PositionRe
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdPositionLabel.setText(mValues.get(position).getLabel());
+        holder.mIdPositionLabel.setText(StringUtils.capitalize(mValues.get(position).getLabel().toLowerCase()));
 
         holder.mIdPositionOptionsMenu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -232,8 +232,6 @@ public class PredictionDashboardFragment extends Fragment {
             future = null;
         }
 
-        mListener = null;
-
         Log.i(TAG, "onDetach: Close fragment");
     }
 

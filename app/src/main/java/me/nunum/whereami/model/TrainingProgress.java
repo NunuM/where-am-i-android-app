@@ -71,13 +71,12 @@ public class TrainingProgress implements Comparable<TrainingProgress> {
 
         TrainingProgress that = (TrainingProgress) o;
 
-        if (!getId().equals(that.getId())) return false;
-        return getStatus() != null ? getStatus().equals(that.getStatus()) : that.getStatus() == null;
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override
     public int hashCode() {
-        return getId() != null ? getId().hashCode() : 0;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override

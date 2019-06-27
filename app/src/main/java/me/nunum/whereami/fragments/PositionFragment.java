@@ -187,7 +187,6 @@ public class PositionFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
         Log.i(TAG, "onDetach: Close fragment");
     }
 
