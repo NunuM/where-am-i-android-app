@@ -23,6 +23,7 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.NotificationActivity"
             android:parentActivityName=".activities.MainActivity"
@@ -36,6 +37,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
@@ -63,6 +65,13 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
+
+        <activity
+            android:name=".activities.FeedbackActivity"
+            android:label="@string/title_activity_feedback"
+            android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

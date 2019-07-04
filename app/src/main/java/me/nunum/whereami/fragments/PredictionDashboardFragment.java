@@ -121,7 +121,7 @@ public class PredictionDashboardFragment extends Fragment {
                         future.cancel(true);
                     }
                     toggle.setClickable(true);
-
+                    mListener.clearScreenAlwaysOnFlag();
                     stopProgressBar();
                 }
             }

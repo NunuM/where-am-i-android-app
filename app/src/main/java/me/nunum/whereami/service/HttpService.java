@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import me.nunum.whereami.framework.AsyncHttp;
 import me.nunum.whereami.framework.OnCircuitTest;
@@ -23,6 +24,7 @@ import me.nunum.whereami.framework.OnSync;
 import me.nunum.whereami.framework.Receiver;
 import me.nunum.whereami.model.Algorithm;
 import me.nunum.whereami.model.Device;
+import me.nunum.whereami.model.Feedback;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
 import me.nunum.whereami.model.Post;
@@ -46,6 +48,8 @@ import static me.nunum.whereami.service.application.ApplicationPreferences.KEYS;
 public final class HttpService {
 
     private final static String TAG = HttpService.class.getSimpleName();
+
+    public final static String X_REQUEST_ID = "x-request-id";
 
     private final Context context;
     private final Gson gson;
@@ -74,7 +78,22 @@ public final class HttpService {
 
     private Map<String, String> getHeaders() {
         this.headers.put("x-app", this.applicationPreferences.getStringKey(KEYS.INSTANCE_ID));
+        this.headers.put(X_REQUEST_ID, UUID.randomUUID().toString());
         return headers;
+    }
+
+
+    public boolean submitFeedback(Feedback feedback, OnResponse<Void> onResponse){
+
+        final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
+
+        final String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_FEEDBACK_RESOURCE);
+
+        final AsyncHttp<Feedback, Void> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, Void.class);
+
+        asyncHttp.post(this.makeURL(host, resource), getHeaders(), feedback, onResponse);
+
+        return true;
     }
 
 

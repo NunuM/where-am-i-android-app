@@ -388,13 +388,14 @@ public class MainActivity
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
             case R.id.app_options_menu_settings:
-
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
-
                 return true;
             case R.id.app_options_menu_notification:
                 startActivity(new Intent(this, NotificationActivity.class));
+                return true;
+            case R.id.app_options_menu_feedback:
+                startActivity(new Intent(this, FeedbackActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

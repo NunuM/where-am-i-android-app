@@ -27,11 +27,14 @@ import me.nunum.whereami.framework.AsyncHttp;
 import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnCircuitTest;
 import me.nunum.whereami.framework.OnResponse;
+import me.nunum.whereami.service.HttpService;
 
 
 public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
     private static final long ONE_DAY_IN_MS = 86400000L;
+
+    private static final String LOG_REQUEST_MSG = "%s - url:%s %nx-request-id:%s";
 
     private static final String TAG = AsyncHttp.class.getSimpleName();
 
@@ -75,7 +78,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
-        Log.d(TAG, "get  " + url.toString());
+        Log.d(TAG, String.format(LOG_REQUEST_MSG, "get", url.toString(), headers.get(HttpService.X_REQUEST_ID)));
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(false));
     }
 
@@ -87,7 +90,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(type, marshaller, onResponse);
 
-        Log.d(TAG, "get  " + url.toString());
+        Log.d(TAG, String.format(LOG_REQUEST_MSG, "get", url.toString(), headers.get(HttpService.X_REQUEST_ID)));
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(false));
     }
 
@@ -99,7 +102,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(type, marshaller, onResponse);
 
-        Log.d(TAG, "get  " + url.toString());
+        Log.d(TAG, String.format(LOG_REQUEST_MSG, "get", url.toString(), headers.get(HttpService.X_REQUEST_ID)));
         requestQueue.add(new GetRequest(url.toString(), headers, handler, handler).setShouldCache(useCache));
     }
 
@@ -112,7 +115,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
-        Log.d(TAG, "put  " + url.toString());
+        Log.d(TAG, String.format(LOG_REQUEST_MSG, "put", url.toString(), headers.get(HttpService.X_REQUEST_ID)));
         requestQueue.add(new PostRequest(Request.Method.PUT, url.toString(), this.marshaller.toJson(t), headers, handler, handler).setShouldCache(false));
     }
 
@@ -125,7 +128,8 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
-        Log.d(TAG, "post  " + url.toString());
+        Log.d(TAG, String.format(LOG_REQUEST_MSG, "post", url.toString(), headers.get(HttpService.X_REQUEST_ID)));
+
         requestQueue.add(new PostRequest(url.toString(), this.marshaller.toJson(t), headers, handler, handler).setShouldCache(false));
     }
 
@@ -137,7 +141,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         ResponseHandler<O> handler = new ResponseHandler<>(tClass, marshaller, onResponse);
 
-        Log.d(TAG, "delete " + url.toString());
+        Log.d(TAG, String.format(LOG_REQUEST_MSG, "delete", url.toString(), headers.get(HttpService.X_REQUEST_ID)));
         requestQueue.add(new DeleteRequest(url.toString(), headers, handler, handler).setShouldCache(false));
     }
 
@@ -222,6 +226,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
 
         @Override
         protected Response<String> parseNetworkResponse(NetworkResponse response) {
+            Log.d(TAG, "parseNetworkResponse: " + response.statusCode + "\nx-request-id:" + response.headers.get(HttpService.X_REQUEST_ID));
             return super.parseNetworkResponse(response);
         }
 
@@ -229,7 +234,7 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         public void deliverError(VolleyError error) {
             if (error instanceof NoConnectionError) {
                 com.android.volley.Cache.Entry entry = getCacheEntry();
-                if(entry != null) {
+                if (entry != null) {
                     Response<String> response = parseNetworkResponse(new NetworkResponse(entry.data, entry.responseHeaders));
                     deliverResponse(response.result);
                     return;
@@ -304,6 +309,13 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         public byte[] getBody() throws AuthFailureError {
             return this.marshaled.getBytes();
         }
+
+        @Override
+        protected Response<String> parseNetworkResponse(NetworkResponse response) {
+            Log.d(TAG, "parseNetworkResponse: " + response.statusCode + "\nx-request-id:" + response.headers.get(HttpService.X_REQUEST_ID));
+            return super.parseNetworkResponse(response);
+        }
+
     }
 
     class DeleteRequest extends StringRequest {
@@ -337,6 +349,13 @@ public class AsyncHttpImpl<T, O> implements AsyncHttp<T, O> {
         public Map<String, String> getHeaders() throws AuthFailureError {
             return this.headers;
         }
+
+        @Override
+        protected Response<String> parseNetworkResponse(NetworkResponse response) {
+            Log.d(TAG, "parseNetworkResponse: " + response.statusCode + "\nx-request-id:" + response.headers.get(HttpService.X_REQUEST_ID));
+            return super.parseNetworkResponse(response);
+        }
+
     }
 
     class TestHandler

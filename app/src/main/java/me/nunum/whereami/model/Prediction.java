@@ -142,6 +142,6 @@ public class Prediction implements Comparable<Prediction> {
 
     @Override
     public int compareTo(@NonNull Prediction o) {
-        return this.requestId.compareTo(o.requestId);
+        return o.requestId.compareTo(this.requestId);
     }
 }

@@ -5,11 +5,14 @@
         android:id="@+id/app_options_menu_about"
         android:title="@string/app_options_menu_about" />
     <item
+        android:id="@+id/app_options_menu_feedback"
+        android:title="@string/app_options_menu_feedback">
+    </item>
+    <item
         android:id="@+id/app_options_menu_notification"
         android:title="@string/app_options_menu_notifications" />
     <item
         android:id="@+id/app_options_menu_settings"
         android:title="@string/app_options_menu_settings" />
-
 
 </menu>

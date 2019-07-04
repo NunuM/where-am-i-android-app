@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:context="me.nunum.whereami.activities.FeedbackActivity">
+
+    <EditText
+        android:hint="Contact"
+        android:inputType="textEmailAddress"
+        android:id="@+id/af_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/af_message"
+        android:hint="Message"
+        android:lines="8"
+        android:maxLines="10"
+        android:minLines="6"
+        android:layout_height="wrap_content"
+        android:inputType="text|textMultiLine"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"/>
+
+
+    <Button
+    android:id="@+id/af_submit_feedback_btn"
+    android:layout_width="match_parent"
+    android:text="@string/af_submit_feedback_btn"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -20,7 +20,7 @@ public class AppConfig {
     public static final Integer PRODUCER_DELAY = 1;
     public static final Integer PRODUCER_PERIOD = 30;
 
-    public static final String HTTP_REMOTE_HOST = "http://192.168.1.6:8080";
+    public static final String HTTP_REMOTE_HOST = "https://whereami.nunum.me/api";
     public static final String HTTP_LOCALIZATIONS_RESOURCE = "/localization";
     public static final String HTTP_LOCALIZATION_POSITIONS_RESOURCE = "localization/:id/position";
     public static final String HTTP_PAGE_LOCALIZATION_RESOURCE = "/page/:x";
@@ -30,6 +30,9 @@ public class AppConfig {
     public static final String HTTP_SAMPLES_RESOURCE = "fingerprint";
     public static final String HTTP_ALGORITHM_RESOURCE = "algorithm";
     public static final String HTTP_DEVICE_RESOURCE = "device";
+
+    public static final String HTTP_FEEDBACK_RESOURCE = "feedback";
+
     public static final Boolean HTTP_PAGINATE_ONLY_MY_LOCALIZATIONS= false;
 
     public static final String HTTP_PREDICTION_RESOURCE = "localization/:id/predict";

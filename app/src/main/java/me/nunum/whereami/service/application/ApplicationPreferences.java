@@ -525,6 +525,22 @@ public class ApplicationPreferences {
                 return true;
             }
         },
+        HTTP_FEEDBACK_RESOURCE {
+            @Override
+            public String defaultValue() {
+                return AppConfig.HTTP_FEEDBACK_RESOURCE;
+            }
+
+            @Override
+            public String keyName() {
+                return "http_device_resource";
+            }
+
+            @Override
+            public boolean isString() {
+                return true;
+            }
+        },
         HTTP_PAGINATE_ONLY_MY_LOCALIZATIONS {
             @Override
             public Boolean defaultValue() {
