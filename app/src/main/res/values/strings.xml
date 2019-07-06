@@ -71,7 +71,7 @@
     <string name="fntr_new_training_algorithm_invalid_request">Must choose an Algorithm and a Implementation</string>
     <string name="fntr_new_training_algorithm_request_failure">The server does not have taken the request</string>
     <string name="fntr_new_training_algorithm_request_failure_w_status">The server does not have taken the request responding with %1$d status code</string>
-    <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.2f - Deployed: %3$s </string>
+    <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.0f%% - Deployed: %3$s </string>
 
     <string name="fpl_samples">Samples</string>
     <string name="fpl_models">Trained Models</string>
@@ -79,7 +79,7 @@
 
     <string name="fp_prediction_actionbar_title">Prediction</string>
 
-    <string name="fpdi_prediction_label_item">Batch %1d | accuracy of %2$.2f</string>
+    <string name="fpdi_prediction_label_item">Batch %1d | accuracy of %2$.0f%%</string>
 
     <string name="fpda_start_request_predictions_label">Predict</string>
     <string name="fpda_start_request_all_predictions_label">All Predicts</string>
