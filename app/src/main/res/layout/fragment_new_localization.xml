@@ -34,15 +34,39 @@
             android:text="" />
 
         <Switch
-            android:id="@+id/fnl_is_private"
+            android:id="@+id/fnl_privacy_for_training_phase"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/fnl_is_localization_private_input_hint"
+            android:text="@string/fnl_is_localization_private_training_phase_input_hint"
             android:textColor="@color/grey"/>
+
+        <Switch
+            android:id="@+id/fnl_can_send_samples"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/fnl_can_other_send_samples"
+            android:textColor="@color/grey"/>
+
+
+        <Switch
+            android:id="@+id/fnl_privacy_for_online_phase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/fnl_is_localization_private_prediction_phase_input_hint"
+            android:textColor="@color/grey"/>
+
 
         <Button
             android:id="@+id/fnl_submit_btn"

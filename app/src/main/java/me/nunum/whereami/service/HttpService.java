@@ -163,16 +163,24 @@ public final class HttpService {
 
     public boolean paginateLocalizationsWithModels(int currentPage, OnResponse<List<Localization>> onResponse) {
 
+        String  queryPart = "page=%d&trained=true";
+
         final String host = this.applicationPreferences.getStringKey(KEYS.HTTP_REMOTE_HOST);
 
         final String resource = this.applicationPreferences.getStringKey(KEYS.HTTP_LOCALIZATIONS_RESOURCE);
 
+        final Boolean onlyMy = this.applicationPreferences.getBooleanKey(KEYS.HTTP_PAGINATE_ONLY_MY_LOCALIZATIONS);
+
         final Type type = new TypeToken<List<Localization>>() {
         }.getType();
 
+        if(onlyMy){
+            queryPart += "&owner=true";
+        }
+
         final AsyncHttp<Void, List<Localization>> asyncHttp = new AsyncHttpImpl<>(this.context, this.gson, type);
 
-        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), "page=%d&trained=true", currentPage)), type, getHeaders(), onResponse);
+        asyncHttp.get(this.makeURL(host, resource, String.format(Locale.getDefault(), queryPart, currentPage)), type, getHeaders(), onResponse);
 
         return true;
     }

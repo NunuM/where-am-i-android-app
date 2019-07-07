@@ -83,57 +83,64 @@ public class PositionDetailsFragment extends Fragment {
         toggleButton = view.findViewById(R.id.fpd_position_samples_toggle);
         toggleButton.setSaveEnabled(false);
 
-        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (mListener.associatedLocalization().isOwner()
+                || mListener.associatedLocalization().canOthersSendSamples()) {
 
-                if (isChecked) {
-                    Log.i(TAG, "onCheckedChanged: User requested to start sampling");
+            toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                    final boolean startSampling = mListener.startSampling(new OnSample() {
-                        @Override
-                        public void emitted(boolean wasToOnline, int samples, Position p) {
-                            Log.i(TAG, "emitted: Completed one sample cycle");
-                            try {
-                                if (wasToOnline) {
+                    if (isChecked) {
+                        Log.i(TAG, "onCheckedChanged: User requested to start sampling");
 
-                                    final int start = Integer.valueOf(onlineSamples.getText().toString());
-                                    final int end = samples + start;
+                        final boolean startSampling = mListener.startSampling(new OnSample() {
+                            @Override
+                            public void emitted(boolean wasToOnline, int samples, Position p) {
+                                Log.i(TAG, "emitted: Completed one sample cycle");
+                                try {
+                                    if (wasToOnline) {
 
-                                    animateNumber(onlineSamples, start, end);
+                                        final int start = Integer.valueOf(onlineSamples.getText().toString());
+                                        final int end = samples + start;
 
-                                    if (p != null) {
-                                        numberOfRouters.setText(p.getStats().getRouters().toString());
-                                        numberOfNetworks.setText(p.getStats().getNetworks().toString());
-                                        topRouter.setText(p.getStats().getStrongestSignal());
+                                        animateNumber(onlineSamples, start, end);
 
-                                        if (mListener != null && mListener.associatedLocalization() != null)
-                                            mListener.associatedLocalization().getStats().incrementSamples();
+                                        if (p != null) {
+                                            numberOfRouters.setText(p.getStats().getRouters().toString());
+                                            numberOfNetworks.setText(p.getStats().getNetworks().toString());
+                                            topRouter.setText(p.getStats().getStrongestSignal());
+
+                                            if (mListener != null && mListener.associatedLocalization() != null)
+                                                mListener.associatedLocalization().getStats().incrementSamples();
+                                        }
+
+                                    } else {
+
+                                        final int start = Integer.valueOf(offlineSamples.getText().toString());
+                                        final int end = samples + start;
+
+                                        animateNumber(offlineSamples, start, end);
                                     }
-
-                                } else {
-
-                                    final int start = Integer.valueOf(offlineSamples.getText().toString());
-                                    final int end = samples + start;
-
-                                    animateNumber(offlineSamples, start, end);
+                                } catch (NumberFormatException exception) {
+                                    Log.e(TAG, "emitted: Could not update counters due the following exception", exception);
                                 }
-                            } catch (NumberFormatException exception) {
-                                Log.e(TAG, "emitted: Could not update counters due the following exception", exception);
                             }
+                        });
+
+                        if (!startSampling) {
+                            buttonView.setChecked(false);
                         }
-                    });
 
-                    if (!startSampling) {
-                        buttonView.setChecked(false);
+                    } else {
+                        mListener.stopSampling();
+                        Log.i(TAG, "onCheckedChanged: User requested to stop sampling");
                     }
-
-                } else {
-                    mListener.stopSampling();
-                    Log.i(TAG, "onCheckedChanged: User requested to stop sampling");
                 }
-            }
-        });
+            });
+
+        } else {
+            toggleButton.setVisibility(View.INVISIBLE);
+        }
 
         return view;
     }

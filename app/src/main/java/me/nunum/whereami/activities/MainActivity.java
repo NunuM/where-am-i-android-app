@@ -79,14 +79,6 @@ public class MainActivity
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private final Gson gson = new Gson();
-    private Position position = null;
-    private Cache servicesCache = null;
-    private Localization localization = null;
-    private StreamFlowService streamFlow = null;
-    private ApplicationPreferences preferences;
-
-    private PositionDetailsFragment positionDetailsFragment;
-
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -124,6 +116,12 @@ public class MainActivity
             return false;
         }
     };
+    private Position position = null;
+    private Cache servicesCache = null;
+    private Localization localization = null;
+    private StreamFlowService streamFlow = null;
+    private ApplicationPreferences preferences;
+    private PositionDetailsFragment positionDetailsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -303,13 +301,15 @@ public class MainActivity
     @Override
     public void createLocalization(String localization,
                                    final String username,
-                                   boolean isPrivate,
+                                   final boolean publicForTraining,
+                                   final boolean canOtherUsersSendSamples,
+                                   final boolean publicForPrediction,
                                    double lat,
                                    double lng) {
 
         HttpService service = (HttpService) this.servicesCache.get(Services.HTTP);
 
-        final NewLocalizationRequest newLocalizationRequest = new NewLocalizationRequest(localization, isPrivate, username, lat, lng);
+        final NewLocalizationRequest newLocalizationRequest = new NewLocalizationRequest(localization, publicForTraining, canOtherUsersSendSamples, publicForPrediction, username, lat, lng);
 
         service.newLocalization(newLocalizationRequest, new OnResponse<Localization>() {
             @Override

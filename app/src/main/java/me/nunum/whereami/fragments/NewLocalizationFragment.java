@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -69,7 +70,10 @@ public class NewLocalizationFragment extends Fragment {
 
         final EditText localizationLabel = view.findViewById(R.id.fnl_input_localization_label);
         final EditText username = view.findViewById(R.id.fnl_input_user);
-        final Switch isPrivate = view.findViewById(R.id.fnl_is_private);
+        final Switch isPublicForTraining = view.findViewById(R.id.fnl_privacy_for_training_phase);
+        final Switch canSendSamples = view.findViewById(R.id.fnl_can_send_samples);
+        canSendSamples.setClickable(false);
+        final Switch isPublicForPrediction = view.findViewById(R.id.fnl_privacy_for_online_phase);
         final Button submit = view.findViewById(R.id.fnl_submit_btn);
 
         if (!this.username.isEmpty()) {
@@ -77,12 +81,26 @@ public class NewLocalizationFragment extends Fragment {
             username.setEnabled(false);
         }
 
+        isPublicForTraining.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    canSendSamples.setClickable(true);
+                } else {
+                    canSendSamples.setChecked(false);
+                    canSendSamples.setClickable(false);
+                }
+            }
+        });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String localizationStr = localizationLabel.getText().toString();
                 final String usernameStr = username.getText().toString();
-                final boolean isPrivateBl = isPrivate.isChecked();
+                final boolean publicForTraining = isPublicForTraining.isChecked();
+                final boolean canOtherUsersSendSamples = canSendSamples.isChecked();
+                final boolean publicForPrediction = isPublicForPrediction.isChecked();
 
                 if (localizationStr.isEmpty()) {
                     Toast.makeText(mListener.context(), R.string.fnl_new_localization_empty_name, Toast.LENGTH_SHORT).show();
@@ -94,7 +112,13 @@ public class NewLocalizationFragment extends Fragment {
                     return;
                 }
 
-                mListener.createLocalization(localizationStr.trim(), usernameStr.trim(), isPrivateBl, lat, lng);
+                mListener.createLocalization(localizationStr.trim(),
+                        usernameStr.trim(),
+                        publicForTraining,
+                        canOtherUsersSendSamples,
+                        publicForPrediction,
+                        lat,
+                        lng);
             }
         });
 
@@ -124,7 +148,9 @@ public class NewLocalizationFragment extends Fragment {
 
         void createLocalization(final String localization,
                                 final String username,
-                                final boolean isPrivate,
+                                final boolean publicForTraining,
+                                final boolean canOtherUsersSendSamples,
+                                final boolean publicForPrediction,
                                 final double lat,
                                 final double lng);
 

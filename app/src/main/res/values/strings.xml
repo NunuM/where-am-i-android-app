@@ -51,7 +51,10 @@
     <string name="fnl_new_localization_informative_text">This application does not require any kind of authentication, so please fill the username to something meaning to you.</string>
     <string name="fnl_new_localization_label_input_hint">Localization name</string>
     <string name="fnl_new_username_input_hint">Username</string>
-    <string name="fnl_is_localization_private_input_hint">Visible to other users</string>
+    <string name="fnl_is_localization_private_training_phase_input_hint">Visible in localization menu to other users</string>
+    <string name="fnl_can_other_send_samples">Allow other users to contribute with samples</string>
+    <string name="fnl_is_localization_private_prediction_phase_input_hint">Allow other users to request predictions</string>
+
     <string name="fnl_new_localization_submit_btn">Create</string>
     <string name="fnl_new_localization_request_duplicate_failure">The pair localizationId name and username already exists</string>
     <string name="fnl_new_localization_request_failure">Not able to create localizationId</string>

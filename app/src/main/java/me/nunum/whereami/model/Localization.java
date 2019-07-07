@@ -36,6 +36,9 @@ public class Localization implements
     private boolean isOwner;
 
 
+    private boolean canOthersSendSamples;
+
+
     private Date created;
 
 
@@ -46,16 +49,23 @@ public class Localization implements
 
 
     public Localization() {
-        this(0L, "", "", true, new LocalizationStats(), new Date());
+        this(0L, "", "", false, false, new LocalizationStats(), new Date());
     }
 
-    public Localization(Long id, String label, String user, boolean isOwner, LocalizationStats stats, Date created) {
+    public Localization(Long id,
+                        String label,
+                        String user,
+                        boolean isOwner,
+                        boolean canOthersSendSamples,
+                        LocalizationStats stats,
+                        Date created) {
         this.id = id;
         this.label = label;
         this.user = user;
         this.isOwner = isOwner;
         this.stats = stats;
         this.created = created;
+        this.canOthersSendSamples = canOthersSendSamples;
     }
 
 
@@ -164,6 +174,9 @@ public class Localization implements
         return o.created.compareTo(this.created);
     }
 
+    public boolean canOthersSendSamples() {
+        return canOthersSendSamples;
+    }
 
     @Override
     public String toString() {
