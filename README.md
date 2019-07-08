@@ -9,7 +9,6 @@ This is a free, collaborative platform with the goal of helping researchers to t
 * [Data Model & Lifecycle](#data-model--lifecycle)
 * [Android Application](#android-application)
 * [REST API Docs](https://whereami.nunum.me/swagger/)
-* [Java API Docs](https://whereami.nunum.me/javadoc/)
 * [FAQ](#faq)
 
 ### Get Started
