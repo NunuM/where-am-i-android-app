@@ -112,10 +112,14 @@ public class PredictionDashboardFragment extends Fragment {
                 toggle.setClickable(false);
                 if (isChecked) {
                     future = startRequestPredictions(adapter);
-                    mListener.setScreenAlwaysOnFlag();
-                    toggle.setClickable(true);
-                    startProgressBar();
+                    if (future != null) {
+                        mListener.setScreenAlwaysOnFlag();
+                        startProgressBar();
+                    } else {
+                        toggle.setChecked(false);
+                    }
 
+                    toggle.setClickable(true);
                 } else {
                     if (future != null) {
                         future.cancel(true);
@@ -181,6 +185,10 @@ public class PredictionDashboardFragment extends Fragment {
     }
 
     private synchronized ScheduledFuture<?> startRequestPredictions(final PredictionDashboardRecyclerViewAdapter adapter) {
+
+        if (mListener.requestWifiPermissions()) {
+            return null;
+        }
 
         final ApplicationPreferences preferences = ApplicationPreferences.instance(mListener.context());
 
@@ -290,5 +298,7 @@ public class PredictionDashboardFragment extends Fragment {
         void setScreenAlwaysOnFlag();
 
         void clearScreenAlwaysOnFlag();
+
+        boolean requestWifiPermissions();
     }
 }

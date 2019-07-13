@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/af_message"
-        android:hint="Message"
+        android:hint="@string/af_message_feedback_hint"
         android:lines="8"
         android:maxLines="10"
         android:minLines="6"

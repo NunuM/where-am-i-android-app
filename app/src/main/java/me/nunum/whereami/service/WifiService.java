@@ -43,7 +43,6 @@ public class WifiService implements Runnable {
      * <p>
      * The general contract of the method <code>run</code> is that it may
      * take any action whatsoever.
-     *
      */
     @Override
     public void run() {
@@ -62,8 +61,9 @@ public class WifiService implements Runnable {
 
                 this.receiver.receive(dataSamples, 0L);
             }
+        } else {
+            this.wifiManager.setWifiEnabled(true);
         }
-
 
     }
 }

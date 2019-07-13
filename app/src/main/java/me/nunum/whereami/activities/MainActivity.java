@@ -555,7 +555,8 @@ public class MainActivity
         }
     }
 
-    private boolean requestWifiPermissions() {
+    @Override
+    public boolean requestWifiPermissions() {
 
         boolean wasNeeded = false;
 
@@ -570,7 +571,6 @@ public class MainActivity
         } else {
             preferences.setBooleanKey(ApplicationPreferences.KEYS.ACCESS_WIFI_PERMISSION, true);
         }
-
 
         String changeWifiState = Manifest.permission.CHANGE_WIFI_STATE;
 

@@ -102,7 +102,7 @@
     <string name="ab_app_author"><b>Author</b>: <a href="https://github.com/NunuM">Nuno Gonçalves (NunuM)</a></string>
     <string name="ab_app_server_page"><b>Website</b>: <a href="https://whereami.nunum.me">WhereAmI</a></string>
     <string name="ab_app_code_page"><b>Github</b>: <a href="https://github.com/NunuM/where-am-i-android-app">Project</a></string>
-    <string name="ab_app_code_donate"><b>Donate</b>: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5RZGRRMR7FM9W&amp;source=url">PayPal</a></string>
+    <string name="ab_app_code_donate"><b>Donate</b>: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=5F3L26AKGKLR2&amp;source=url">PayPal</a></string>
     <string name="ab_app_description"><b>Where Am I</b> is an open source application to test novel algorithms that are able to determine the users localization using labeled WI-FI fingerprints.</string>
     <string name="ab_made_author">Made with ❤️ by NunuM</string>
 
@@ -112,6 +112,7 @@
     <string name="af_empty_contact">Contact field cannot be empty</string>
     <string name="af_empty_message">Message field cannot be empty</string>
     <string name="af_submit_feedback_request_failure">Sorry, we could not persist your feedback</string>
+    <string name="af_message_feedback_hint">Use this form to propose new features, material for new posts, eventual bugs or other anything else.</string>
     <string name="af_submit_feedback_btn">Send</string>
     <string name="af_submit_feedback_request_success">Thank you for your feedback</string>
 
