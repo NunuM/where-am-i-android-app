@@ -89,11 +89,17 @@ public class PositionDetailsFragment extends Fragment {
             toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    toggleButton.setClickable(false);
 
                     if (isChecked) {
                         Log.i(TAG, "onCheckedChanged: User requested to start sampling");
 
                         final boolean startSampling = mListener.startSampling(new OnSample() {
+                            @Override
+                            public void started() {
+                                toggleButton.setClickable(true);
+                            }
+
                             @Override
                             public void emitted(boolean wasToOnline, int samples, Position p) {
                                 Log.i(TAG, "emitted: Completed one sample cycle");
@@ -129,10 +135,13 @@ public class PositionDetailsFragment extends Fragment {
 
                         if (!startSampling) {
                             buttonView.setChecked(false);
+                            toggleButton.setClickable(true);
+
                         }
 
                     } else {
                         mListener.stopSampling();
+                        toggleButton.setClickable(true);
                         Log.i(TAG, "onCheckedChanged: User requested to stop sampling");
                     }
                 }

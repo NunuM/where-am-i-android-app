@@ -44,7 +44,6 @@ import me.nunum.whereami.fragments.TrainingStatusFragment;
 import me.nunum.whereami.framework.Cache;
 import me.nunum.whereami.framework.OnResponse;
 import me.nunum.whereami.framework.OnSample;
-import me.nunum.whereami.framework.StreamFlow;
 import me.nunum.whereami.model.Device;
 import me.nunum.whereami.model.Localization;
 import me.nunum.whereami.model.Position;
@@ -345,7 +344,6 @@ public class MainActivity
         if (this.requestWifiPermissions()) {
             return false;
         }
-
         setScreenAlwaysOnFlag();
 
         return this.streamFlow.start(this.localization, this.position, onSampleCallback, this.servicesCache);
@@ -353,12 +351,12 @@ public class MainActivity
 
     @Override
     public boolean stopSampling() {
-        if (streamFlow.currentState() == StreamFlow.STREAM_STATE.RUNNING) {
+        if (streamFlow.stop()) {
             clearScreenAlwaysOnFlag();
-            return streamFlow.stop();
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
@@ -456,8 +454,10 @@ public class MainActivity
 
         if (locationManager != null) {
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            lat = location.getLatitude();
-            lng = location.getLongitude();
+            if (location != null) {
+                lat = location.getLatitude();
+                lng = location.getLongitude();
+            }
         }
 
         final String username = preferences.getStringKey(ApplicationPreferences.KEYS.USERNAME);

@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:inputType="text|textMultiLine"
         android:scrollbars="vertical"
+        android:gravity="top"
         android:layout_width="match_parent"/>
 
 

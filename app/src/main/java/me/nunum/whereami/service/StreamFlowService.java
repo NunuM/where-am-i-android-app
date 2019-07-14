@@ -33,12 +33,12 @@ public class StreamFlowService implements
     private final Context context;
     private final ApplicationPreferences preferences;
     private final ScheduledExecutorService executorService;
+    private final AtomicLong batch = new AtomicLong(1);
+    private final ConcurrentSkipListMap<Long, List<WifiDataSample>> holder;
     private FLUSH_MODE flushMode;
     private STREAM_STATE streamState;
     private Receiver<List<WifiDataSample>> sinker;
     private ScheduledFuture<?> worker;
-    private final AtomicLong batch = new AtomicLong(1);
-    private final ConcurrentSkipListMap<Long, List<WifiDataSample>> holder;
 
     public StreamFlowService(Context context) {
         this.context = context;
@@ -121,6 +121,8 @@ public class StreamFlowService implements
                         Log.i(TAG, String.format("onConnectionSucceeded: Starting sampling. Delay %d. Period %d", delay, period));
                         worker = executorService
                                 .scheduleAtFixedRate(new WifiService(context, position, localization, StreamFlowService.this), delay, period, TimeUnit.SECONDS);
+
+                        onSampleCallback.started();
                     }
 
                     @Override
@@ -148,6 +150,7 @@ public class StreamFlowService implements
                         worker = executorService
                                 .scheduleAtFixedRate(new WifiService(context, position, localization, StreamFlowService.this), delay, 5, TimeUnit.SECONDS);
 
+                        onSampleCallback.started();
                     }
                 });
                 break;
@@ -164,6 +167,11 @@ public class StreamFlowService implements
      */
     @Override
     public boolean stop() {
+
+        if (worker == null || worker.isCancelled() || worker.isDone()) {
+            this.streamState = STREAM_STATE.STOP;
+            return true;
+        }
 
         final boolean wasCanceled = worker.cancel(true);
 

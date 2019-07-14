@@ -108,6 +108,7 @@
 
     <string name="an_notification_options_menu_delete_all">Delete All</string>
     <string name="an_notification_options_menu_seen_all">Mark as Seen</string>
+    <string name="an_no_data_available">You not have any notification!</string>
 
     <string name="af_empty_contact">Contact field cannot be empty</string>
     <string name="af_empty_message">Message field cannot be empty</string>

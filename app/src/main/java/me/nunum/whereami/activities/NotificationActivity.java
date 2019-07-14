@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +54,10 @@ public class NotificationActivity
         List<Notification> notifications = notificationList();
 
         final RecyclerView recyclerView = findViewById(R.id.an_list_view);
+        final TextView emptyLabelView = findViewById(R.id.an_empty_view);
+        final ViewSwitcher viewSwitcher = findViewById(R.id.an_switcher);
         final Context context = recyclerView.getContext();
+
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
@@ -97,6 +102,25 @@ public class NotificationActivity
             }
 
             @Override
+            public void listIsEmpty() {
+                if (R.id.an_empty_view == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            }
+
+            @Override
+            public void onListSizeChange(int size) {
+                if (size > 0) {
+
+                    if (R.id.an_list_view == viewSwitcher.getNextView().getId()) {
+                        viewSwitcher.showNext();
+                    }
+                } else if (R.id.an_empty_view == viewSwitcher.getNextView().getId()) {
+                    viewSwitcher.showNext();
+                }
+            }
+
+            @Override
             public Context context() {
                 return getApplicationContext();
             }
@@ -124,7 +148,7 @@ public class NotificationActivity
             }
         };
 
-        if(broadcastManager != null) {
+        if (broadcastManager != null) {
             broadcastManager.registerReceiver(mObserver, new IntentFilter(AppConfig.BROADCAST_NEW_NOTIFICATION_ACTION));
         }
 
@@ -188,14 +212,14 @@ public class NotificationActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.an_notification_options_delete_all:
-                if(clearAllNotifications()){
+                if (clearAllNotifications()) {
                     adapter.clearNotifications();
                 }
                 return true;
             case R.id.an_notification_options_mark_as_seen:
-                if(markAsSeen()){
+                if (markAsSeen()) {
                     adapter.updateToAsSeen();
                 }
                 return true;
@@ -204,14 +228,14 @@ public class NotificationActivity
         }
     }
 
-    private boolean clearAllNotifications(){
+    private boolean clearAllNotifications() {
         boolean result = true;
         final DatabaseService service = DatabaseService.getInstance(getApplicationContext());
         final SQLiteDatabase database = service.getWritableDatabase();
 
         try {
             database.execSQL("DELETE FROM " + DatabaseService.NOTIFICATIONS);
-        } catch (Throwable e){
+        } catch (Throwable e) {
             result = false;
             Log.e(TAG, "markAsSeen: Cannot mark all notifications as seen", e);
         } finally {
@@ -221,14 +245,14 @@ public class NotificationActivity
         return result;
     }
 
-    private boolean markAsSeen(){
+    private boolean markAsSeen() {
         boolean result = true;
         final DatabaseService service = DatabaseService.getInstance(getApplicationContext());
         final SQLiteDatabase database = service.getWritableDatabase();
 
         try {
             database.execSQL("UPDATE " + DatabaseService.NOTIFICATIONS + " SET seen=1");
-        } catch (Throwable e){
+        } catch (Throwable e) {
             result = false;
             Log.e(TAG, "markAsSeen: Cannot mark all notifications as seen", e);
         } finally {

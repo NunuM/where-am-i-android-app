@@ -51,14 +51,8 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
         this.mValues.beginBatchedUpdates();
         this.mValues.clear();
         this.mValues.endBatchedUpdates();
-    }
 
-    public interface OnNotificationClicked {
-        void onSeenClick(Notification notification);
-
-        boolean deleteNotification(Notification notification);
-
-        Context context();
+        mListener.onListSizeChange(mValues.size());
     }
 
     public void addAll(List<Notification> notifications) {
@@ -67,6 +61,8 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
             this.mValues.add(notifications.get(i));
         }
         this.mValues.endBatchedUpdates();
+
+        mListener.onListSizeChange(mValues.size());
     }
 
     @NonNull
@@ -114,6 +110,10 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
                             case R.id.an_notification_options_delete:
                                 if (mListener.deleteNotification(n)) {
                                     mValues.remove(n);
+
+                                    if (mValues.size() == 0) {
+                                        mListener.listIsEmpty();
+                                    }
                                 }
                                 break;
                         }
@@ -129,6 +129,18 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public interface OnNotificationClicked {
+        void onSeenClick(Notification notification);
+
+        boolean deleteNotification(Notification notification);
+
+        void listIsEmpty();
+
+        void onListSizeChange(int size);
+
+        Context context();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

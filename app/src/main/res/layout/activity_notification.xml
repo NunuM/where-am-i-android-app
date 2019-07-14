@@ -11,12 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/an_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.NotificationActivity"
-        tools:listitem="@layout/activity_notification_item" />
+        <ViewSwitcher
+            android:id="@+id/an_switcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/an_empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/an_no_data_available" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/an_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".activities.NotificationActivity"
+                tools:listitem="@layout/activity_notification_item" />
+
+        </ViewSwitcher>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
