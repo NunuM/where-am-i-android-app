@@ -13,6 +13,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import me.nunum.whereami.R;
@@ -203,6 +205,32 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     }
 
                     return true;
+                }
+            });
+
+
+            final Preference hostPreference = findPreference(ApplicationPreferences.KEYS.HTTP_REMOTE_HOST.keyName());
+            hostPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    if(newValue instanceof String) {
+                        try{
+                            new URL((String) newValue);
+                            return true;
+                        } catch (MalformedURLException e){
+                            //Ignore
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            final Preference installationPreference = findPreference(ApplicationPreferences.KEYS.INSTANCE_ID.keyName());
+            installationPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    return newValue instanceof String && !((String) newValue).isEmpty();
                 }
             });
 

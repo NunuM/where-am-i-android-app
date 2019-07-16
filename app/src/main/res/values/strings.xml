@@ -76,7 +76,7 @@
     <string name="fntr_new_training_algorithm_request_failure_w_status">The server does not have taken the request responding with %1$d status code</string>
     <string name="fntr_new_training_provider_name">Provider %1$d - Prediction rate of %2$.0f%% - Deployed: %3$s </string>
 
-    <string name="fpl_samples">Samples</string>
+    <string name="fpl_samples">Fingerprints</string>
     <string name="fpl_models">Trained Models</string>
     <string name="fpl_positions">Positions</string>
 

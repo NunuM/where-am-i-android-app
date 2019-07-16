@@ -26,6 +26,7 @@
         android:key="http_remote_host"
         android:selectAllOnFocus="true"
         android:singleLine="true"
+        android:inputType="textWebEmailAddress"
         android:summary="@string/pref_hostname_summary"
         android:title="@string/pref_hostname_label" />
 
